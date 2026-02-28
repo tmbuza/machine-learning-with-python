@@ -1,0 +1,132 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Machine Learning with Python",
+    "section": "",
+    "text": "Free Guide · Updated r format(Sys.Date(), \"%b %Y\")",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html",
+    "href": "01-preface-and-setup.html",
+    "title": "Preface and Setup",
+    "section": "",
+    "text": "Setup\nMachine learning is often taught as a list of algorithms. CDI teaches it as a workflow.\nThis free track focuses on:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#setup",
+    "href": "01-preface-and-setup.html#setup",
+    "title": "Preface and Setup",
+    "section": "",
+    "text": "Create the environment\n\nbash scripts/setup-env.sh",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html",
+    "href": "02-ml-thinking-and-problem-types.html",
+    "title": "ML Thinking and Problem Types",
+    "section": "",
+    "text": "ID: MLPY-FREE-02\nType: Lesson\nAudience: Public\nTheme: Framing prediction problems correctly\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-preparation-for-ml.html",
+    "href": "03-data-preparation-for-ml.html",
+    "title": "Data Preparation for ML",
+    "section": "",
+    "text": "ID: MLPY-FREE-03\nType: Lesson\nAudience: Public\nTheme: Leakage avoidance and pipelines\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for ML</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html",
+    "href": "04-regression-models.html",
+    "title": "Regression Models",
+    "section": "",
+    "text": "ID: MLPY-FREE-04\nType: Lesson\nAudience: Public\nTheme: Continuous targets and calibration\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html",
+    "href": "05-classification-models.html",
+    "title": "Classification Models",
+    "section": "",
+    "text": "ID: MLPY-FREE-05\nType: Lesson\nAudience: Public\nTheme: Decisions, thresholds, and costs\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html",
+    "href": "06-model-evaluation.html",
+    "title": "Model Evaluation",
+    "section": "",
+    "text": "ID: MLPY-FREE-06\nType: Lesson\nAudience: Public\nTheme: Metrics that match the question\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html",
+    "href": "07-overfitting-and-regularization.html",
+    "title": "Overfitting and Regularization",
+    "section": "",
+    "text": "ID: MLPY-FREE-07\nType: Lesson\nAudience: Public\nTheme: Generalization discipline\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html",
+    "href": "08-feature-importance-and-interpretation.html",
+    "title": "Feature Importance and Interpretation",
+    "section": "",
+    "text": "ID: MLPY-FREE-08\nType: Lesson\nAudience: Public\nTheme: From prediction to cautious interpretation\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html",
+    "href": "09-next-steps.html",
+    "title": "Next Steps",
+    "section": "",
+    "text": "ID: MLPY-FREE-09\nType: Lesson\nAudience: Public\nTheme: Where this workflow goes next\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Next Steps</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html",
+    "href": "99-appendix.html",
+    "title": "Appendix",
+    "section": "",
+    "text": "ID: MLPY-APP\nType: Lesson\nAudience: Public\nTheme: Troubleshooting and extra notes\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "99-references.html",
+    "href": "99-references.html",
+    "title": "References",
+    "section": "",
+    "text": "ID: MLPY-REF\nType: Lesson\nAudience: Public\nTheme: Sources and recommended reading\n\n\nContent coming soon.\n\nNext: TBD",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>References</span>"
+    ]
+  }
+]

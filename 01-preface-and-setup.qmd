@@ -1,0 +1,28 @@
+---
+title: "Preface and Setup"
+---
+
+:::cdi-message
+- **ID:** MLPY-FREE-01
+- **Type:** Preface
+- **Audience:** Public
+- **Theme:** CDI workflow for predictive modeling
+:::
+
+Machine learning is often taught as a list of algorithms. CDI teaches it as a workflow.
+
+This free track focuses on:
+
+- framing a prediction problem clearly
+- preparing data without leakage
+- training baseline regression and classification models
+- evaluating performance with discipline
+- interpreting outputs responsibly
+
+## Setup
+
+1. Create the environment
+
+```bash
+bash scripts/setup-env.sh
+```

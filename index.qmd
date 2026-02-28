@@ -1,0 +1,16 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+    number-sections: false
+    body-classes: front-page
+---
+
+<div style="text-align: center; margin-top: 1.5em;">
+  <img src="assets/images/cover/machine-learning-with-python-cover-free.png.png" width="75%" />
+</div>
+
+<div style="text-align: center; font-style: normal; margin-top: 1em;">
+Free Guide · Updated `r format(Sys.Date(), "%b %Y")`
+</div>

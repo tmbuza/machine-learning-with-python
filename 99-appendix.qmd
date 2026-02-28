@@ -1,0 +1,16 @@
+---
+title: "Appendix"
+---
+
+:::cdi-message
+- **ID:** MLPY-APP
+- **Type:** Lesson
+- **Audience:** Public
+- **Theme:** Troubleshooting and extra notes
+:::
+
+Content coming soon.
+
+:::next
+Next: TBD
+:::

@@ -1,0 +1,16 @@
+---
+title: "ML Thinking and Problem Types"
+---
+
+:::cdi-message
+- **ID:** MLPY-FREE-02
+- **Type:** Lesson
+- **Audience:** Public
+- **Theme:** Framing prediction problems correctly
+:::
+
+Content coming soon.
+
+:::next
+Next: TBD
+:::

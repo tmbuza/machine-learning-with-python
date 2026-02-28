@@ -1,0 +1,34 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Machine Learning with Python"
+  subtitle: "Free Track"
+  author: "Complex Data Insights (CDI)"
+  chapters:
+    - index.qmd
+    - 01-preface-and-setup.qmd
+    - 02-ml-thinking-and-problem-types.qmd
+    - 03-data-preparation-for-ml.qmd
+    - 04-regression-models.qmd
+    - 05-classification-models.qmd
+    - 06-model-evaluation.qmd
+    - 07-overfitting-and-regularization.qmd
+    - 08-feature-importance-and-interpretation.qmd
+    - 09-next-steps.qmd
+    - 99-appendix.qmd
+    - 99-references.qmd
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+
+format:
+  html:
+    toc: true
+    number-sections: false
+    code-copy: true
+    css: assets/css/cdi.css

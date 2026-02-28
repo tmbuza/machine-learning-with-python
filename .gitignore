@@ -1,0 +1,21 @@
+# Quarto
+.quarto/
+_cache/
+*_files/
+*.html
+*.pdf
+*.docx
+
+# Output
+_site/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+/.quarto/

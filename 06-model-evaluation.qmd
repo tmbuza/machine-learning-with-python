@@ -1,0 +1,16 @@
+---
+title: "Model Evaluation"
+---
+
+:::cdi-message
+- **ID:** MLPY-FREE-06
+- **Type:** Lesson
+- **Audience:** Public
+- **Theme:** Metrics that match the question
+:::
+
+Content coming soon.
+
+:::next
+Next: TBD
+:::

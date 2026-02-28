@@ -1,0 +1,16 @@
+---
+title: "Overfitting and Regularization"
+---
+
+:::cdi-message
+- **ID:** MLPY-FREE-07
+- **Type:** Lesson
+- **Audience:** Public
+- **Theme:** Generalization discipline
+:::
+
+Content coming soon.
+
+:::next
+Next: TBD
+:::
