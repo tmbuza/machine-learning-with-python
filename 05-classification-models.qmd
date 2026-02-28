@@ -1,6 +1,4 @@
----
-title: Classification Models
----
+# Classification Models
 
 ::: cdi-message
 -   **ID:** MLPY-F-L05

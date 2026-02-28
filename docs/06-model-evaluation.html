@@ -225,8 +225,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">Confusion Matrix</a></li>
   <li><a href="#accuracy-can-be-misleading" id="toc-accuracy-can-be-misleading" class="nav-link" data-scroll-target="#accuracy-can-be-misleading">Accuracy Can Be Misleading</a></li>
   <li><a href="#precision-recall-and-f1" id="toc-precision-recall-and-f1" class="nav-link" data-scroll-target="#precision-recall-and-f1">Precision, Recall, and F1</a></li>
+  <li><a href="#classification-report" id="toc-classification-report" class="nav-link" data-scroll-target="#classification-report">Classification Report</a></li>
   <li><a href="#thresholds-change-behavior" id="toc-thresholds-change-behavior" class="nav-link" data-scroll-target="#thresholds-change-behavior">Thresholds Change Behavior</a></li>
   <li><a href="#roc-curve-and-auc" id="toc-roc-curve-and-auc" class="nav-link" data-scroll-target="#roc-curve-and-auc">ROC Curve and AUC</a></li>
+  <li><a href="#precisionrecall-curve" id="toc-precisionrecall-curve" class="nav-link" data-scroll-target="#precisionrecall-curve">Precision–Recall Curve</a></li>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-Validation</a></li>
   <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
@@ -267,11 +269,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A model is not useful because it produces predictions.</p>
 <p>It is useful if:</p>
 <ul>
-<li>It generalizes to new data<br>
+<li>it generalizes to new data<br>
 </li>
-<li>Its errors are acceptable in context<br>
+<li>its errors are acceptable in context<br>
 </li>
-<li>Its evaluation matches the real decision goal</li>
+<li>the evaluation matches the real decision goal</li>
 </ul>
 <p>This lesson focuses on disciplined evaluation for classification models.</p>
 <hr>
@@ -1736,17 +1738,14 @@ forceTheme('sk-container-id-1');</script>
        [19, 83]])</code></pre>
 </div>
 </div>
-<p>For readability, we can label it.</p>
 <div id="cell-confusion-matrix-labeled" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cm_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    cm,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Actual 0"</span>, <span class="st">"Actual 1"</span>],</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"Pred 0"</span>, <span class="st">"Pred 1"</span>]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>cm_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cm_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    cm,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Actual 0"</span>, <span class="st">"Actual 1"</span>],</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"Pred 0"</span>, <span class="st">"Pred 1"</span>]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cm_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="confusion-matrix-labeled" class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -1782,13 +1781,13 @@ forceTheme('sk-container-id-1');</script>
 <h2 class="anchored" data-anchor-id="accuracy-can-be-misleading">Accuracy Can Be Misleading</h2>
 <p>Accuracy answers:</p>
 <p>How often was the prediction correct?</p>
-<p>But accuracy does not reflect:</p>
+<p>Accuracy can be misleading when:</p>
 <ul>
-<li>Class imbalance<br>
+<li>classes are imbalanced<br>
 </li>
-<li>Asymmetric error costs</li>
+<li>false positives and false negatives have different costs</li>
 </ul>
-<p>For churn, false negatives can be more costly than false positives.</p>
+<p>For churn, missing a true churner (false negative) can be more costly than contacting a customer who would not churn (false positive).</p>
 <hr>
 </section>
 <section id="precision-recall-and-f1" class="level2">
@@ -1816,30 +1815,51 @@ forceTheme('sk-container-id-1');</script>
 </ul>
 <hr>
 </section>
+<section id="classification-report" class="level2">
+<h2 class="anchored" data-anchor-id="classification-report">Classification Report</h2>
+<p>A classification report summarizes key metrics per class.</p>
+<div id="classification-report" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(classification_report(y_test, y_pred, digits<span class="op">=</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              precision    recall  f1-score   support
+
+           0      0.500     0.328     0.396        58
+           1      0.680     0.814     0.741       102
+
+    accuracy                          0.637       160
+   macro avg      0.590     0.571     0.568       160
+weighted avg      0.615     0.637     0.616       160
+</code></pre>
+</div>
+</div>
+<hr>
+</section>
 <section id="thresholds-change-behavior" class="level2">
 <h2 class="anchored" data-anchor-id="thresholds-change-behavior">Thresholds Change Behavior</h2>
-<p>By default, classification uses threshold 0.5.</p>
-<p>We can change it.</p>
-<div id="threshold-function" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_with_threshold(probs, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (probs <span class="op">&gt;=</span> threshold).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By default, class predictions use a threshold of 0.5.</p>
+<p>Lower thresholds often increase recall.<br>
+Higher thresholds often increase precision.</p>
+<div id="threshold-function" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_with_threshold(probs, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (probs <span class="op">&gt;=</span> threshold).astype(<span class="bu">int</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Compare metrics at different thresholds.</p>
-<div id="cell-threshold-sweep" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> [<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    y_t <span class="op">=</span> predict_with_threshold(y_prob, threshold<span class="op">=</span>t)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"threshold"</span>: t,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"precision"</span>: precision_score(y_test, y_t),</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"recall"</span>: recall_score(y_test, y_t),</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"f1"</span>: f1_score(y_test, y_t)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="threshold-sweep" class="cell-output cell-output-display" data-execution_count="10">
+<div id="cell-threshold-sweep" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> [<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    y_t <span class="op">=</span> predict_with_threshold(y_prob, threshold<span class="op">=</span>t)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    rows.append({</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"threshold"</span>: t,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"precision"</span>: precision_score(y_test, y_t),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"recall"</span>: recall_score(y_test, y_t),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"f1"</span>: f1_score(y_test, y_t)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="threshold-sweep" class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -1881,33 +1901,30 @@ forceTheme('sk-container-id-1');</script>
 </div>
 </div>
 </div>
-<p>Lower thresholds usually increase recall.<br>
-Higher thresholds usually increase precision.</p>
 <hr>
 </section>
 <section id="roc-curve-and-auc" class="level2">
 <h2 class="anchored" data-anchor-id="roc-curve-and-auc">ROC Curve and AUC</h2>
-<p>The ROC curve summarizes performance across thresholds.</p>
-<div id="cell-roc-curve" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thr <span class="op">=</span> roc_curve(y_test, y_prob)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test, y_prob)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="roc-curve" class="cell-output cell-output-display" data-execution_count="11">
+<p>The ROC curve shows performance across thresholds.</p>
+<div id="cell-roc-curve" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, roc_auc_score</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>fpr, tpr, thr <span class="op">=</span> roc_curve(y_test, y_prob)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>auc <span class="op">=</span> roc_auc_score(y_test, y_prob)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>auc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="roc-curve" class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>0.6511156186612576</code></pre>
 </div>
 </div>
-<p>Plot the ROC curve.</p>
-<div id="cell-plot-roc" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax.plot(fpr, tpr)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"False Positive Rate"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"True Positive Rate"</span>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"ROC Curve"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-plot-roc" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax.plot(fpr, tpr)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"False Positive Rate"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"True Positive Rate"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"ROC Curve"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1919,16 +1936,54 @@ Higher thresholds usually increase precision.</p>
 <p>AUC ranges from 0.5 (no skill) to 1.0 (perfect separation).</p>
 <hr>
 </section>
+<section id="precisionrecall-curve" class="level2">
+<h2 class="anchored" data-anchor-id="precisionrecall-curve">Precision–Recall Curve</h2>
+<p>When the positive class is rare, ROC curves can look optimistic.</p>
+<p>Precision–Recall curves focus directly on:</p>
+<ul>
+<li>precision<br>
+</li>
+<li>recall</li>
+</ul>
+<div id="cell-pr-curve" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_recall_curve, average_precision_score</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>p, r, t <span class="op">=</span> precision_recall_curve(y_test, y_prob)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ap <span class="op">=</span> average_precision_score(y_test, y_prob)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ap</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="pr-curve" class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>0.776966011701467</code></pre>
+</div>
+</div>
+<div id="cell-plot-pr-curve" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ax.plot(r, p)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Recall"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Precision"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Precision–Recall Curve"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06-model-evaluation_files/figure-html/plot-pr-curve-output-1.png" id="plot-pr-curve" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Average precision summarizes the PR curve in a single number.</p>
+<hr>
+</section>
 <section id="cross-validation" class="level2">
 <h2 class="anchored" data-anchor-id="cross-validation">Cross-Validation</h2>
 <p>A single train/test split can be noisy.</p>
 <p>Cross-validation provides a more stable estimate of generalization.</p>
-<div id="cell-cross-validation" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_val_score(clf, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>scores, scores.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="cross-validation" class="cell-output cell-output-display" data-execution_count="13">
+<div id="cell-cross-validation" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cross_val_score(clf, X, y, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>scores, scores.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cross-validation" class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>(array([0.74782609, 0.75862069, 0.80869565, 0.74178404, 0.79475983]),
  np.float64(0.7703372583343606))</code></pre>
 </div>
@@ -1937,7 +1992,7 @@ Higher thresholds usually increase precision.</p>
 </section>
 <section id="looking-ahead" class="level2">
 <h2 class="anchored" data-anchor-id="looking-ahead">Looking Ahead</h2>
-<p>In the next lesson, we will focus on overfitting and regularization.</p>
+<p>In the next lesson, we focus on overfitting and regularization.</p>
 <p>The goal is not to chase metrics.</p>
 <p>The goal is to build models that generalize.</p>
 

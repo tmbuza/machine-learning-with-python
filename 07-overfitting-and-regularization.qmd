@@ -1,6 +1,4 @@
----
-title: "Overfitting and Regularization"
----
+# Overfitting and Regularization
 
 :::cdi-message
 - **ID:** MLPY-F-L07
@@ -196,6 +194,33 @@ train_acc_lr, test_acc_lr
 The parameter `C` controls regularization strength.
 
 Lower `C` means stronger regularization.
+
+---
+
+## A Note on Hyperparameters
+
+Most machine learning models expose **hyperparameters** that control model flexibility.
+
+Examples:
+
+- tree depth in decision trees  
+- regularization strength in logistic regression  
+- kernel parameters in support vector machines  
+
+These values are not learned from data directly. They are chosen before training.
+
+Increasing flexibility can reduce training error but may increase overfitting.
+
+Adjusting hyperparameters without a proper validation strategy can produce unstable improvements.
+
+The disciplined approach is:
+
+1. Establish a strong baseline  
+2. Measure generalization performance  
+3. Adjust complexity gradually  
+4. Validate changes using consistent evaluation  
+
+Complexity should follow evidence, not curiosity.
 
 ---
 

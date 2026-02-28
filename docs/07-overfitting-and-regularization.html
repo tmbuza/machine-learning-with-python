@@ -224,6 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#compare-training-vs-test-performance" id="toc-compare-training-vs-test-performance" class="nav-link" data-scroll-target="#compare-training-vs-test-performance">Compare Training vs Test Performance</a></li>
   <li><a href="#controlling-complexity" id="toc-controlling-complexity" class="nav-link" data-scroll-target="#controlling-complexity">Controlling Complexity</a></li>
   <li><a href="#regularization-in-linear-models" id="toc-regularization-in-linear-models" class="nav-link" data-scroll-target="#regularization-in-linear-models">Regularization in Linear Models</a></li>
+  <li><a href="#a-note-on-hyperparameters" id="toc-a-note-on-hyperparameters" class="nav-link" data-scroll-target="#a-note-on-hyperparameters">A Note on Hyperparameters</a></li>
   <li><a href="#biasvariance-tradeoff" id="toc-biasvariance-tradeoff" class="nav-link" data-scroll-target="#biasvariance-tradeoff">Bias–Variance Tradeoff</a></li>
   <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking Ahead</a></li>
   </ul>
@@ -1763,6 +1764,33 @@ forceTheme('sk-container-id-1');</script>
 </div>
 <p>The parameter <code>C</code> controls regularization strength.</p>
 <p>Lower <code>C</code> means stronger regularization.</p>
+<hr>
+</section>
+<section id="a-note-on-hyperparameters" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-on-hyperparameters">A Note on Hyperparameters</h2>
+<p>Most machine learning models expose <strong>hyperparameters</strong> that control model flexibility.</p>
+<p>Examples:</p>
+<ul>
+<li>tree depth in decision trees<br>
+</li>
+<li>regularization strength in logistic regression<br>
+</li>
+<li>kernel parameters in support vector machines</li>
+</ul>
+<p>These values are not learned from data directly. They are chosen before training.</p>
+<p>Increasing flexibility can reduce training error but may increase overfitting.</p>
+<p>Adjusting hyperparameters without a proper validation strategy can produce unstable improvements.</p>
+<p>The disciplined approach is:</p>
+<ol type="1">
+<li>Establish a strong baseline<br>
+</li>
+<li>Measure generalization performance<br>
+</li>
+<li>Adjust complexity gradually<br>
+</li>
+<li>Validate changes using consistent evaluation</li>
+</ol>
+<p>Complexity should follow evidence, not curiosity.</p>
 <hr>
 </section>
 <section id="biasvariance-tradeoff" class="level2">

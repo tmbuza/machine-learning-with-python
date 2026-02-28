@@ -1,6 +1,4 @@
----
-title: "Appendix: Troubleshooting and Extra Notes"
----
+# Appendix: Troubleshooting and Extra Notes
 
 :::cdi-message
 - **ID:** MLPY-APP
@@ -11,7 +9,7 @@ title: "Appendix: Troubleshooting and Extra Notes"
 
 ## Common Rendering Issues
 
-### 1. NameError: variable not defined
+### NameError: variable not defined
 
 Cause:
 Each Quarto chapter runs in a fresh Python session.
@@ -27,7 +25,7 @@ Do not rely on variables from previous chapters.
 
 ---
 
-### 2. All arrays must be of the same length
+### All arrays must be of the same length
 
 Cause:
 Mixing expanded one-hot feature names with original column names.
@@ -36,11 +34,11 @@ Solution:
 - Built-in tree feature importance → use expanded feature names  
 - Permutation importance → use original X.columns  
 
-These are different levels of representation.
+These represent different feature spaces.
 
 ---
 
-### 3. ModuleNotFoundError
+### ModuleNotFoundError
 
 Cause:
 Virtual environment not activated.
@@ -71,11 +69,31 @@ To ensure consistent results:
 - Avoid modifying datasets mid-analysis  
 - Do not evaluate on training data  
 
-For publication-quality work, consider:
+For more robust validation, consider:
 
 - Cross-validation  
 - Multiple random seeds  
 - Version control for datasets  
+
+---
+
+## Model Reuse and Persistence
+
+Applied machine learning rarely ends at evaluation.
+
+In real settings, you often need to reuse a trained pipeline outside the notebook.
+
+Deployment does not automatically mean cloud infrastructure.
+
+A practical first step is being able to:
+
+- save a trained model or pipeline  
+- reload it in a fresh session  
+- run predictions reliably on new records  
+
+The format matters less than the habit.
+
+Reproducibility and versioning are more important than the specific deployment tool.
 
 ---
 
@@ -87,7 +105,7 @@ Always ask:
 
 - What error is more costly?  
 - False positive or false negative?  
-- Does the metric match the business or research objective?  
+- Does the metric match the operational objective?  
 
 Metrics should reflect consequences.
 
@@ -111,9 +129,7 @@ Not as a claim.
 
 ## Scaling Up
 
-If you apply this workflow to real-world data:
-
-Expect additional challenges:
+If you apply this workflow to real-world data, expect additional challenges:
 
 - Missing data  
 - Severe class imbalance  
@@ -121,7 +137,7 @@ Expect additional challenges:
 - Temporal leakage  
 - Deployment constraints  
 
-The structured workflow still applies.
+The structured workflow still applies:
 
 Design → Data → Model → Evaluation → Interpretation
 

@@ -1,6 +1,4 @@
----
-title: "ML Thinking and Problem Types"
----
+# ML Thinking and Problem Types
 
 :::cdi-message
 - **ID:** MLPY-F-L02
@@ -101,7 +99,7 @@ The goal is to predict:
 import pandas as pd
 
 df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
-df.head()
+print(df.head())
 ```
 
 ### Identify target and features

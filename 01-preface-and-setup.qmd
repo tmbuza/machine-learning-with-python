@@ -1,6 +1,4 @@
----
-title: "Preface and Setup"
----
+# Preface and Setup
 
 :::cdi-message
 - **ID:** MLPY-F-L01
@@ -18,44 +16,69 @@ Logistic regression.
 Decision trees.  
 Neural networks.
 
-But predictive modeling is not a menu of techniques.
+But applied machine learning is not a menu of techniques.
 
 It is a structured workflow:
 
 Design → Data → Model → Evaluation → Interpretation
 
-The focus of this guide is not complexity.  
-The focus is discipline.
+In production settings, this workflow extends further to deployment and monitoring.
+In this free track, we focus on building the foundation correctly.
+
+Machine learning is a system, not a model.
 
 ---
 
-## What This Free Track Covers
+## What Machine Learning Means in Practice
 
-This guide introduces the foundations of supervised machine learning:
+Machine learning is the practice of building systems that learn patterns from data
+to make predictions or decisions on unseen inputs.
 
-- Framing regression and classification problems  
-- Preparing data without leakage  
-- Training baseline models in Python  
-- Evaluating performance using appropriate metrics  
-- Interpreting results cautiously  
+In applied settings, success depends less on algorithm choice and more on:
 
-This is the free foundational track.
+- framing the right problem,
+- establishing strong baselines,
+- validating results properly,
+- preventing data leakage,
+- interpreting outputs responsibly.
 
-Advanced modeling, tuning, ensembles, and deployment belong to the premium track.
+Unlike traditional programming, rules are learned from data rather than hard-coded.
 
 ---
 
-## What This Guide Does Not Do
+## Where Machine Learning Is Used
 
-This guide does not:
+Machine learning supports decision-making across domains:
 
-- Promise state-of-the-art performance  
-- Replace domain expertise  
-- Teach every algorithm  
-- Treat high accuracy as success without context  
+- Healthcare: risk scoring and early detection  
+- Finance: fraud detection and credit risk  
+- Marketing: churn prediction and segmentation  
+- Operations: demand forecasting and optimization  
+- Research: predictive modeling and pattern discovery  
 
-Models produce predictions.  
-Interpretation requires judgment.
+The domain changes.
+
+The workflow remains.
+
+---
+
+## Scope of This Free Track
+
+This guide focuses on supervised learning using structured tabular data.
+
+You will learn how to:
+
+- Frame regression and classification problems  
+- Split data correctly  
+- Prevent leakage using pipelines  
+- Train baseline models in scikit-learn  
+- Evaluate models with appropriate metrics  
+- Diagnose overfitting  
+- Interpret feature importance cautiously  
+
+This is a complete and scalable foundation.
+
+Advanced topics such as hyperparameter tuning, ensemble methods, deployment, and monitoring build on this structure but are beyond the scope of this free track.
 
 ---
 
@@ -67,7 +90,7 @@ You should be comfortable with:
 - Working with pandas DataFrames  
 - Running commands in a terminal  
 
-If not, complete the CDI Data Science Free Track first.
+Basic familiarity with statistics is helpful but not required.
 
 ---
 
@@ -83,7 +106,7 @@ bash scripts/setup-env.sh
 source .venv/bin/activate
 ```
 
-This installs:
+This installs the core dependencies:
 
 - pandas  
 - numpy  
@@ -103,7 +126,7 @@ The dataset will be saved to:
 
 data/ml-ready/cdi-customer-churn.csv
 
-This dataset will be used throughout the guide.
+This dataset will be used consistently throughout the guide.
 
 ---
 
@@ -118,7 +141,7 @@ import numpy as np
 sklearn.__version__
 ```
 
-If a version number prints, the environment is working correctly.
+If a version number prints, the environment is correctly configured.
 
 ---
 
@@ -131,7 +154,7 @@ To render the Quarto book locally:
 bash scripts/build-all.sh
 ```
 
-The rendered output will appear in:
+The rendered site will appear in:
 
 docs/
 
@@ -141,14 +164,15 @@ Navigation is handled automatically by Quarto.
 
 ## How to Approach This Guide
 
-Do not rush.
+Do not rush into modeling.
 
-Most machine learning errors occur in:
+Most machine learning errors originate in:
 
-- Problem framing  
-- Data leakage  
-- Incorrect evaluation  
-- Overinterpretation  
+- unclear problem framing  
+- improper data splitting  
+- hidden leakage  
+- incorrect metric selection  
+- overinterpretation of results  
 
 The next lesson begins with the most important skill:
 

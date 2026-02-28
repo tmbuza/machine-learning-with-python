@@ -1,6 +1,4 @@
----
-title: "References"
----
+# References
 
 :::cdi-message
 - **ID:** MLPY-REF
@@ -11,6 +9,3 @@ title: "References"
 
 Content coming soon.
 
-:::next
-Next: TBD
-:::

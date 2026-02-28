@@ -25,6 +25,27 @@ Feature importance is not causality.
 
 ---
 
+## Global vs Local Explanations
+
+Accuracy asks: how often are we right?
+
+Interpretability asks: why are we right (or wrong)?
+
+There are two common levels of explanation:
+
+- **Global**: what inputs matter most overall in the model  
+- **Local**: why a specific record received a specific prediction  
+
+This lesson focuses on global feature influence using feature importance.
+
+We include a lightweight local check to make interpretation feel concrete, without introducing heavy tooling.
+
+:::cdi-message
+If you cannot explain a model to a stakeholder, you do not fully understand your system.
+:::
+
+---
+
 ## Load Data
 
 ```{python}
@@ -109,7 +130,8 @@ tree.fit(X_train, y_train)
 
 Decision trees provide a feature importance score.
 
-Because one-hot encoding expands categorical variables into multiple columns, we first build the expanded feature names.
+Because one-hot encoding expands categorical variables into multiple columns,
+we build the expanded feature names first.
 
 ```{python}
 #| label: get-expanded-feature-names
@@ -127,7 +149,7 @@ expanded_feature_names = np.concatenate([numeric_features, cat_names])
 len(expanded_feature_names)
 ```
 
-Now extract importance values from the fitted tree.
+Extract importance values from the fitted tree.
 
 ```{python}
 #| label: extract-built-in-importances
@@ -141,7 +163,7 @@ imp_df = pd.DataFrame({
 imp_df.head(10)
 ```
 
-Plot the top features.
+Plot top features.
 
 ```{python}
 #| label: plot-built-in-importances
@@ -160,19 +182,15 @@ plt.show()
 
 ## Permutation Importance (Original Features)
 
-Permutation importance answers a different question:
+Permutation importance measures how much model performance drops when one input feature is randomly shuffled.
 
-How much does performance drop if we shuffle one input feature?
+When computed on a pipeline, the permutation happens on the original input columns.
 
-When we compute permutation importance on a pipeline, the permutation happens on the original input columns, not on expanded one-hot columns.
+That means the results align with:
 
-That means the importance results align with:
-
-```text
 X.columns
-```
 
-not with expanded feature names.
+not with expanded one-hot feature names.
 
 ```{python}
 #| label: permutation-importance
@@ -196,7 +214,7 @@ perm_df = pd.DataFrame({
 perm_df.head(10)
 ```
 
-Plot the permutation importances.
+Plot permutation importances.
 
 ```{python}
 #| label: plot-permutation-importances
@@ -208,6 +226,37 @@ ax.set_xlabel("Mean importance (F1 drop)")
 ax.set_title("Top Permutation Importances (Original Features)")
 plt.show()
 ```
+
+:::cdi-message
+Permutation importance tells you what the model relies on, not what is causally true.
+:::
+
+---
+
+## A Lightweight Local Check
+
+A true local explanation requires dedicated methods.
+
+Here we do a lightweight check:
+
+- take one record  
+- compute its predicted probability  
+- inspect the input values  
+
+```{python}
+#| label: local-prediction
+row = X_test.iloc[[0]]
+proba = tree.predict_proba(row)[0, 1]
+
+proba
+```
+
+```{python}
+#| label: inspect-record
+row.T
+```
+
+This is not a full explanation, but it helps connect model output to a real input record.
 
 ---
 

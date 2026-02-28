@@ -214,8 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#why-this-guide-exists" id="toc-why-this-guide-exists" class="nav-link active" data-scroll-target="#why-this-guide-exists">Why This Guide Exists</a></li>
-  <li><a href="#what-this-free-track-covers" id="toc-what-this-free-track-covers" class="nav-link" data-scroll-target="#what-this-free-track-covers">What This Free Track Covers</a></li>
-  <li><a href="#what-this-guide-does-not-do" id="toc-what-this-guide-does-not-do" class="nav-link" data-scroll-target="#what-this-guide-does-not-do">What This Guide Does Not Do</a></li>
+  <li><a href="#what-machine-learning-means-in-practice" id="toc-what-machine-learning-means-in-practice" class="nav-link" data-scroll-target="#what-machine-learning-means-in-practice">What Machine Learning Means in Practice</a></li>
+  <li><a href="#where-machine-learning-is-used" id="toc-where-machine-learning-is-used" class="nav-link" data-scroll-target="#where-machine-learning-is-used">Where Machine Learning Is Used</a></li>
+  <li><a href="#scope-of-this-free-track" id="toc-scope-of-this-free-track" class="nav-link" data-scroll-target="#scope-of-this-free-track">Scope of This Free Track</a></li>
   <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
   <li><a href="#environment-setup" id="toc-environment-setup" class="nav-link" data-scroll-target="#environment-setup">Environment Setup</a>
   <ul class="collapse">
@@ -265,45 +266,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Logistic regression.<br>
 Decision trees.<br>
 Neural networks.</p>
-<p>But predictive modeling is not a menu of techniques.</p>
+<p>But applied machine learning is not a menu of techniques.</p>
 <p>It is a structured workflow:</p>
 <p>Design → Data → Model → Evaluation → Interpretation</p>
-<p>The focus of this guide is not complexity.<br>
-The focus is discipline.</p>
+<p>In production settings, this workflow extends further to deployment and monitoring. In this free track, we focus on building the foundation correctly.</p>
+<p>Machine learning is a system, not a model.</p>
 <hr>
 </section>
-<section id="what-this-free-track-covers" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-free-track-covers">What This Free Track Covers</h2>
-<p>This guide introduces the foundations of supervised machine learning:</p>
+<section id="what-machine-learning-means-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="what-machine-learning-means-in-practice">What Machine Learning Means in Practice</h2>
+<p>Machine learning is the practice of building systems that learn patterns from data to make predictions or decisions on unseen inputs.</p>
+<p>In applied settings, success depends less on algorithm choice and more on:</p>
 <ul>
-<li>Framing regression and classification problems<br>
-</li>
-<li>Preparing data without leakage<br>
-</li>
-<li>Training baseline models in Python<br>
-</li>
-<li>Evaluating performance using appropriate metrics<br>
-</li>
-<li>Interpreting results cautiously</li>
+<li>framing the right problem,</li>
+<li>establishing strong baselines,</li>
+<li>validating results properly,</li>
+<li>preventing data leakage,</li>
+<li>interpreting outputs responsibly.</li>
 </ul>
-<p>This is the free foundational track.</p>
-<p>Advanced modeling, tuning, ensembles, and deployment belong to the premium track.</p>
+<p>Unlike traditional programming, rules are learned from data rather than hard-coded.</p>
 <hr>
 </section>
-<section id="what-this-guide-does-not-do" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-guide-does-not-do">What This Guide Does Not Do</h2>
-<p>This guide does not:</p>
+<section id="where-machine-learning-is-used" class="level2">
+<h2 class="anchored" data-anchor-id="where-machine-learning-is-used">Where Machine Learning Is Used</h2>
+<p>Machine learning supports decision-making across domains:</p>
 <ul>
-<li>Promise state-of-the-art performance<br>
+<li>Healthcare: risk scoring and early detection<br>
 </li>
-<li>Replace domain expertise<br>
+<li>Finance: fraud detection and credit risk<br>
 </li>
-<li>Teach every algorithm<br>
+<li>Marketing: churn prediction and segmentation<br>
 </li>
-<li>Treat high accuracy as success without context</li>
+<li>Operations: demand forecasting and optimization<br>
+</li>
+<li>Research: predictive modeling and pattern discovery</li>
 </ul>
-<p>Models produce predictions.<br>
-Interpretation requires judgment.</p>
+<p>The domain changes.</p>
+<p>The workflow remains.</p>
+<hr>
+</section>
+<section id="scope-of-this-free-track" class="level2">
+<h2 class="anchored" data-anchor-id="scope-of-this-free-track">Scope of This Free Track</h2>
+<p>This guide focuses on supervised learning using structured tabular data.</p>
+<p>You will learn how to:</p>
+<ul>
+<li>Frame regression and classification problems<br>
+</li>
+<li>Split data correctly<br>
+</li>
+<li>Prevent leakage using pipelines<br>
+</li>
+<li>Train baseline models in scikit-learn<br>
+</li>
+<li>Evaluate models with appropriate metrics<br>
+</li>
+<li>Diagnose overfitting<br>
+</li>
+<li>Interpret feature importance cautiously</li>
+</ul>
+<p>This is a complete and scalable foundation.</p>
+<p>Advanced topics such as hyperparameter tuning, ensemble methods, deployment, and monitoring build on this structure but are beyond the scope of this free track.</p>
 <hr>
 </section>
 <section id="prerequisites" class="level2">
@@ -316,7 +338,7 @@ Interpretation requires judgment.</p>
 </li>
 <li>Running commands in a terminal</li>
 </ul>
-<p>If not, complete the CDI Data Science Free Track first.</p>
+<p>Basic familiarity with statistics is helpful but not required.</p>
 <hr>
 </section>
 <section id="environment-setup" class="level2">
@@ -327,7 +349,7 @@ Interpretation requires judgment.</p>
 <pre class="{bash}"><code>#| label: create-environment
 bash scripts/setup-env.sh
 source .venv/bin/activate</code></pre>
-<p>This installs:</p>
+<p>This installs the core dependencies:</p>
 <ul>
 <li>pandas<br>
 </li>
@@ -346,7 +368,7 @@ source .venv/bin/activate</code></pre>
 python scripts/make-cdi-customer-churn.py</code></pre>
 <p>The dataset will be saved to:</p>
 <p>data/ml-ready/cdi-customer-churn.csv</p>
-<p>This dataset will be used throughout the guide.</p>
+<p>This dataset will be used consistently throughout the guide.</p>
 <hr>
 </section>
 <section id="verify-installation" class="level2">
@@ -361,7 +383,7 @@ python scripts/make-cdi-customer-churn.py</code></pre>
 <pre><code>'1.8.0'</code></pre>
 </div>
 </div>
-<p>If a version number prints, the environment is working correctly.</p>
+<p>If a version number prints, the environment is correctly configured.</p>
 <hr>
 </section>
 <section id="rendering-the-book" class="level2">
@@ -369,23 +391,25 @@ python scripts/make-cdi-customer-churn.py</code></pre>
 <p>To render the Quarto book locally:</p>
 <pre class="{bash}"><code>#| label: render-book
 bash scripts/build-all.sh</code></pre>
-<p>The rendered output will appear in:</p>
+<p>The rendered site will appear in:</p>
 <p>docs/</p>
 <p>Navigation is handled automatically by Quarto.</p>
 <hr>
 </section>
 <section id="how-to-approach-this-guide" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-approach-this-guide">How to Approach This Guide</h2>
-<p>Do not rush.</p>
-<p>Most machine learning errors occur in:</p>
+<p>Do not rush into modeling.</p>
+<p>Most machine learning errors originate in:</p>
 <ul>
-<li>Problem framing<br>
+<li>unclear problem framing<br>
 </li>
-<li>Data leakage<br>
+<li>improper data splitting<br>
 </li>
-<li>Incorrect evaluation<br>
+<li>hidden leakage<br>
 </li>
-<li>Overinterpretation</li>
+<li>incorrect metric selection<br>
+</li>
+<li>overinterpretation of results</li>
 </ul>
 <p>The next lesson begins with the most important skill:</p>
 <p>Framing the prediction problem correctly.</p>

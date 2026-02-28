@@ -1,6 +1,4 @@
----
-title: Data Preparation for Machine Learning
----
+# Data Preparation for Machine Learning
 
 ::: cdi-message
 -   **ID:** MLPY-F-L03
@@ -16,7 +14,7 @@ title: Data Preparation for Machine Learning
 import pandas as pd
 
 df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
-df.head()
+print(df.head())
 ```
 
 ## Define Features and Target

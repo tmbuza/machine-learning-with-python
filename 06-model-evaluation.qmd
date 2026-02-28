@@ -1,6 +1,4 @@
----
-title: "Model Evaluation"
----
+# Model Evaluation
 
 :::cdi-message
 - **ID:** MLPY-F-L06
@@ -15,9 +13,9 @@ A model is not useful because it produces predictions.
 
 It is useful if:
 
-- It generalizes to new data  
-- Its errors are acceptable in context  
-- Its evaluation matches the real decision goal  
+- it generalizes to new data  
+- its errors are acceptable in context  
+- the evaluation matches the real decision goal  
 
 This lesson focuses on disciplined evaluation for classification models.
 
@@ -124,12 +122,8 @@ cm = confusion_matrix(y_test, y_pred)
 cm
 ```
 
-For readability, we can label it.
-
 ```{python}
 #| label: confusion-matrix-labeled
-import pandas as pd
-
 cm_df = pd.DataFrame(
     cm,
     index=["Actual 0", "Actual 1"],
@@ -147,12 +141,12 @@ Accuracy answers:
 
 How often was the prediction correct?
 
-But accuracy does not reflect:
+Accuracy can be misleading when:
 
-- Class imbalance  
-- Asymmetric error costs  
+- classes are imbalanced  
+- false positives and false negatives have different costs  
 
-For churn, false negatives can be more costly than false positives.
+For churn, missing a true churner (false negative) can be more costly than contacting a customer who would not churn (false positive).
 
 ---
 
@@ -178,19 +172,31 @@ Interpretation:
 
 ---
 
+## Classification Report
+
+A classification report summarizes key metrics per class.
+
+```{python}
+#| label: classification-report
+from sklearn.metrics import classification_report
+
+print(classification_report(y_test, y_pred, digits=3))
+```
+
+---
+
 ## Thresholds Change Behavior
 
-By default, classification uses threshold 0.5.
+By default, class predictions use a threshold of 0.5.
 
-We can change it.
+Lower thresholds often increase recall.  
+Higher thresholds often increase precision.
 
 ```{python}
 #| label: threshold-function
 def predict_with_threshold(probs, threshold=0.5):
     return (probs >= threshold).astype(int)
 ```
-
-Compare metrics at different thresholds.
 
 ```{python}
 #| label: threshold-sweep
@@ -209,14 +215,11 @@ for t in thresholds:
 pd.DataFrame(rows)
 ```
 
-Lower thresholds usually increase recall.  
-Higher thresholds usually increase precision.
-
 ---
 
 ## ROC Curve and AUC
 
-The ROC curve summarizes performance across thresholds.
+The ROC curve shows performance across thresholds.
 
 ```{python}
 #| label: roc-curve
@@ -229,8 +232,6 @@ auc = roc_auc_score(y_test, y_prob)
 auc
 ```
 
-Plot the ROC curve.
-
 ```{python}
 #| label: plot-roc
 fig, ax = plt.subplots()
@@ -242,6 +243,39 @@ plt.show()
 ```
 
 AUC ranges from 0.5 (no skill) to 1.0 (perfect separation).
+
+---
+
+## Precision–Recall Curve
+
+When the positive class is rare, ROC curves can look optimistic.
+
+Precision–Recall curves focus directly on:
+
+- precision  
+- recall  
+
+```{python}
+#| label: pr-curve
+from sklearn.metrics import precision_recall_curve, average_precision_score
+
+p, r, t = precision_recall_curve(y_test, y_prob)
+ap = average_precision_score(y_test, y_prob)
+
+ap
+```
+
+```{python}
+#| label: plot-pr-curve
+fig, ax = plt.subplots()
+ax.plot(r, p)
+ax.set_xlabel("Recall")
+ax.set_ylabel("Precision")
+ax.set_title("Precision–Recall Curve")
+plt.show()
+```
+
+Average precision summarizes the PR curve in a single number.
 
 ---
 
@@ -263,7 +297,7 @@ scores, scores.mean()
 
 ## Looking Ahead
 
-In the next lesson, we will focus on overfitting and regularization.
+In the next lesson, we focus on overfitting and regularization.
 
 The goal is not to chase metrics.
 
