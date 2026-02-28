@@ -1,16 +1,122 @@
 ---
-title: "Classification Models"
+title: Classification Models
 ---
 
-:::cdi-message
-- **ID:** MLPY-FREE-05
-- **Type:** Lesson
-- **Audience:** Public
-- **Theme:** Decisions, thresholds, and costs
+::: cdi-message
+-   **ID:** MLPY-F-L05
+-   **Type:** Lesson
+-   **Audience:** Public
+-   **Theme:** Decision modeling and class prediction
 :::
 
-Content coming soon.
+## Load Data
 
-:::next
-Next: TBD
-:::
+``` {python}
+#| label: load-data
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+
+X = df.drop(columns="churn")
+y = df["churn"]
+```
+
+## Train/Test Split
+
+``` {python}
+#| label: train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+```
+
+## Define Preprocessing
+
+``` {python}
+#| label: define-preprocessor
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+
+numeric_features = X.select_dtypes(include=["int64", "float64"]).columns
+categorical_features = X.select_dtypes(include=["object"]).columns
+
+numeric_transformer = Pipeline(
+    steps=[("scaler", StandardScaler())]
+)
+
+categorical_transformer = Pipeline(
+    steps=[("encoder", OneHotEncoder(handle_unknown="ignore"))]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ]
+)
+```
+
+## Build Logistic Regression Pipeline
+
+``` {python}
+#| label: build-classifier-pipeline
+from sklearn.linear_model import LogisticRegression
+
+clf = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", LogisticRegression(max_iter=1000))
+    ]
+)
+```
+
+## Train Classifier
+
+``` {python}
+#| label: train-classifier
+clf.fit(X_train, y_train)
+```
+
+## Predict Classes
+
+``` {python}
+#| label: predict-classes
+y_pred = clf.predict(X_test)
+y_pred[:10]
+```
+
+## Evaluate Classification Performance
+
+``` {python}
+#| label: evaluate-classifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+accuracy, precision, recall, f1
+```
+
+## Predict Probabilities
+
+``` {python}
+#| label: predict-probabilities
+y_prob = clf.predict_proba(X_test)[:, 1]
+y_prob[:10]
+```
+
+## Note on Thresholds
+
+By default, class predictions use a threshold of 0.5.
+
+In the evaluation lesson, we will examine how changing thresholds
+affects precision and recall.

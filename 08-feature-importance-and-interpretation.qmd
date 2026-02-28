@@ -3,14 +3,233 @@ title: "Feature Importance and Interpretation"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-08
+- **ID:** MLPY-F-L08
 - **Type:** Lesson
 - **Audience:** Public
 - **Theme:** From prediction to cautious interpretation
 :::
 
-Content coming soon.
+## Interpretation Is Not the Same as Prediction
 
-:::next
-Next: TBD
-:::
+A model can predict well and still be poorly understood.
+
+Interpretation asks different questions:
+
+- Which features does the model rely on?  
+- How sensitive are predictions to each feature?  
+- Are relationships stable or dataset-specific?  
+
+Interpretation is useful, but it requires caution.
+
+Feature importance is not causality.
+
+---
+
+## Load Data
+
+```{python}
+#| label: load-data
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+
+X = df.drop(columns="churn")
+y = df["churn"]
+```
+
+## Train/Test Split
+
+```{python}
+#| label: train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+```
+
+## Define Preprocessing
+
+```{python}
+#| label: define-preprocessor
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+
+numeric_features = X.select_dtypes(include=["int64", "float64"]).columns
+categorical_features = X.select_dtypes(include=["object"]).columns
+
+numeric_transformer = Pipeline(
+    steps=[("scaler", StandardScaler())]
+)
+
+categorical_transformer = Pipeline(
+    steps=[("encoder", OneHotEncoder(handle_unknown="ignore"))]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ]
+)
+```
+
+---
+
+## Train a Model
+
+For feature importance, tree-based models are convenient because they provide built-in importances.
+
+```{python}
+#| label: train-tree
+from sklearn.tree import DecisionTreeClassifier
+
+tree = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", DecisionTreeClassifier(
+            max_depth=4,
+            min_samples_leaf=10,
+            random_state=42
+        ))
+    ]
+)
+
+tree.fit(X_train, y_train)
+```
+
+---
+
+## Built-in Feature Importance (Expanded Features)
+
+Decision trees provide a feature importance score.
+
+Because one-hot encoding expands categorical variables into multiple columns, we first build the expanded feature names.
+
+```{python}
+#| label: get-expanded-feature-names
+import numpy as np
+
+ohe = (
+    tree.named_steps["preprocessor"]
+        .named_transformers_["cat"]
+        .named_steps["encoder"]
+)
+
+cat_names = ohe.get_feature_names_out(categorical_features)
+expanded_feature_names = np.concatenate([numeric_features, cat_names])
+
+len(expanded_feature_names)
+```
+
+Now extract importance values from the fitted tree.
+
+```{python}
+#| label: extract-built-in-importances
+importances = tree.named_steps["classifier"].feature_importances_
+
+imp_df = pd.DataFrame({
+    "feature": expanded_feature_names,
+    "importance": importances
+}).sort_values("importance", ascending=False)
+
+imp_df.head(10)
+```
+
+Plot the top features.
+
+```{python}
+#| label: plot-built-in-importances
+import matplotlib.pyplot as plt
+
+top = imp_df.head(10).iloc[::-1]
+
+fig, ax = plt.subplots()
+ax.barh(top["feature"], top["importance"])
+ax.set_xlabel("Importance")
+ax.set_title("Top Feature Importances (Decision Tree)")
+plt.show()
+```
+
+---
+
+## Permutation Importance (Original Features)
+
+Permutation importance answers a different question:
+
+How much does performance drop if we shuffle one input feature?
+
+When we compute permutation importance on a pipeline, the permutation happens on the original input columns, not on expanded one-hot columns.
+
+That means the importance results align with:
+
+```text
+X.columns
+```
+
+not with expanded feature names.
+
+```{python}
+#| label: permutation-importance
+from sklearn.inspection import permutation_importance
+
+result = permutation_importance(
+    tree,
+    X_test,
+    y_test,
+    n_repeats=10,
+    random_state=42,
+    scoring="f1"
+)
+
+perm_df = pd.DataFrame({
+    "feature": X.columns,
+    "importance_mean": result.importances_mean,
+    "importance_std": result.importances_std
+}).sort_values("importance_mean", ascending=False)
+
+perm_df.head(10)
+```
+
+Plot the permutation importances.
+
+```{python}
+#| label: plot-permutation-importances
+top_p = perm_df.head(10).iloc[::-1]
+
+fig, ax = plt.subplots()
+ax.barh(top_p["feature"], top_p["importance_mean"])
+ax.set_xlabel("Mean importance (F1 drop)")
+ax.set_title("Top Permutation Importances (Original Features)")
+plt.show()
+```
+
+---
+
+## Interpreting Importances Responsibly
+
+Important does not mean causal.
+
+A feature can appear important because:
+
+- it is correlated with the true driver  
+- it encodes historical behavior  
+- it captures an operational artifact  
+- it is specific to this dataset  
+
+Use feature importance as a diagnostic tool.
+
+Not as a causal claim.
+
+---
+
+## Looking Ahead
+
+In the next lesson, we close the free track.
+
+We summarize what you can now do confidently, and what requires deeper study.

@@ -3,14 +3,219 @@ title: "Overfitting and Regularization"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-07
+- **ID:** MLPY-F-L07
 - **Type:** Lesson
 - **Audience:** Public
 - **Theme:** Generalization discipline
 :::
 
-Content coming soon.
+## When Good Training Performance Is Not Enough
 
-:::next
-Next: TBD
-:::
+A model can perform extremely well on training data and still fail in practice.
+
+This happens when the model memorizes patterns that do not generalize.
+
+This phenomenon is called **overfitting**.
+
+Overfitting occurs when:
+
+- The model is too complex for the available data  
+- Noise is mistaken for signal  
+- Evaluation is performed incorrectly  
+- Data leakage is present  
+
+The goal of machine learning is not to fit training data.
+
+The goal is to generalize.
+
+---
+
+## Load Data
+
+```{python}
+#| label: load-data
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+
+X = df.drop(columns="churn")
+y = df["churn"]
+```
+
+## Train/Test Split
+
+```{python}
+#| label: train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+```
+
+## Define Preprocessing
+
+```{python}
+#| label: define-preprocessor
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+
+numeric_features = X.select_dtypes(include=["int64", "float64"]).columns
+categorical_features = X.select_dtypes(include=["object"]).columns
+
+numeric_transformer = Pipeline(
+    steps=[("scaler", StandardScaler())]
+)
+
+categorical_transformer = Pipeline(
+    steps=[("encoder", OneHotEncoder(handle_unknown="ignore"))]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ]
+)
+```
+
+---
+
+## A More Flexible Model
+
+Decision trees can model complex patterns.
+
+They can also overfit easily.
+
+```{python}
+#| label: train-decision-tree
+from sklearn.tree import DecisionTreeClassifier
+
+tree_clf = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", DecisionTreeClassifier(random_state=42))
+    ]
+)
+
+tree_clf.fit(X_train, y_train)
+```
+
+---
+
+## Compare Training vs Test Performance
+
+```{python}
+#| label: evaluate-tree
+from sklearn.metrics import accuracy_score
+
+train_acc = accuracy_score(y_train, tree_clf.predict(X_train))
+test_acc = accuracy_score(y_test, tree_clf.predict(X_test))
+
+train_acc, test_acc
+```
+
+If training accuracy is much higher than test accuracy, the model is likely overfitting.
+
+---
+
+## Controlling Complexity
+
+Decision trees have parameters that limit complexity:
+
+- max_depth  
+- min_samples_split  
+- min_samples_leaf  
+
+Reducing complexity improves generalization.
+
+```{python}
+#| label: regularized-tree
+tree_reg = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", DecisionTreeClassifier(
+            max_depth=3,
+            min_samples_leaf=10,
+            random_state=42
+        ))
+    ]
+)
+
+tree_reg.fit(X_train, y_train)
+
+train_acc_reg = accuracy_score(y_train, tree_reg.predict(X_train))
+test_acc_reg = accuracy_score(y_test, tree_reg.predict(X_test))
+
+train_acc_reg, test_acc_reg
+```
+
+Often, the gap between training and test accuracy narrows.
+
+---
+
+## Regularization in Linear Models
+
+Regularization also applies to linear models.
+
+It adds a penalty for large coefficients.
+
+Two common forms:
+
+- Ridge (L2 penalty)  
+- Lasso (L1 penalty)  
+
+```{python}
+#| label: logistic-with-regularization
+from sklearn.linear_model import LogisticRegression
+
+log_reg = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", LogisticRegression(
+            penalty="l2",
+            C=0.5,
+            max_iter=1000
+        ))
+    ]
+)
+
+log_reg.fit(X_train, y_train)
+
+train_acc_lr = accuracy_score(y_train, log_reg.predict(X_train))
+test_acc_lr = accuracy_score(y_test, log_reg.predict(X_test))
+
+train_acc_lr, test_acc_lr
+```
+
+The parameter `C` controls regularization strength.
+
+Lower `C` means stronger regularization.
+
+---
+
+## Bias–Variance Tradeoff
+
+Overfitting and underfitting represent two extremes:
+
+- High variance → overfitting  
+- High bias → underfitting  
+
+A well-calibrated model balances bias and variance.
+
+The objective is stable performance on unseen data.
+
+---
+
+## Looking Ahead
+
+In the next lesson, we move from generalization control to interpretation.
+
+Feature importance helps us understand model behavior.
+
+But interpretation requires caution.

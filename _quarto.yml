@@ -4,8 +4,7 @@ project:
 
 book:
   title: "Machine Learning with Python"
-  subtitle: "Free Track"
-  author: "Complex Data Insights (CDI)"
+  subtitle: "A Structured Workflow for Predictive Modeling"
   chapters:
     - index.qmd
     - 01-preface-and-setup.qmd

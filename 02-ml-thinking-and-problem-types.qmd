@@ -3,14 +3,198 @@ title: "ML Thinking and Problem Types"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-02
+- **ID:** MLPY-F-L02
 - **Type:** Lesson
 - **Audience:** Public
-- **Theme:** Framing prediction problems correctly
+- **Theme:** Framing predictive problems correctly
 :::
 
-Content coming soon.
+## Machine Learning Begins Before Modeling
 
-:::next
-Next: TBD
-:::
+Most mistakes in machine learning happen before the first model is trained.
+
+They occur when:
+
+- The prediction target is unclear  
+- The data does not match the question  
+- Future information leaks into training  
+- Evaluation metrics do not match the real objective  
+
+Machine learning begins with framing.
+
+---
+
+## What Is a Prediction Problem?
+
+A prediction problem answers:
+
+Given the available information, what do we want to estimate?
+
+To make this concrete, define three things:
+
+1. **Target (y)**: what you want to predict  
+2. **Features (X)**: what you will use to make the prediction  
+3. **Prediction context**: when the prediction happens and what will be known at that time  
+
+Without these three elements, modeling is premature.
+
+---
+
+## Supervised Learning in One Sentence
+
+This guide focuses on supervised learning.
+
+Supervised learning means:
+
+We have labeled examples. Each row contains:
+
+- input features (X)  
+- a known outcome (y)  
+
+The model learns a mapping from X to y that should generalize to new data.
+
+---
+
+## Two Core Problem Types
+
+The problem type is determined by the target variable.
+
+### Regression
+
+Regression is used when the target is numeric and continuous.
+
+Examples:
+
+- predicting monthly spend  
+- predicting house price  
+- predicting customer lifetime value  
+
+### Classification
+
+Classification is used when the target is categorical.
+
+Examples:
+
+- churn vs no churn  
+- fraud vs not fraud  
+- disease vs no disease  
+
+A classification model may output:
+
+- a class label (0 or 1)  
+- a probability (risk score)  
+
+---
+
+## Our Dataset: Churn Prediction
+
+We will use a synthetic churn dataset generated in Lesson 01.
+
+The goal is to predict:
+
+- **churn** = 1 if the customer churned, 0 otherwise
+
+### Load the dataset
+
+```{python}
+#| label: load-dataset
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+df.head()
+```
+
+### Identify target and features
+
+```{python}
+#| label: define-x-y
+X = df.drop(columns="churn")
+y = df["churn"]
+
+X.shape, y.shape
+```
+
+### Confirm the problem type
+
+```{python}
+#| label: confirm-problem-type
+y.dtype, sorted(y.unique())
+```
+
+Because the target is binary (0/1), this is a **classification** problem.
+
+---
+
+## Why Problem Type Matters
+
+The model choice depends on the problem type, but the workflow is shared.
+
+- Regression uses regression metrics (MAE, MSE, R²)  
+- Classification uses classification metrics (precision, recall, ROC AUC)  
+
+Using the wrong metric leads to the wrong conclusion.
+
+---
+
+## The Train/Test Mental Model
+
+A predictive model must work on new data.
+
+To simulate this, we split the dataset into:
+
+- **training set**: used to fit the model  
+- **test set**: used to evaluate generalization  
+
+Evaluating on training data produces overly optimistic performance.
+
+This is called **overfitting**.
+
+We will study overfitting later, but the mental model starts here.
+
+---
+
+## Data Leakage: The Hidden Failure
+
+Data leakage occurs when the model has access to information it would not have at prediction time.
+
+Common examples:
+
+- using future-derived variables  
+- fitting preprocessing on the full dataset before splitting  
+- including target-derived variables  
+
+Leakage produces high accuracy and false confidence.
+
+The CDI workflow prevents leakage by design:
+
+Split first, then transform, then model.
+
+---
+
+## From Question to Workflow
+
+Before you train any model, ask:
+
+1. What exactly am I predicting?  
+2. When will this prediction be made?  
+3. What information will be available at that time?  
+4. What error is more costly? false positive or false negative?  
+5. What metric matches that cost?  
+
+These questions determine the workflow:
+
+Design → Data → Model → Evaluation
+
+Not the other way around.
+
+---
+
+## Looking Ahead
+
+In the next lesson, we will prepare data properly for modeling.
+
+We will introduce pipelines to ensure:
+
+- transformations are fit only on training data  
+- the same transformations apply to test data  
+- leakage is prevented automatically

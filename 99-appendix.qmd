@@ -1,5 +1,5 @@
 ---
-title: "Appendix"
+title: "Appendix: Troubleshooting and Extra Notes"
 ---
 
 :::cdi-message
@@ -9,8 +9,129 @@ title: "Appendix"
 - **Theme:** Troubleshooting and extra notes
 :::
 
-Content coming soon.
+## Common Rendering Issues
 
-:::next
-Next: TBD
-:::
+### 1. NameError: variable not defined
+
+Cause:
+Each Quarto chapter runs in a fresh Python session.
+
+Solution:
+Ensure every chapter is self-contained:
+- load the dataset
+- split the data
+- define preprocessing
+- define the model
+
+Do not rely on variables from previous chapters.
+
+---
+
+### 2. All arrays must be of the same length
+
+Cause:
+Mixing expanded one-hot feature names with original column names.
+
+Solution:
+- Built-in tree feature importance → use expanded feature names  
+- Permutation importance → use original X.columns  
+
+These are different levels of representation.
+
+---
+
+### 3. ModuleNotFoundError
+
+Cause:
+Virtual environment not activated.
+
+Solution:
+
+```{bash}
+#| label: activate-env
+source .venv/bin/activate
+```
+
+Verify installation:
+
+```{python}
+#| label: verify-packages
+import sklearn
+import pandas
+```
+
+---
+
+## Reproducibility Notes
+
+To ensure consistent results:
+
+- Use fixed random_state values  
+- Keep train/test splits consistent  
+- Avoid modifying datasets mid-analysis  
+- Do not evaluate on training data  
+
+For publication-quality work, consider:
+
+- Cross-validation  
+- Multiple random seeds  
+- Version control for datasets  
+
+---
+
+## On Metrics and Interpretation
+
+Accuracy is not always sufficient.
+
+Always ask:
+
+- What error is more costly?  
+- False positive or false negative?  
+- Does the metric match the business or research objective?  
+
+Metrics should reflect consequences.
+
+---
+
+## On Feature Importance
+
+Feature importance indicates influence on prediction within this dataset.
+
+It does not imply:
+
+- causation  
+- mechanism  
+- domain-level truth  
+
+Treat feature importance as a diagnostic tool.
+
+Not as a claim.
+
+---
+
+## Scaling Up
+
+If you apply this workflow to real-world data:
+
+Expect additional challenges:
+
+- Missing data  
+- Severe class imbalance  
+- High-dimensional features  
+- Temporal leakage  
+- Deployment constraints  
+
+The structured workflow still applies.
+
+Design → Data → Model → Evaluation → Interpretation
+
+---
+
+## Final Note
+
+Machine learning is powerful when disciplined.
+
+The workflow you learned here is more important than any single algorithm.
+
+Structure first.  
+Then complexity.

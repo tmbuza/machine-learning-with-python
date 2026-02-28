@@ -1,16 +1,73 @@
 ---
-title: "Data Preparation for ML"
+title: Data Preparation for Machine Learning
 ---
 
-:::cdi-message
-- **ID:** MLPY-FREE-03
-- **Type:** Lesson
-- **Audience:** Public
-- **Theme:** Leakage avoidance and pipelines
+::: cdi-message
+-   **ID:** MLPY-F-L03
+-   **Type:** Lesson
+-   **Audience:** Public
+-   **Theme:** Preventing leakage through structured preparation
 :::
 
-Content coming soon.
+## Loading the Dataset
 
-:::next
-Next: TBD
-:::
+```{python}
+#| label: load-data
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+df.head()
+```
+
+## Define Features and Target
+
+```{python}
+#| label: define-target
+X = df.drop(columns="churn")
+y = df["churn"]
+```
+
+## Train/Test Split
+
+```{python}
+#| label: train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+```
+
+## Identify Feature Types
+
+```{python}
+#| label: identify-feature-types
+numeric_features = X.select_dtypes(include=["int64", "float64"]).columns
+categorical_features = X.select_dtypes(include=["object"]).columns
+
+numeric_features, categorical_features
+```
+
+## Define Preprocessing Pipeline
+
+```{python}
+#| label: define-preprocessor
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+
+numeric_transformer = Pipeline(
+    steps=[("scaler", StandardScaler())]
+)
+
+categorical_transformer = Pipeline(
+    steps=[("encoder", OneHotEncoder(handle_unknown="ignore"))]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ]
+)
+```

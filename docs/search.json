@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Machine Learning with Python",
     "section": "",
-    "text": "Free Guide · Updated r format(Sys.Date(), \"%b %Y\")",
+    "text": "Free Guide · Updated Feb 2026",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>index.html</span>"
     ]
@@ -14,17 +14,87 @@
     "href": "01-preface-and-setup.html",
     "title": "Preface and Setup",
     "section": "",
-    "text": "Setup\nMachine learning is often taught as a list of algorithms. CDI teaches it as a workflow.\nThis free track focuses on:",
+    "text": "Why This Guide Exists\nMachine learning is often presented as a collection of algorithms.\nLinear regression.\nLogistic regression.\nDecision trees.\nNeural networks.\nBut predictive modeling is not a menu of techniques.\nIt is a structured workflow:\nDesign → Data → Model → Evaluation → Interpretation\nThe focus of this guide is not complexity.\nThe focus is discipline.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
     ]
   },
   {
-    "objectID": "01-preface-and-setup.html#setup",
-    "href": "01-preface-and-setup.html#setup",
+    "objectID": "01-preface-and-setup.html#what-this-free-track-covers",
+    "href": "01-preface-and-setup.html#what-this-free-track-covers",
     "title": "Preface and Setup",
-    "section": "",
-    "text": "Create the environment\n\nbash scripts/setup-env.sh",
+    "section": "What This Free Track Covers",
+    "text": "What This Free Track Covers\nThis guide introduces the foundations of supervised machine learning:\n\nFraming regression and classification problems\n\nPreparing data without leakage\n\nTraining baseline models in Python\n\nEvaluating performance using appropriate metrics\n\nInterpreting results cautiously\n\nThis is the free foundational track.\nAdvanced modeling, tuning, ensembles, and deployment belong to the premium track.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#what-this-guide-does-not-do",
+    "href": "01-preface-and-setup.html#what-this-guide-does-not-do",
+    "title": "Preface and Setup",
+    "section": "What This Guide Does Not Do",
+    "text": "What This Guide Does Not Do\nThis guide does not:\n\nPromise state-of-the-art performance\n\nReplace domain expertise\n\nTeach every algorithm\n\nTreat high accuracy as success without context\n\nModels produce predictions.\nInterpretation requires judgment.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#prerequisites",
+    "href": "01-preface-and-setup.html#prerequisites",
+    "title": "Preface and Setup",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nYou should be comfortable with:\n\nBasic Python syntax\n\nWorking with pandas DataFrames\n\nRunning commands in a terminal\n\nIf not, complete the CDI Data Science Free Track first.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#environment-setup",
+    "href": "01-preface-and-setup.html#environment-setup",
+    "title": "Preface and Setup",
+    "section": "Environment Setup",
+    "text": "Environment Setup\nThis project uses a virtual environment to isolate dependencies.\n\nCreate the environment\n#| label: create-environment\nbash scripts/setup-env.sh\nsource .venv/bin/activate\nThis installs:\n\npandas\n\nnumpy\n\nmatplotlib\n\nscikit-learn",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#generate-the-synthetic-dataset",
+    "href": "01-preface-and-setup.html#generate-the-synthetic-dataset",
+    "title": "Preface and Setup",
+    "section": "Generate the Synthetic Dataset",
+    "text": "Generate the Synthetic Dataset\n#| label: generate-dataset\npython scripts/make-cdi-customer-churn.py\nThe dataset will be saved to:\ndata/ml-ready/cdi-customer-churn.csv\nThis dataset will be used throughout the guide.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#verify-installation",
+    "href": "01-preface-and-setup.html#verify-installation",
+    "title": "Preface and Setup",
+    "section": "Verify Installation",
+    "text": "Verify Installation\n\nimport sklearn\nimport pandas as pd\nimport numpy as np\n\nsklearn.__version__\n\n'1.8.0'\n\n\nIf a version number prints, the environment is working correctly.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#rendering-the-book",
+    "href": "01-preface-and-setup.html#rendering-the-book",
+    "title": "Preface and Setup",
+    "section": "Rendering the Book",
+    "text": "Rendering the Book\nTo render the Quarto book locally:\n#| label: render-book\nbash scripts/build-all.sh\nThe rendered output will appear in:\ndocs/\nNavigation is handled automatically by Quarto.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
+    ]
+  },
+  {
+    "objectID": "01-preface-and-setup.html#how-to-approach-this-guide",
+    "href": "01-preface-and-setup.html#how-to-approach-this-guide",
+    "title": "Preface and Setup",
+    "section": "How to Approach This Guide",
+    "text": "How to Approach This Guide\nDo not rush.\nMost machine learning errors occur in:\n\nProblem framing\n\nData leakage\n\nIncorrect evaluation\n\nOverinterpretation\n\nThe next lesson begins with the most important skill:\nFraming the prediction problem correctly.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Preface and Setup</span>"
     ]
@@ -34,7 +104,107 @@
     "href": "02-ml-thinking-and-problem-types.html",
     "title": "ML Thinking and Problem Types",
     "section": "",
-    "text": "ID: MLPY-FREE-02\nType: Lesson\nAudience: Public\nTheme: Framing prediction problems correctly\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Machine Learning Begins Before Modeling\nMost mistakes in machine learning happen before the first model is trained.\nThey occur when:\nMachine learning begins with framing.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#machine-learning-begins-before-modeling",
+    "href": "02-ml-thinking-and-problem-types.html#machine-learning-begins-before-modeling",
+    "title": "ML Thinking and Problem Types",
+    "section": "",
+    "text": "The prediction target is unclear\n\nThe data does not match the question\n\nFuture information leaks into training\n\nEvaluation metrics do not match the real objective",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#what-is-a-prediction-problem",
+    "href": "02-ml-thinking-and-problem-types.html#what-is-a-prediction-problem",
+    "title": "ML Thinking and Problem Types",
+    "section": "What Is a Prediction Problem?",
+    "text": "What Is a Prediction Problem?\nA prediction problem answers:\nGiven the available information, what do we want to estimate?\nTo make this concrete, define three things:\n\nTarget (y): what you want to predict\n\nFeatures (X): what you will use to make the prediction\n\nPrediction context: when the prediction happens and what will be known at that time\n\nWithout these three elements, modeling is premature.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#supervised-learning-in-one-sentence",
+    "href": "02-ml-thinking-and-problem-types.html#supervised-learning-in-one-sentence",
+    "title": "ML Thinking and Problem Types",
+    "section": "Supervised Learning in One Sentence",
+    "text": "Supervised Learning in One Sentence\nThis guide focuses on supervised learning.\nSupervised learning means:\nWe have labeled examples. Each row contains:\n\ninput features (X)\n\na known outcome (y)\n\nThe model learns a mapping from X to y that should generalize to new data.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#two-core-problem-types",
+    "href": "02-ml-thinking-and-problem-types.html#two-core-problem-types",
+    "title": "ML Thinking and Problem Types",
+    "section": "Two Core Problem Types",
+    "text": "Two Core Problem Types\nThe problem type is determined by the target variable.\n\nRegression\nRegression is used when the target is numeric and continuous.\nExamples:\n\npredicting monthly spend\n\npredicting house price\n\npredicting customer lifetime value\n\n\n\nClassification\nClassification is used when the target is categorical.\nExamples:\n\nchurn vs no churn\n\nfraud vs not fraud\n\ndisease vs no disease\n\nA classification model may output:\n\na class label (0 or 1)\n\na probability (risk score)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#our-dataset-churn-prediction",
+    "href": "02-ml-thinking-and-problem-types.html#our-dataset-churn-prediction",
+    "title": "ML Thinking and Problem Types",
+    "section": "Our Dataset: Churn Prediction",
+    "text": "Our Dataset: Churn Prediction\nWe will use a synthetic churn dataset generated in Lesson 01.\nThe goal is to predict:\n\nchurn = 1 if the customer churned, 0 otherwise\n\n\nLoad the dataset\n\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\ndf.head()\n\n\n\n\n\n\n\n\ncustomer_id\ntenure_months\nmonthly_spend\nsupport_calls\ncontract_type\nautopay\nchurn\n\n\n\n\n0\nC100000\n6\n45.85\n2\none-year\nno\n0\n\n\n1\nC100001\n17\n69.95\n1\nmonth-to-month\nyes\n1\n\n\n2\nC100002\n64\n70.98\n0\nmonth-to-month\nno\n1\n\n\n3\nC100003\n59\n33.02\n2\nmonth-to-month\nyes\n0\n\n\n4\nC100004\n8\n70.74\n0\nmonth-to-month\nyes\n1\n\n\n\n\n\n\n\n\n\nIdentify target and features\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]\n\nX.shape, y.shape\n\n((800, 6), (800,))\n\n\n\n\nConfirm the problem type\n\ny.dtype, sorted(y.unique())\n\n(dtype('int64'), [np.int64(0), np.int64(1)])\n\n\nBecause the target is binary (0/1), this is a classification problem.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#why-problem-type-matters",
+    "href": "02-ml-thinking-and-problem-types.html#why-problem-type-matters",
+    "title": "ML Thinking and Problem Types",
+    "section": "Why Problem Type Matters",
+    "text": "Why Problem Type Matters\nThe model choice depends on the problem type, but the workflow is shared.\n\nRegression uses regression metrics (MAE, MSE, R²)\n\nClassification uses classification metrics (precision, recall, ROC AUC)\n\nUsing the wrong metric leads to the wrong conclusion.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#the-traintest-mental-model",
+    "href": "02-ml-thinking-and-problem-types.html#the-traintest-mental-model",
+    "title": "ML Thinking and Problem Types",
+    "section": "The Train/Test Mental Model",
+    "text": "The Train/Test Mental Model\nA predictive model must work on new data.\nTo simulate this, we split the dataset into:\n\ntraining set: used to fit the model\n\ntest set: used to evaluate generalization\n\nEvaluating on training data produces overly optimistic performance.\nThis is called overfitting.\nWe will study overfitting later, but the mental model starts here.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#data-leakage-the-hidden-failure",
+    "href": "02-ml-thinking-and-problem-types.html#data-leakage-the-hidden-failure",
+    "title": "ML Thinking and Problem Types",
+    "section": "Data Leakage: The Hidden Failure",
+    "text": "Data Leakage: The Hidden Failure\nData leakage occurs when the model has access to information it would not have at prediction time.\nCommon examples:\n\nusing future-derived variables\n\nfitting preprocessing on the full dataset before splitting\n\nincluding target-derived variables\n\nLeakage produces high accuracy and false confidence.\nThe CDI workflow prevents leakage by design:\nSplit first, then transform, then model.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#from-question-to-workflow",
+    "href": "02-ml-thinking-and-problem-types.html#from-question-to-workflow",
+    "title": "ML Thinking and Problem Types",
+    "section": "From Question to Workflow",
+    "text": "From Question to Workflow\nBefore you train any model, ask:\n\nWhat exactly am I predicting?\n\nWhen will this prediction be made?\n\nWhat information will be available at that time?\n\nWhat error is more costly? false positive or false negative?\n\nWhat metric matches that cost?\n\nThese questions determine the workflow:\nDesign → Data → Model → Evaluation\nNot the other way around.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
+    ]
+  },
+  {
+    "objectID": "02-ml-thinking-and-problem-types.html#looking-ahead",
+    "href": "02-ml-thinking-and-problem-types.html#looking-ahead",
+    "title": "ML Thinking and Problem Types",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nIn the next lesson, we will prepare data properly for modeling.\nWe will introduce pipelines to ensure:\n\ntransformations are fit only on training data\n\nthe same transformations apply to test data\n\nleakage is prevented automatically",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>ML Thinking and Problem Types</span>"
     ]
@@ -42,11 +212,51 @@
   {
     "objectID": "03-data-preparation-for-ml.html",
     "href": "03-data-preparation-for-ml.html",
-    "title": "Data Preparation for ML",
+    "title": "Data Preparation for Machine Learning",
     "section": "",
-    "text": "ID: MLPY-FREE-03\nType: Lesson\nAudience: Public\nTheme: Leakage avoidance and pipelines\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Loading the Dataset\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\ndf.head()\n\n\n\n\n\n\n\n\ncustomer_id\ntenure_months\nmonthly_spend\nsupport_calls\ncontract_type\nautopay\nchurn\n\n\n\n\n0\nC100000\n6\n45.85\n2\none-year\nno\n0\n\n\n1\nC100001\n17\n69.95\n1\nmonth-to-month\nyes\n1\n\n\n2\nC100002\n64\n70.98\n0\nmonth-to-month\nno\n1\n\n\n3\nC100003\n59\n33.02\n2\nmonth-to-month\nyes\n0\n\n\n4\nC100004\n8\n70.74\n0\nmonth-to-month\nyes\n1",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for ML</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-preparation-for-ml.html#define-features-and-target",
+    "href": "03-data-preparation-for-ml.html#define-features-and-target",
+    "title": "Data Preparation for Machine Learning",
+    "section": "Define Features and Target",
+    "text": "Define Features and Target\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-preparation-for-ml.html#traintest-split",
+    "href": "03-data-preparation-for-ml.html#traintest-split",
+    "title": "Data Preparation for Machine Learning",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-preparation-for-ml.html#identify-feature-types",
+    "href": "03-data-preparation-for-ml.html#identify-feature-types",
+    "title": "Data Preparation for Machine Learning",
+    "section": "Identify Feature Types",
+    "text": "Identify Feature Types\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_features, categorical_features\n\n(Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str'),\n Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for Machine Learning</span>"
+    ]
+  },
+  {
+    "objectID": "03-data-preparation-for-ml.html#define-preprocessing-pipeline",
+    "href": "03-data-preparation-for-ml.html#define-preprocessing-pipeline",
+    "title": "Data Preparation for Machine Learning",
+    "section": "Define Preprocessing Pipeline",
+    "text": "Define Preprocessing Pipeline\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Data Preparation for Machine Learning</span>"
     ]
   },
   {
@@ -54,7 +264,67 @@
     "href": "04-regression-models.html",
     "title": "Regression Models",
     "section": "",
-    "text": "ID: MLPY-FREE-04\nType: Lesson\nAudience: Public\nTheme: Continuous targets and calibration\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Load Data\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#traintest-split",
+    "href": "04-regression-models.html#traintest-split",
+    "title": "Regression Models",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42,\n    stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#define-preprocessing",
+    "href": "04-regression-models.html#define-preprocessing",
+    "title": "Regression Models",
+    "section": "Define Preprocessing",
+    "text": "Define Preprocessing\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#add-linear-regression",
+    "href": "04-regression-models.html#add-linear-regression",
+    "title": "Regression Models",
+    "section": "Add Linear Regression",
+    "text": "Add Linear Regression\n\nfrom sklearn.linear_model import LinearRegression\n\nmodel = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"regressor\", LinearRegression())\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#train",
+    "href": "04-regression-models.html#train",
+    "title": "Regression Models",
+    "section": "Train",
+    "text": "Train\n\nmodel.fit(X_train, y_train)\n\nPipeline(steps=[('preprocessor',\n                 ColumnTransformer(transformers=[('num',\n                                                  Pipeline(steps=[('scaler',\n                                                                   StandardScaler())]),\n                                                  Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')),\n                                                 ('cat',\n                                                  Pipeline(steps=[('encoder',\n                                                                   OneHotEncoder(handle_unknown='ignore'))]),\n                                                  Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))])),\n                ('regressor', LinearRegression())])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('preprocessor', ...), ('regressor', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    preprocessor: ColumnTransformer?Documentation for preprocessor: ColumnTransformer\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ntransformers transformers: list of tuples\n\nList of (name, transformer, columns) tuples specifying the\ntransformer objects to be applied to subsets of the data.\n\nname : str\nLike in Pipeline and FeatureUnion, this allows the transformer and\nits parameters to be set using ``set_params`` and searched in grid\nsearch.\ntransformer : {'drop', 'passthrough'} or estimator\nEstimator must support :term:`fit` and :term:`transform`.\nSpecial-cased strings 'drop' and 'passthrough' are accepted as\nwell, to indicate to drop the columns or to pass them through\nuntransformed, respectively.\ncolumns : str, array-like of str, int, array-like of int, array-like of bool, slice or callable\nIndexes the data on its second axis. Integers are interpreted as\npositional columns, while strings can reference DataFrame columns\nby name. A scalar string or int should be used where\n``transformer`` expects X to be a 1d array-like (vector),\notherwise a 2d array will be passed to the transformer.\nA callable is passed the input data `X` and can return any of the\nabove. To select multiple columns by name or dtype, you can use\n:obj:`make_column_selector`.\n[('num', ...), ('cat', ...)]\n\n\n\nremainder remainder: {'drop', 'passthrough'} or estimator, default='drop'\n\nBy default, only the specified columns in `transformers` are\ntransformed and combined in the output, and the non-specified\ncolumns are dropped. (default of ``'drop'``).\nBy specifying ``remainder='passthrough'``, all remaining columns that\nwere not specified in `transformers`, but present in the data passed\nto `fit` will be automatically passed through. This subset of columns\nis concatenated with the output of the transformers. For dataframes,\nextra columns not seen during `fit` will be excluded from the output\nof `transform`.\nBy setting ``remainder`` to be an estimator, the remaining\nnon-specified columns will use the ``remainder`` estimator. The\nestimator must support :term:`fit` and :term:`transform`.\nNote that using this feature requires that the DataFrame columns\ninput at :term:`fit` and :term:`transform` have identical order.\n'drop'\n\n\n\nsparse_threshold sparse_threshold: float, default=0.3\n\nIf the output of the different transformers contains sparse matrices,\nthese will be stacked as a sparse matrix if the overall density is\nlower than this value. Use ``sparse_threshold=0`` to always return\ndense. When the transformed output consists of all dense data, the\nstacked result will be dense, and this keyword will be ignored.\n0.3\n\n\n\nn_jobs n_jobs: int, default=None\n\nNumber of jobs to run in parallel.\n``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.\n``-1`` means using all processors. See :term:`Glossary `\nfor more details.\nNone\n\n\n\ntransformer_weights transformer_weights: dict, default=None\n\nMultiplicative weights for features per transformer. The output of the\ntransformer is multiplied by these weights. Keys are transformer names,\nvalues the weights.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each transformer will be\nprinted as it is completed.\nFalse\n\n\n\nverbose_feature_names_out verbose_feature_names_out: bool, str or Callable[[str, str], str], default=True\n\n- If True, :meth:`ColumnTransformer.get_feature_names_out` will prefix\nall feature names with the name of the transformer that generated that\nfeature. It is equivalent to setting\n`verbose_feature_names_out=\"{transformer_name}__{feature_name}\"`.\n- If False, :meth:`ColumnTransformer.get_feature_names_out` will not\nprefix any feature names and will error if feature names are not\nunique.\n- If ``Callable[[str, str], str]``,\n:meth:`ColumnTransformer.get_feature_names_out` will rename all the features\nusing the name of the transformer. The first argument of the callable is the\ntransformer name and the second argument is the feature name. The returned\nstring will be the new feature name.\n- If ``str``, it must be a string ready for formatting. The given string will\nbe formatted using two field names: ``transformer_name`` and ``feature_name``.\ne.g. ``\"{feature_name}__{transformer_name}\"``. See :meth:`str.format` method\nfrom the standard library for more info.\n\n.. versionadded:: 1.0\n\n.. versionchanged:: 1.6\n`verbose_feature_names_out` can be a callable or a string to be formatted.\nTrue\n\n\n\nforce_int_remainder_cols force_int_remainder_cols: bool, default=False\n\nThis parameter has no effect.\n\n.. note::\nIf you do not access the list of columns for the remainder columns\nin the `transformers_` fitted attribute, you do not need to set\nthis parameter.\n\n.. versionadded:: 1.5\n\n.. versionchanged:: 1.7\nThe default value for `force_int_remainder_cols` will change from\n`True` to `False` in version 1.7.\n\n.. deprecated:: 1.7\n`force_int_remainder_cols` is deprecated and will be removed in 1.9.\n'deprecated'\n\n\n\n\n            \n        \n    numIndex(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    catIndex(['customer_id', 'contract_type', 'autopay'], dtype='str')OneHotEncoder?Documentation for OneHotEncoder\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncategories categories: 'auto' or a list of array-like, default='auto'\n\nCategories (unique values) per feature:\n\n- 'auto' : Determine categories automatically from the training data.\n- list : ``categories[i]`` holds the categories expected in the ith\ncolumn. The passed categories should not mix strings and numeric\nvalues within a single feature, and should be sorted in case of\nnumeric values.\n\nThe used categories can be found in the ``categories_`` attribute.\n\n.. versionadded:: 0.20\n'auto'\n\n\n\ndrop drop: {'first', 'if_binary'} or an array-like of shape (n_features,), default=None\n\nSpecifies a methodology to use to drop one of the categories per\nfeature. This is useful in situations where perfectly collinear\nfeatures cause problems, such as when feeding the resulting data\ninto an unregularized linear regression model.\n\nHowever, dropping one category breaks the symmetry of the original\nrepresentation and can therefore induce a bias in downstream models,\nfor instance for penalized linear classification or regression models.\n\n- None : retain all features (the default).\n- 'first' : drop the first category in each feature. If only one\ncategory is present, the feature will be dropped entirely.\n- 'if_binary' : drop the first category in each feature with two\ncategories. Features with 1 or more than 2 categories are\nleft intact.\n- array : ``drop[i]`` is the category in feature ``X[:, i]`` that\nshould be dropped.\n\nWhen `max_categories` or `min_frequency` is configured to group\ninfrequent categories, the dropping behavior is handled after the\ngrouping.\n\n.. versionadded:: 0.21\nThe parameter `drop` was added in 0.21.\n\n.. versionchanged:: 0.23\nThe option `drop='if_binary'` was added in 0.23.\n\n.. versionchanged:: 1.1\nSupport for dropping infrequent categories.\nNone\n\n\n\nsparse_output sparse_output: bool, default=True\n\nWhen ``True``, it returns a :class:`scipy.sparse.csr_matrix`,\ni.e. a sparse matrix in \"Compressed Sparse Row\" (CSR) format.\n\n.. versionadded:: 1.2\n`sparse` was renamed to `sparse_output`\nTrue\n\n\n\ndtype dtype: number type, default=np.float64\n\nDesired dtype of output.\n&lt;class 'numpy.float64'&gt;\n\n\n\nhandle_unknown handle_unknown: {'error', 'ignore', 'infrequent_if_exist', 'warn'}, default='error'\n\nSpecifies the way unknown categories are handled during :meth:`transform`.\n\n- 'error' : Raise an error if an unknown category is present during transform.\n- 'ignore' : When an unknown category is encountered during\ntransform, the resulting one-hot encoded columns for this feature\nwill be all zeros. In the inverse transform, an unknown category\nwill be denoted as None.\n- 'infrequent_if_exist' : When an unknown category is encountered\nduring transform, the resulting one-hot encoded columns for this\nfeature will map to the infrequent category if it exists. The\ninfrequent category will be mapped to the last position in the\nencoding. During inverse transform, an unknown category will be\nmapped to the category denoted `'infrequent'` if it exists. If the\n`'infrequent'` category does not exist, then :meth:`transform` and\n:meth:`inverse_transform` will handle an unknown category as with\n`handle_unknown='ignore'`. Infrequent categories exist based on\n`min_frequency` and `max_categories`. Read more in the\n:ref:`User Guide `.\n- 'warn' : When an unknown category is encountered during transform\na warning is issued, and the encoding then proceeds as described for\n`handle_unknown=\"infrequent_if_exist\"`.\n\n.. versionchanged:: 1.1\n`'infrequent_if_exist'` was added to automatically handle unknown\ncategories and infrequent categories.\n\n.. versionadded:: 1.6\nThe option `\"warn\"` was added in 1.6.\n'ignore'\n\n\n\nmin_frequency min_frequency: int or float, default=None\n\nSpecifies the minimum frequency below which a category will be\nconsidered infrequent.\n\n- If `int`, categories with a smaller cardinality will be considered\ninfrequent.\n\n- If `float`, categories with a smaller cardinality than\n`min_frequency * n_samples` will be considered infrequent.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nmax_categories max_categories: int, default=None\n\nSpecifies an upper limit to the number of output features for each input\nfeature when considering infrequent categories. If there are infrequent\ncategories, `max_categories` includes the category representing the\ninfrequent categories along with the frequent categories. If `None`,\nthere is no limit to the number of output features.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nfeature_name_combiner feature_name_combiner: \"concat\" or callable, default=\"concat\"\n\nCallable with signature `def callable(input_feature, category)` that returns a\nstring. This is used to create feature names to be returned by\n:meth:`get_feature_names_out`.\n\n`\"concat\"` concatenates encoded feature name and category with\n`feature + \"_\" + str(category)`.E.g. feature X with values 1, 6, 7 create\nfeature names `X_1, X_6, X_7`.\n\n.. versionadded:: 1.3\n'concat'\n\n\n\n\n            \n        \n    LinearRegression?Documentation for LinearRegression\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nWhether to calculate the intercept for this model. If set\nto False, no intercept will be used in calculations\n(i.e. data is expected to be centered).\nTrue\n\n\n\ncopy_X copy_X: bool, default=True\n\nIf True, X will be copied; else, it may be overwritten.\nTrue\n\n\n\ntol tol: float, default=1e-6\n\nThe precision of the solution (`coef_`) is determined by `tol` which\nspecifies a different convergence criterion for the `lsqr` solver.\n`tol` is set as `atol` and `btol` of :func:`scipy.sparse.linalg.lsqr` when\nfitting on sparse training data. This parameter has no effect when fitting\non dense data.\n\n.. versionadded:: 1.7\n1e-06\n\n\n\nn_jobs n_jobs: int, default=None\n\nThe number of jobs to use for the computation. This will only provide\nspeedup in case of sufficiently large problems, that is if firstly\n`n_targets &gt; 1` and secondly `X` is sparse or if `positive` is set\nto `True`. ``None`` means 1 unless in a\n:obj:`joblib.parallel_backend` context. ``-1`` means using all\nprocessors. See :term:`Glossary ` for more details.\nNone\n\n\n\npositive positive: bool, default=False\n\nWhen set to ``True``, forces the coefficients to be positive. This\noption is only supported for dense arrays.\n\nFor a comparison between a linear regression model with positive constraints\non the regression coefficients and a linear regression without such constraints,\nsee :ref:`sphx_glr_auto_examples_linear_model_plot_nnls.py`.\n\n.. versionadded:: 0.24\nFalse",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#predict",
+    "href": "04-regression-models.html#predict",
+    "title": "Regression Models",
+    "section": "Predict",
+    "text": "Predict\n\ny_pred = model.predict(X_test)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
+    ]
+  },
+  {
+    "objectID": "04-regression-models.html#evaluate",
+    "href": "04-regression-models.html#evaluate",
+    "title": "Regression Models",
+    "section": "Evaluate",
+    "text": "Evaluate\n\nfrom sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score\n\nmae = mean_absolute_error(y_test, y_pred)\nmse = mean_squared_error(y_test, y_pred)\nr2 = r2_score(y_test, y_pred)\n\nmae, mse, r2\n\n(0.42805356228380875, 0.2195631133715204, 0.049895925910932615)",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Regression Models</span>"
     ]
@@ -64,7 +334,87 @@
     "href": "05-classification-models.html",
     "title": "Classification Models",
     "section": "",
-    "text": "ID: MLPY-FREE-05\nType: Lesson\nAudience: Public\nTheme: Decisions, thresholds, and costs\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Load Data\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#traintest-split",
+    "href": "05-classification-models.html#traintest-split",
+    "title": "Classification Models",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42,\n    stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#define-preprocessing",
+    "href": "05-classification-models.html#define-preprocessing",
+    "title": "Classification Models",
+    "section": "Define Preprocessing",
+    "text": "Define Preprocessing\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#build-logistic-regression-pipeline",
+    "href": "05-classification-models.html#build-logistic-regression-pipeline",
+    "title": "Classification Models",
+    "section": "Build Logistic Regression Pipeline",
+    "text": "Build Logistic Regression Pipeline\n\nfrom sklearn.linear_model import LogisticRegression\n\nclf = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", LogisticRegression(max_iter=1000))\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#train-classifier",
+    "href": "05-classification-models.html#train-classifier",
+    "title": "Classification Models",
+    "section": "Train Classifier",
+    "text": "Train Classifier\n\nclf.fit(X_train, y_train)\n\nPipeline(steps=[('preprocessor',\n                 ColumnTransformer(transformers=[('num',\n                                                  Pipeline(steps=[('scaler',\n                                                                   StandardScaler())]),\n                                                  Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')),\n                                                 ('cat',\n                                                  Pipeline(steps=[('encoder',\n                                                                   OneHotEncoder(handle_unknown='ignore'))]),\n                                                  Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))])),\n                ('classifier', LogisticRegression(max_iter=1000))])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('preprocessor', ...), ('classifier', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    preprocessor: ColumnTransformer?Documentation for preprocessor: ColumnTransformer\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ntransformers transformers: list of tuples\n\nList of (name, transformer, columns) tuples specifying the\ntransformer objects to be applied to subsets of the data.\n\nname : str\nLike in Pipeline and FeatureUnion, this allows the transformer and\nits parameters to be set using ``set_params`` and searched in grid\nsearch.\ntransformer : {'drop', 'passthrough'} or estimator\nEstimator must support :term:`fit` and :term:`transform`.\nSpecial-cased strings 'drop' and 'passthrough' are accepted as\nwell, to indicate to drop the columns or to pass them through\nuntransformed, respectively.\ncolumns : str, array-like of str, int, array-like of int, array-like of bool, slice or callable\nIndexes the data on its second axis. Integers are interpreted as\npositional columns, while strings can reference DataFrame columns\nby name. A scalar string or int should be used where\n``transformer`` expects X to be a 1d array-like (vector),\notherwise a 2d array will be passed to the transformer.\nA callable is passed the input data `X` and can return any of the\nabove. To select multiple columns by name or dtype, you can use\n:obj:`make_column_selector`.\n[('num', ...), ('cat', ...)]\n\n\n\nremainder remainder: {'drop', 'passthrough'} or estimator, default='drop'\n\nBy default, only the specified columns in `transformers` are\ntransformed and combined in the output, and the non-specified\ncolumns are dropped. (default of ``'drop'``).\nBy specifying ``remainder='passthrough'``, all remaining columns that\nwere not specified in `transformers`, but present in the data passed\nto `fit` will be automatically passed through. This subset of columns\nis concatenated with the output of the transformers. For dataframes,\nextra columns not seen during `fit` will be excluded from the output\nof `transform`.\nBy setting ``remainder`` to be an estimator, the remaining\nnon-specified columns will use the ``remainder`` estimator. The\nestimator must support :term:`fit` and :term:`transform`.\nNote that using this feature requires that the DataFrame columns\ninput at :term:`fit` and :term:`transform` have identical order.\n'drop'\n\n\n\nsparse_threshold sparse_threshold: float, default=0.3\n\nIf the output of the different transformers contains sparse matrices,\nthese will be stacked as a sparse matrix if the overall density is\nlower than this value. Use ``sparse_threshold=0`` to always return\ndense. When the transformed output consists of all dense data, the\nstacked result will be dense, and this keyword will be ignored.\n0.3\n\n\n\nn_jobs n_jobs: int, default=None\n\nNumber of jobs to run in parallel.\n``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.\n``-1`` means using all processors. See :term:`Glossary `\nfor more details.\nNone\n\n\n\ntransformer_weights transformer_weights: dict, default=None\n\nMultiplicative weights for features per transformer. The output of the\ntransformer is multiplied by these weights. Keys are transformer names,\nvalues the weights.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each transformer will be\nprinted as it is completed.\nFalse\n\n\n\nverbose_feature_names_out verbose_feature_names_out: bool, str or Callable[[str, str], str], default=True\n\n- If True, :meth:`ColumnTransformer.get_feature_names_out` will prefix\nall feature names with the name of the transformer that generated that\nfeature. It is equivalent to setting\n`verbose_feature_names_out=\"{transformer_name}__{feature_name}\"`.\n- If False, :meth:`ColumnTransformer.get_feature_names_out` will not\nprefix any feature names and will error if feature names are not\nunique.\n- If ``Callable[[str, str], str]``,\n:meth:`ColumnTransformer.get_feature_names_out` will rename all the features\nusing the name of the transformer. The first argument of the callable is the\ntransformer name and the second argument is the feature name. The returned\nstring will be the new feature name.\n- If ``str``, it must be a string ready for formatting. The given string will\nbe formatted using two field names: ``transformer_name`` and ``feature_name``.\ne.g. ``\"{feature_name}__{transformer_name}\"``. See :meth:`str.format` method\nfrom the standard library for more info.\n\n.. versionadded:: 1.0\n\n.. versionchanged:: 1.6\n`verbose_feature_names_out` can be a callable or a string to be formatted.\nTrue\n\n\n\nforce_int_remainder_cols force_int_remainder_cols: bool, default=False\n\nThis parameter has no effect.\n\n.. note::\nIf you do not access the list of columns for the remainder columns\nin the `transformers_` fitted attribute, you do not need to set\nthis parameter.\n\n.. versionadded:: 1.5\n\n.. versionchanged:: 1.7\nThe default value for `force_int_remainder_cols` will change from\n`True` to `False` in version 1.7.\n\n.. deprecated:: 1.7\n`force_int_remainder_cols` is deprecated and will be removed in 1.9.\n'deprecated'\n\n\n\n\n            \n        \n    numIndex(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    catIndex(['customer_id', 'contract_type', 'autopay'], dtype='str')OneHotEncoder?Documentation for OneHotEncoder\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncategories categories: 'auto' or a list of array-like, default='auto'\n\nCategories (unique values) per feature:\n\n- 'auto' : Determine categories automatically from the training data.\n- list : ``categories[i]`` holds the categories expected in the ith\ncolumn. The passed categories should not mix strings and numeric\nvalues within a single feature, and should be sorted in case of\nnumeric values.\n\nThe used categories can be found in the ``categories_`` attribute.\n\n.. versionadded:: 0.20\n'auto'\n\n\n\ndrop drop: {'first', 'if_binary'} or an array-like of shape (n_features,), default=None\n\nSpecifies a methodology to use to drop one of the categories per\nfeature. This is useful in situations where perfectly collinear\nfeatures cause problems, such as when feeding the resulting data\ninto an unregularized linear regression model.\n\nHowever, dropping one category breaks the symmetry of the original\nrepresentation and can therefore induce a bias in downstream models,\nfor instance for penalized linear classification or regression models.\n\n- None : retain all features (the default).\n- 'first' : drop the first category in each feature. If only one\ncategory is present, the feature will be dropped entirely.\n- 'if_binary' : drop the first category in each feature with two\ncategories. Features with 1 or more than 2 categories are\nleft intact.\n- array : ``drop[i]`` is the category in feature ``X[:, i]`` that\nshould be dropped.\n\nWhen `max_categories` or `min_frequency` is configured to group\ninfrequent categories, the dropping behavior is handled after the\ngrouping.\n\n.. versionadded:: 0.21\nThe parameter `drop` was added in 0.21.\n\n.. versionchanged:: 0.23\nThe option `drop='if_binary'` was added in 0.23.\n\n.. versionchanged:: 1.1\nSupport for dropping infrequent categories.\nNone\n\n\n\nsparse_output sparse_output: bool, default=True\n\nWhen ``True``, it returns a :class:`scipy.sparse.csr_matrix`,\ni.e. a sparse matrix in \"Compressed Sparse Row\" (CSR) format.\n\n.. versionadded:: 1.2\n`sparse` was renamed to `sparse_output`\nTrue\n\n\n\ndtype dtype: number type, default=np.float64\n\nDesired dtype of output.\n&lt;class 'numpy.float64'&gt;\n\n\n\nhandle_unknown handle_unknown: {'error', 'ignore', 'infrequent_if_exist', 'warn'}, default='error'\n\nSpecifies the way unknown categories are handled during :meth:`transform`.\n\n- 'error' : Raise an error if an unknown category is present during transform.\n- 'ignore' : When an unknown category is encountered during\ntransform, the resulting one-hot encoded columns for this feature\nwill be all zeros. In the inverse transform, an unknown category\nwill be denoted as None.\n- 'infrequent_if_exist' : When an unknown category is encountered\nduring transform, the resulting one-hot encoded columns for this\nfeature will map to the infrequent category if it exists. The\ninfrequent category will be mapped to the last position in the\nencoding. During inverse transform, an unknown category will be\nmapped to the category denoted `'infrequent'` if it exists. If the\n`'infrequent'` category does not exist, then :meth:`transform` and\n:meth:`inverse_transform` will handle an unknown category as with\n`handle_unknown='ignore'`. Infrequent categories exist based on\n`min_frequency` and `max_categories`. Read more in the\n:ref:`User Guide `.\n- 'warn' : When an unknown category is encountered during transform\na warning is issued, and the encoding then proceeds as described for\n`handle_unknown=\"infrequent_if_exist\"`.\n\n.. versionchanged:: 1.1\n`'infrequent_if_exist'` was added to automatically handle unknown\ncategories and infrequent categories.\n\n.. versionadded:: 1.6\nThe option `\"warn\"` was added in 1.6.\n'ignore'\n\n\n\nmin_frequency min_frequency: int or float, default=None\n\nSpecifies the minimum frequency below which a category will be\nconsidered infrequent.\n\n- If `int`, categories with a smaller cardinality will be considered\ninfrequent.\n\n- If `float`, categories with a smaller cardinality than\n`min_frequency * n_samples` will be considered infrequent.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nmax_categories max_categories: int, default=None\n\nSpecifies an upper limit to the number of output features for each input\nfeature when considering infrequent categories. If there are infrequent\ncategories, `max_categories` includes the category representing the\ninfrequent categories along with the frequent categories. If `None`,\nthere is no limit to the number of output features.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nfeature_name_combiner feature_name_combiner: \"concat\" or callable, default=\"concat\"\n\nCallable with signature `def callable(input_feature, category)` that returns a\nstring. This is used to create feature names to be returned by\n:meth:`get_feature_names_out`.\n\n`\"concat\"` concatenates encoded feature name and category with\n`feature + \"_\" + str(category)`.E.g. feature X with values 1, 6, 7 create\nfeature names `X_1, X_6, X_7`.\n\n.. versionadded:: 1.3\n'concat'\n\n\n\n\n            \n        \n    LogisticRegression?Documentation for LogisticRegression\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\npenalty penalty: {'l1', 'l2', 'elasticnet', None}, default='l2'\n\nSpecify the norm of the penalty:\n\n- `None`: no penalty is added;\n- `'l2'`: add a L2 penalty term and it is the default choice;\n- `'l1'`: add a L1 penalty term;\n- `'elasticnet'`: both L1 and L2 penalty terms are added.\n\n.. warning::\nSome penalties may not work with some solvers. See the parameter\n`solver` below, to know the compatibility between the penalty and\nsolver.\n\n.. versionadded:: 0.19\nl1 penalty with SAGA solver (allowing 'multinomial' + L1)\n\n.. deprecated:: 1.8\n`penalty` was deprecated in version 1.8 and will be removed in 1.10.\nUse `l1_ratio` instead. `l1_ratio=0` for `penalty='l2'`, `l1_ratio=1` for\n`penalty='l1'` and `l1_ratio` set to any float between 0 and 1 for\n`'penalty='elasticnet'`.\n'deprecated'\n\n\n\nC C: float, default=1.0\n\nInverse of regularization strength; must be a positive float.\nLike in support vector machines, smaller values specify stronger\nregularization. `C=np.inf` results in unpenalized logistic regression.\nFor a visual example on the effect of tuning the `C` parameter\nwith an L1 penalty, see:\n:ref:`sphx_glr_auto_examples_linear_model_plot_logistic_path.py`.\n1.0\n\n\n\nl1_ratio l1_ratio: float, default=0.0\n\nThe Elastic-Net mixing parameter, with `0 &lt;= l1_ratio &lt;= 1`. Setting\n`l1_ratio=1` gives a pure L1-penalty, setting `l1_ratio=0` a pure L2-penalty.\nAny value between 0 and 1 gives an Elastic-Net penalty of the form\n`l1_ratio * L1 + (1 - l1_ratio) * L2`.\n\n.. warning::\nCertain values of `l1_ratio`, i.e. some penalties, may not work with some\nsolvers. See the parameter `solver` below, to know the compatibility between\nthe penalty and solver.\n\n.. versionchanged:: 1.8\nDefault value changed from None to 0.0.\n\n.. deprecated:: 1.8\n`None` is deprecated and will be removed in version 1.10. Always use\n`l1_ratio` to specify the penalty type.\n0.0\n\n\n\ndual dual: bool, default=False\n\nDual (constrained) or primal (regularized, see also\n:ref:`this equation `) formulation. Dual formulation\nis only implemented for l2 penalty with liblinear solver. Prefer `dual=False`\nwhen n_samples &gt; n_features.\nFalse\n\n\n\ntol tol: float, default=1e-4\n\nTolerance for stopping criteria.\n0.0001\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nSpecifies if a constant (a.k.a. bias or intercept) should be\nadded to the decision function.\nTrue\n\n\n\nintercept_scaling intercept_scaling: float, default=1\n\nUseful only when the solver `liblinear` is used\nand `self.fit_intercept` is set to `True`. In this case, `x` becomes\n`[x, self.intercept_scaling]`,\ni.e. a \"synthetic\" feature with constant value equal to\n`intercept_scaling` is appended to the instance vector.\nThe intercept becomes\n``intercept_scaling * synthetic_feature_weight``.\n\n.. note::\nThe synthetic feature weight is subject to L1 or L2\nregularization as all other features.\nTo lessen the effect of regularization on synthetic feature weight\n(and therefore on the intercept) `intercept_scaling` has to be increased.\n1\n\n\n\nclass_weight class_weight: dict or 'balanced', default=None\n\nWeights associated with classes in the form ``{class_label: weight}``.\nIf not given, all classes are supposed to have weight one.\n\nThe \"balanced\" mode uses the values of y to automatically adjust\nweights inversely proportional to class frequencies in the input data\nas ``n_samples / (n_classes * np.bincount(y))``.\n\nNote that these weights will be multiplied with sample_weight (passed\nthrough the fit method) if sample_weight is specified.\n\n.. versionadded:: 0.17\n*class_weight='balanced'*\nNone\n\n\n\nrandom_state random_state: int, RandomState instance, default=None\n\nUsed when ``solver`` == 'sag', 'saga' or 'liblinear' to shuffle the\ndata. See :term:`Glossary ` for details.\nNone\n\n\n\nsolver solver: {'lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag', 'saga'}, default='lbfgs'\n\nAlgorithm to use in the optimization problem. Default is 'lbfgs'.\nTo choose a solver, you might want to consider the following aspects:\n\n- 'lbfgs' is a good default solver because it works reasonably well for a wide\nclass of problems.\n- For :term:`multiclass` problems (`n_classes &gt;= 3`), all solvers except\n'liblinear' minimize the full multinomial loss, 'liblinear' will raise an\nerror.\n- 'newton-cholesky' is a good choice for\n`n_samples` &gt;&gt; `n_features * n_classes`, especially with one-hot encoded\ncategorical features with rare categories. Be aware that the memory usage\nof this solver has a quadratic dependency on `n_features * n_classes`\nbecause it explicitly computes the full Hessian matrix.\n- For small datasets, 'liblinear' is a good choice, whereas 'sag'\nand 'saga' are faster for large ones;\n- 'liblinear' can only handle binary classification by default. To apply a\none-versus-rest scheme for the multiclass setting one can wrap it with the\n:class:`~sklearn.multiclass.OneVsRestClassifier`.\n\n.. warning::\nThe choice of the algorithm depends on the penalty chosen (`l1_ratio=0`\nfor L2-penalty, `l1_ratio=1` for L1-penalty and `0 &lt; l1_ratio &lt; 1` for\nElastic-Net) and on (multinomial) multiclass support:\n\n================= ======================== ======================\nsolver l1_ratio multinomial multiclass\n================= ======================== ======================\n'lbfgs' l1_ratio=0 yes\n'liblinear' l1_ratio=1 or l1_ratio=0 no\n'newton-cg' l1_ratio=0 yes\n'newton-cholesky' l1_ratio=0 yes\n'sag' l1_ratio=0 yes\n'saga' 0&lt;=l1_ratio&lt;=1 yes\n================= ======================== ======================\n\n.. note::\n'sag' and 'saga' fast convergence is only guaranteed on features\nwith approximately the same scale. You can preprocess the data with\na scaler from :mod:`sklearn.preprocessing`.\n\n.. seealso::\nRefer to the :ref:`User Guide ` for more\ninformation regarding :class:`LogisticRegression` and more specifically the\n:ref:`Table `\nsummarizing solver/penalty supports.\n\n.. versionadded:: 0.17\nStochastic Average Gradient (SAG) descent solver. Multinomial support in\nversion 0.18.\n.. versionadded:: 0.19\nSAGA solver.\n.. versionchanged:: 0.22\nThe default solver changed from 'liblinear' to 'lbfgs' in 0.22.\n.. versionadded:: 1.2\nnewton-cholesky solver. Multinomial support in version 1.6.\n'lbfgs'\n\n\n\nmax_iter max_iter: int, default=100\n\nMaximum number of iterations taken for the solvers to converge.\n1000\n\n\n\nverbose verbose: int, default=0\n\nFor the liblinear and lbfgs solvers set verbose to any positive\nnumber for verbosity.\n0\n\n\n\nwarm_start warm_start: bool, default=False\n\nWhen set to True, reuse the solution of the previous call to fit as\ninitialization, otherwise, just erase the previous solution.\nUseless for liblinear solver. See :term:`the Glossary `.\n\n.. versionadded:: 0.17\n*warm_start* to support *lbfgs*, *newton-cg*, *sag*, *saga* solvers.\nFalse\n\n\n\nn_jobs n_jobs: int, default=None\n\nDoes not have any effect.\n\n.. deprecated:: 1.8\n`n_jobs` is deprecated in version 1.8 and will be removed in 1.10.\nNone",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#predict-classes",
+    "href": "05-classification-models.html#predict-classes",
+    "title": "Classification Models",
+    "section": "Predict Classes",
+    "text": "Predict Classes\n\ny_pred = clf.predict(X_test)\ny_pred[:10]\n\narray([0, 1, 1, 1, 1, 1, 1, 1, 0, 1])",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#evaluate-classification-performance",
+    "href": "05-classification-models.html#evaluate-classification-performance",
+    "title": "Classification Models",
+    "section": "Evaluate Classification Performance",
+    "text": "Evaluate Classification Performance\n\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred)\nrecall = recall_score(y_test, y_pred)\nf1 = f1_score(y_test, y_pred)\n\naccuracy, precision, recall, f1\n\n(0.6375, 0.680327868852459, 0.8137254901960784, 0.7410714285714286)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#predict-probabilities",
+    "href": "05-classification-models.html#predict-probabilities",
+    "title": "Classification Models",
+    "section": "Predict Probabilities",
+    "text": "Predict Probabilities\n\ny_prob = clf.predict_proba(X_test)[:, 1]\ny_prob[:10]\n\narray([0.34507573, 0.66552028, 0.64911401, 0.82731511, 0.8113595 ,\n       0.82512733, 0.76763305, 0.57034489, 0.41141683, 0.6657059 ])",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
+    ]
+  },
+  {
+    "objectID": "05-classification-models.html#note-on-thresholds",
+    "href": "05-classification-models.html#note-on-thresholds",
+    "title": "Classification Models",
+    "section": "Note on Thresholds",
+    "text": "Note on Thresholds\nBy default, class predictions use a threshold of 0.5.\nIn the evaluation lesson, we will examine how changing thresholds affects precision and recall.",
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Classification Models</span>"
     ]
@@ -74,7 +424,137 @@
     "href": "06-model-evaluation.html",
     "title": "Model Evaluation",
     "section": "",
-    "text": "ID: MLPY-FREE-06\nType: Lesson\nAudience: Public\nTheme: Metrics that match the question\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Evaluation Is Not a Decoration\nA model is not useful because it produces predictions.\nIt is useful if:\nThis lesson focuses on disciplined evaluation for classification models.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#evaluation-is-not-a-decoration",
+    "href": "06-model-evaluation.html#evaluation-is-not-a-decoration",
+    "title": "Model Evaluation",
+    "section": "",
+    "text": "It generalizes to new data\n\nIts errors are acceptable in context\n\nIts evaluation matches the real decision goal",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#load-data",
+    "href": "06-model-evaluation.html#load-data",
+    "title": "Model Evaluation",
+    "section": "Load Data",
+    "text": "Load Data\n\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#traintest-split",
+    "href": "06-model-evaluation.html#traintest-split",
+    "title": "Model Evaluation",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42,\n    stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#define-preprocessing",
+    "href": "06-model-evaluation.html#define-preprocessing",
+    "title": "Model Evaluation",
+    "section": "Define Preprocessing",
+    "text": "Define Preprocessing\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#train-a-baseline-classifier",
+    "href": "06-model-evaluation.html#train-a-baseline-classifier",
+    "title": "Model Evaluation",
+    "section": "Train a Baseline Classifier",
+    "text": "Train a Baseline Classifier\n\nfrom sklearn.linear_model import LogisticRegression\n\nclf = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", LogisticRegression(max_iter=1000))\n    ]\n)\n\nclf.fit(X_train, y_train)\n\nPipeline(steps=[('preprocessor',\n                 ColumnTransformer(transformers=[('num',\n                                                  Pipeline(steps=[('scaler',\n                                                                   StandardScaler())]),\n                                                  Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')),\n                                                 ('cat',\n                                                  Pipeline(steps=[('encoder',\n                                                                   OneHotEncoder(handle_unknown='ignore'))]),\n                                                  Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))])),\n                ('classifier', LogisticRegression(max_iter=1000))])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('preprocessor', ...), ('classifier', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    preprocessor: ColumnTransformer?Documentation for preprocessor: ColumnTransformer\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ntransformers transformers: list of tuples\n\nList of (name, transformer, columns) tuples specifying the\ntransformer objects to be applied to subsets of the data.\n\nname : str\nLike in Pipeline and FeatureUnion, this allows the transformer and\nits parameters to be set using ``set_params`` and searched in grid\nsearch.\ntransformer : {'drop', 'passthrough'} or estimator\nEstimator must support :term:`fit` and :term:`transform`.\nSpecial-cased strings 'drop' and 'passthrough' are accepted as\nwell, to indicate to drop the columns or to pass them through\nuntransformed, respectively.\ncolumns : str, array-like of str, int, array-like of int, array-like of bool, slice or callable\nIndexes the data on its second axis. Integers are interpreted as\npositional columns, while strings can reference DataFrame columns\nby name. A scalar string or int should be used where\n``transformer`` expects X to be a 1d array-like (vector),\notherwise a 2d array will be passed to the transformer.\nA callable is passed the input data `X` and can return any of the\nabove. To select multiple columns by name or dtype, you can use\n:obj:`make_column_selector`.\n[('num', ...), ('cat', ...)]\n\n\n\nremainder remainder: {'drop', 'passthrough'} or estimator, default='drop'\n\nBy default, only the specified columns in `transformers` are\ntransformed and combined in the output, and the non-specified\ncolumns are dropped. (default of ``'drop'``).\nBy specifying ``remainder='passthrough'``, all remaining columns that\nwere not specified in `transformers`, but present in the data passed\nto `fit` will be automatically passed through. This subset of columns\nis concatenated with the output of the transformers. For dataframes,\nextra columns not seen during `fit` will be excluded from the output\nof `transform`.\nBy setting ``remainder`` to be an estimator, the remaining\nnon-specified columns will use the ``remainder`` estimator. The\nestimator must support :term:`fit` and :term:`transform`.\nNote that using this feature requires that the DataFrame columns\ninput at :term:`fit` and :term:`transform` have identical order.\n'drop'\n\n\n\nsparse_threshold sparse_threshold: float, default=0.3\n\nIf the output of the different transformers contains sparse matrices,\nthese will be stacked as a sparse matrix if the overall density is\nlower than this value. Use ``sparse_threshold=0`` to always return\ndense. When the transformed output consists of all dense data, the\nstacked result will be dense, and this keyword will be ignored.\n0.3\n\n\n\nn_jobs n_jobs: int, default=None\n\nNumber of jobs to run in parallel.\n``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.\n``-1`` means using all processors. See :term:`Glossary `\nfor more details.\nNone\n\n\n\ntransformer_weights transformer_weights: dict, default=None\n\nMultiplicative weights for features per transformer. The output of the\ntransformer is multiplied by these weights. Keys are transformer names,\nvalues the weights.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each transformer will be\nprinted as it is completed.\nFalse\n\n\n\nverbose_feature_names_out verbose_feature_names_out: bool, str or Callable[[str, str], str], default=True\n\n- If True, :meth:`ColumnTransformer.get_feature_names_out` will prefix\nall feature names with the name of the transformer that generated that\nfeature. It is equivalent to setting\n`verbose_feature_names_out=\"{transformer_name}__{feature_name}\"`.\n- If False, :meth:`ColumnTransformer.get_feature_names_out` will not\nprefix any feature names and will error if feature names are not\nunique.\n- If ``Callable[[str, str], str]``,\n:meth:`ColumnTransformer.get_feature_names_out` will rename all the features\nusing the name of the transformer. The first argument of the callable is the\ntransformer name and the second argument is the feature name. The returned\nstring will be the new feature name.\n- If ``str``, it must be a string ready for formatting. The given string will\nbe formatted using two field names: ``transformer_name`` and ``feature_name``.\ne.g. ``\"{feature_name}__{transformer_name}\"``. See :meth:`str.format` method\nfrom the standard library for more info.\n\n.. versionadded:: 1.0\n\n.. versionchanged:: 1.6\n`verbose_feature_names_out` can be a callable or a string to be formatted.\nTrue\n\n\n\nforce_int_remainder_cols force_int_remainder_cols: bool, default=False\n\nThis parameter has no effect.\n\n.. note::\nIf you do not access the list of columns for the remainder columns\nin the `transformers_` fitted attribute, you do not need to set\nthis parameter.\n\n.. versionadded:: 1.5\n\n.. versionchanged:: 1.7\nThe default value for `force_int_remainder_cols` will change from\n`True` to `False` in version 1.7.\n\n.. deprecated:: 1.7\n`force_int_remainder_cols` is deprecated and will be removed in 1.9.\n'deprecated'\n\n\n\n\n            \n        \n    numIndex(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    catIndex(['customer_id', 'contract_type', 'autopay'], dtype='str')OneHotEncoder?Documentation for OneHotEncoder\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncategories categories: 'auto' or a list of array-like, default='auto'\n\nCategories (unique values) per feature:\n\n- 'auto' : Determine categories automatically from the training data.\n- list : ``categories[i]`` holds the categories expected in the ith\ncolumn. The passed categories should not mix strings and numeric\nvalues within a single feature, and should be sorted in case of\nnumeric values.\n\nThe used categories can be found in the ``categories_`` attribute.\n\n.. versionadded:: 0.20\n'auto'\n\n\n\ndrop drop: {'first', 'if_binary'} or an array-like of shape (n_features,), default=None\n\nSpecifies a methodology to use to drop one of the categories per\nfeature. This is useful in situations where perfectly collinear\nfeatures cause problems, such as when feeding the resulting data\ninto an unregularized linear regression model.\n\nHowever, dropping one category breaks the symmetry of the original\nrepresentation and can therefore induce a bias in downstream models,\nfor instance for penalized linear classification or regression models.\n\n- None : retain all features (the default).\n- 'first' : drop the first category in each feature. If only one\ncategory is present, the feature will be dropped entirely.\n- 'if_binary' : drop the first category in each feature with two\ncategories. Features with 1 or more than 2 categories are\nleft intact.\n- array : ``drop[i]`` is the category in feature ``X[:, i]`` that\nshould be dropped.\n\nWhen `max_categories` or `min_frequency` is configured to group\ninfrequent categories, the dropping behavior is handled after the\ngrouping.\n\n.. versionadded:: 0.21\nThe parameter `drop` was added in 0.21.\n\n.. versionchanged:: 0.23\nThe option `drop='if_binary'` was added in 0.23.\n\n.. versionchanged:: 1.1\nSupport for dropping infrequent categories.\nNone\n\n\n\nsparse_output sparse_output: bool, default=True\n\nWhen ``True``, it returns a :class:`scipy.sparse.csr_matrix`,\ni.e. a sparse matrix in \"Compressed Sparse Row\" (CSR) format.\n\n.. versionadded:: 1.2\n`sparse` was renamed to `sparse_output`\nTrue\n\n\n\ndtype dtype: number type, default=np.float64\n\nDesired dtype of output.\n&lt;class 'numpy.float64'&gt;\n\n\n\nhandle_unknown handle_unknown: {'error', 'ignore', 'infrequent_if_exist', 'warn'}, default='error'\n\nSpecifies the way unknown categories are handled during :meth:`transform`.\n\n- 'error' : Raise an error if an unknown category is present during transform.\n- 'ignore' : When an unknown category is encountered during\ntransform, the resulting one-hot encoded columns for this feature\nwill be all zeros. In the inverse transform, an unknown category\nwill be denoted as None.\n- 'infrequent_if_exist' : When an unknown category is encountered\nduring transform, the resulting one-hot encoded columns for this\nfeature will map to the infrequent category if it exists. The\ninfrequent category will be mapped to the last position in the\nencoding. During inverse transform, an unknown category will be\nmapped to the category denoted `'infrequent'` if it exists. If the\n`'infrequent'` category does not exist, then :meth:`transform` and\n:meth:`inverse_transform` will handle an unknown category as with\n`handle_unknown='ignore'`. Infrequent categories exist based on\n`min_frequency` and `max_categories`. Read more in the\n:ref:`User Guide `.\n- 'warn' : When an unknown category is encountered during transform\na warning is issued, and the encoding then proceeds as described for\n`handle_unknown=\"infrequent_if_exist\"`.\n\n.. versionchanged:: 1.1\n`'infrequent_if_exist'` was added to automatically handle unknown\ncategories and infrequent categories.\n\n.. versionadded:: 1.6\nThe option `\"warn\"` was added in 1.6.\n'ignore'\n\n\n\nmin_frequency min_frequency: int or float, default=None\n\nSpecifies the minimum frequency below which a category will be\nconsidered infrequent.\n\n- If `int`, categories with a smaller cardinality will be considered\ninfrequent.\n\n- If `float`, categories with a smaller cardinality than\n`min_frequency * n_samples` will be considered infrequent.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nmax_categories max_categories: int, default=None\n\nSpecifies an upper limit to the number of output features for each input\nfeature when considering infrequent categories. If there are infrequent\ncategories, `max_categories` includes the category representing the\ninfrequent categories along with the frequent categories. If `None`,\nthere is no limit to the number of output features.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nfeature_name_combiner feature_name_combiner: \"concat\" or callable, default=\"concat\"\n\nCallable with signature `def callable(input_feature, category)` that returns a\nstring. This is used to create feature names to be returned by\n:meth:`get_feature_names_out`.\n\n`\"concat\"` concatenates encoded feature name and category with\n`feature + \"_\" + str(category)`.E.g. feature X with values 1, 6, 7 create\nfeature names `X_1, X_6, X_7`.\n\n.. versionadded:: 1.3\n'concat'\n\n\n\n\n            \n        \n    LogisticRegression?Documentation for LogisticRegression\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\npenalty penalty: {'l1', 'l2', 'elasticnet', None}, default='l2'\n\nSpecify the norm of the penalty:\n\n- `None`: no penalty is added;\n- `'l2'`: add a L2 penalty term and it is the default choice;\n- `'l1'`: add a L1 penalty term;\n- `'elasticnet'`: both L1 and L2 penalty terms are added.\n\n.. warning::\nSome penalties may not work with some solvers. See the parameter\n`solver` below, to know the compatibility between the penalty and\nsolver.\n\n.. versionadded:: 0.19\nl1 penalty with SAGA solver (allowing 'multinomial' + L1)\n\n.. deprecated:: 1.8\n`penalty` was deprecated in version 1.8 and will be removed in 1.10.\nUse `l1_ratio` instead. `l1_ratio=0` for `penalty='l2'`, `l1_ratio=1` for\n`penalty='l1'` and `l1_ratio` set to any float between 0 and 1 for\n`'penalty='elasticnet'`.\n'deprecated'\n\n\n\nC C: float, default=1.0\n\nInverse of regularization strength; must be a positive float.\nLike in support vector machines, smaller values specify stronger\nregularization. `C=np.inf` results in unpenalized logistic regression.\nFor a visual example on the effect of tuning the `C` parameter\nwith an L1 penalty, see:\n:ref:`sphx_glr_auto_examples_linear_model_plot_logistic_path.py`.\n1.0\n\n\n\nl1_ratio l1_ratio: float, default=0.0\n\nThe Elastic-Net mixing parameter, with `0 &lt;= l1_ratio &lt;= 1`. Setting\n`l1_ratio=1` gives a pure L1-penalty, setting `l1_ratio=0` a pure L2-penalty.\nAny value between 0 and 1 gives an Elastic-Net penalty of the form\n`l1_ratio * L1 + (1 - l1_ratio) * L2`.\n\n.. warning::\nCertain values of `l1_ratio`, i.e. some penalties, may not work with some\nsolvers. See the parameter `solver` below, to know the compatibility between\nthe penalty and solver.\n\n.. versionchanged:: 1.8\nDefault value changed from None to 0.0.\n\n.. deprecated:: 1.8\n`None` is deprecated and will be removed in version 1.10. Always use\n`l1_ratio` to specify the penalty type.\n0.0\n\n\n\ndual dual: bool, default=False\n\nDual (constrained) or primal (regularized, see also\n:ref:`this equation `) formulation. Dual formulation\nis only implemented for l2 penalty with liblinear solver. Prefer `dual=False`\nwhen n_samples &gt; n_features.\nFalse\n\n\n\ntol tol: float, default=1e-4\n\nTolerance for stopping criteria.\n0.0001\n\n\n\nfit_intercept fit_intercept: bool, default=True\n\nSpecifies if a constant (a.k.a. bias or intercept) should be\nadded to the decision function.\nTrue\n\n\n\nintercept_scaling intercept_scaling: float, default=1\n\nUseful only when the solver `liblinear` is used\nand `self.fit_intercept` is set to `True`. In this case, `x` becomes\n`[x, self.intercept_scaling]`,\ni.e. a \"synthetic\" feature with constant value equal to\n`intercept_scaling` is appended to the instance vector.\nThe intercept becomes\n``intercept_scaling * synthetic_feature_weight``.\n\n.. note::\nThe synthetic feature weight is subject to L1 or L2\nregularization as all other features.\nTo lessen the effect of regularization on synthetic feature weight\n(and therefore on the intercept) `intercept_scaling` has to be increased.\n1\n\n\n\nclass_weight class_weight: dict or 'balanced', default=None\n\nWeights associated with classes in the form ``{class_label: weight}``.\nIf not given, all classes are supposed to have weight one.\n\nThe \"balanced\" mode uses the values of y to automatically adjust\nweights inversely proportional to class frequencies in the input data\nas ``n_samples / (n_classes * np.bincount(y))``.\n\nNote that these weights will be multiplied with sample_weight (passed\nthrough the fit method) if sample_weight is specified.\n\n.. versionadded:: 0.17\n*class_weight='balanced'*\nNone\n\n\n\nrandom_state random_state: int, RandomState instance, default=None\n\nUsed when ``solver`` == 'sag', 'saga' or 'liblinear' to shuffle the\ndata. See :term:`Glossary ` for details.\nNone\n\n\n\nsolver solver: {'lbfgs', 'liblinear', 'newton-cg', 'newton-cholesky', 'sag', 'saga'}, default='lbfgs'\n\nAlgorithm to use in the optimization problem. Default is 'lbfgs'.\nTo choose a solver, you might want to consider the following aspects:\n\n- 'lbfgs' is a good default solver because it works reasonably well for a wide\nclass of problems.\n- For :term:`multiclass` problems (`n_classes &gt;= 3`), all solvers except\n'liblinear' minimize the full multinomial loss, 'liblinear' will raise an\nerror.\n- 'newton-cholesky' is a good choice for\n`n_samples` &gt;&gt; `n_features * n_classes`, especially with one-hot encoded\ncategorical features with rare categories. Be aware that the memory usage\nof this solver has a quadratic dependency on `n_features * n_classes`\nbecause it explicitly computes the full Hessian matrix.\n- For small datasets, 'liblinear' is a good choice, whereas 'sag'\nand 'saga' are faster for large ones;\n- 'liblinear' can only handle binary classification by default. To apply a\none-versus-rest scheme for the multiclass setting one can wrap it with the\n:class:`~sklearn.multiclass.OneVsRestClassifier`.\n\n.. warning::\nThe choice of the algorithm depends on the penalty chosen (`l1_ratio=0`\nfor L2-penalty, `l1_ratio=1` for L1-penalty and `0 &lt; l1_ratio &lt; 1` for\nElastic-Net) and on (multinomial) multiclass support:\n\n================= ======================== ======================\nsolver l1_ratio multinomial multiclass\n================= ======================== ======================\n'lbfgs' l1_ratio=0 yes\n'liblinear' l1_ratio=1 or l1_ratio=0 no\n'newton-cg' l1_ratio=0 yes\n'newton-cholesky' l1_ratio=0 yes\n'sag' l1_ratio=0 yes\n'saga' 0&lt;=l1_ratio&lt;=1 yes\n================= ======================== ======================\n\n.. note::\n'sag' and 'saga' fast convergence is only guaranteed on features\nwith approximately the same scale. You can preprocess the data with\na scaler from :mod:`sklearn.preprocessing`.\n\n.. seealso::\nRefer to the :ref:`User Guide ` for more\ninformation regarding :class:`LogisticRegression` and more specifically the\n:ref:`Table `\nsummarizing solver/penalty supports.\n\n.. versionadded:: 0.17\nStochastic Average Gradient (SAG) descent solver. Multinomial support in\nversion 0.18.\n.. versionadded:: 0.19\nSAGA solver.\n.. versionchanged:: 0.22\nThe default solver changed from 'liblinear' to 'lbfgs' in 0.22.\n.. versionadded:: 1.2\nnewton-cholesky solver. Multinomial support in version 1.6.\n'lbfgs'\n\n\n\nmax_iter max_iter: int, default=100\n\nMaximum number of iterations taken for the solvers to converge.\n1000\n\n\n\nverbose verbose: int, default=0\n\nFor the liblinear and lbfgs solvers set verbose to any positive\nnumber for verbosity.\n0\n\n\n\nwarm_start warm_start: bool, default=False\n\nWhen set to True, reuse the solution of the previous call to fit as\ninitialization, otherwise, just erase the previous solution.\nUseless for liblinear solver. See :term:`the Glossary `.\n\n.. versionadded:: 0.17\n*warm_start* to support *lbfgs*, *newton-cg*, *sag*, *saga* solvers.\nFalse\n\n\n\nn_jobs n_jobs: int, default=None\n\nDoes not have any effect.\n\n.. deprecated:: 1.8\n`n_jobs` is deprecated in version 1.8 and will be removed in 1.10.\nNone",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#predictions-and-probabilities",
+    "href": "06-model-evaluation.html#predictions-and-probabilities",
+    "title": "Model Evaluation",
+    "section": "Predictions and Probabilities",
+    "text": "Predictions and Probabilities\n\nimport numpy as np\n\ny_pred = clf.predict(X_test)\ny_prob = clf.predict_proba(X_test)[:, 1]\n\ny_pred[:10], np.round(y_prob[:10], 3)\n\n(array([0, 1, 1, 1, 1, 1, 1, 1, 0, 1]),\n array([0.345, 0.666, 0.649, 0.827, 0.811, 0.825, 0.768, 0.57 , 0.411,\n        0.666]))",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#confusion-matrix",
+    "href": "06-model-evaluation.html#confusion-matrix",
+    "title": "Model Evaluation",
+    "section": "Confusion Matrix",
+    "text": "Confusion Matrix\nA confusion matrix breaks predictions into four counts:\n\nTrue positives (TP)\n\nFalse positives (FP)\n\nTrue negatives (TN)\n\nFalse negatives (FN)\n\n\nfrom sklearn.metrics import confusion_matrix\n\ncm = confusion_matrix(y_test, y_pred)\ncm\n\narray([[19, 39],\n       [19, 83]])\n\n\nFor readability, we can label it.\n\nimport pandas as pd\n\ncm_df = pd.DataFrame(\n    cm,\n    index=[\"Actual 0\", \"Actual 1\"],\n    columns=[\"Pred 0\", \"Pred 1\"]\n)\n\ncm_df\n\n\n\n\n\n\n\n\nPred 0\nPred 1\n\n\n\n\nActual 0\n19\n39\n\n\nActual 1\n19\n83",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#accuracy-can-be-misleading",
+    "href": "06-model-evaluation.html#accuracy-can-be-misleading",
+    "title": "Model Evaluation",
+    "section": "Accuracy Can Be Misleading",
+    "text": "Accuracy Can Be Misleading\nAccuracy answers:\nHow often was the prediction correct?\nBut accuracy does not reflect:\n\nClass imbalance\n\nAsymmetric error costs\n\nFor churn, false negatives can be more costly than false positives.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#precision-recall-and-f1",
+    "href": "06-model-evaluation.html#precision-recall-and-f1",
+    "title": "Model Evaluation",
+    "section": "Precision, Recall, and F1",
+    "text": "Precision, Recall, and F1\n\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred)\nrecall = recall_score(y_test, y_pred)\nf1 = f1_score(y_test, y_pred)\n\naccuracy, precision, recall, f1\n\n(0.6375, 0.680327868852459, 0.8137254901960784, 0.7410714285714286)\n\n\nInterpretation:\n\nPrecision: among predicted churners, how many truly churned?\n\nRecall: among true churners, how many did we catch?\n\nF1: balance between precision and recall",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#thresholds-change-behavior",
+    "href": "06-model-evaluation.html#thresholds-change-behavior",
+    "title": "Model Evaluation",
+    "section": "Thresholds Change Behavior",
+    "text": "Thresholds Change Behavior\nBy default, classification uses threshold 0.5.\nWe can change it.\n\ndef predict_with_threshold(probs, threshold=0.5):\n    return (probs &gt;= threshold).astype(int)\n\nCompare metrics at different thresholds.\n\nthresholds = [0.3, 0.5, 0.7]\n\nrows = []\nfor t in thresholds:\n    y_t = predict_with_threshold(y_prob, threshold=t)\n    rows.append({\n        \"threshold\": t,\n        \"precision\": precision_score(y_test, y_t),\n        \"recall\": recall_score(y_test, y_t),\n        \"f1\": f1_score(y_test, y_t)\n    })\n\npd.DataFrame(rows)\n\n\n\n\n\n\n\n\nthreshold\nprecision\nrecall\nf1\n\n\n\n\n0\n0.3\n0.647059\n0.970588\n0.776471\n\n\n1\n0.5\n0.680328\n0.813725\n0.741071\n\n\n2\n0.7\n0.786885\n0.470588\n0.588957\n\n\n\n\n\n\n\nLower thresholds usually increase recall.\nHigher thresholds usually increase precision.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#roc-curve-and-auc",
+    "href": "06-model-evaluation.html#roc-curve-and-auc",
+    "title": "Model Evaluation",
+    "section": "ROC Curve and AUC",
+    "text": "ROC Curve and AUC\nThe ROC curve summarizes performance across thresholds.\n\nimport matplotlib.pyplot as plt\nfrom sklearn.metrics import roc_curve, roc_auc_score\n\nfpr, tpr, thr = roc_curve(y_test, y_prob)\nauc = roc_auc_score(y_test, y_prob)\n\nauc\n\n0.6511156186612576\n\n\nPlot the ROC curve.\n\nfig, ax = plt.subplots()\nax.plot(fpr, tpr)\nax.set_xlabel(\"False Positive Rate\")\nax.set_ylabel(\"True Positive Rate\")\nax.set_title(\"ROC Curve\")\nplt.show()\n\n\n\n\n\n\n\n\nAUC ranges from 0.5 (no skill) to 1.0 (perfect separation).",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#cross-validation",
+    "href": "06-model-evaluation.html#cross-validation",
+    "title": "Model Evaluation",
+    "section": "Cross-Validation",
+    "text": "Cross-Validation\nA single train/test split can be noisy.\nCross-validation provides a more stable estimate of generalization.\n\nfrom sklearn.model_selection import cross_val_score\n\nscores = cross_val_score(clf, X, y, cv=5, scoring=\"f1\")\nscores, scores.mean()\n\n(array([0.74782609, 0.75862069, 0.80869565, 0.74178404, 0.79475983]),\n np.float64(0.7703372583343606))",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
+    ]
+  },
+  {
+    "objectID": "06-model-evaluation.html#looking-ahead",
+    "href": "06-model-evaluation.html#looking-ahead",
+    "title": "Model Evaluation",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nIn the next lesson, we will focus on overfitting and regularization.\nThe goal is not to chase metrics.\nThe goal is to build models that generalize.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Model Evaluation</span>"
     ]
@@ -84,7 +564,107 @@
     "href": "07-overfitting-and-regularization.html",
     "title": "Overfitting and Regularization",
     "section": "",
-    "text": "ID: MLPY-FREE-07\nType: Lesson\nAudience: Public\nTheme: Generalization discipline\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "When Good Training Performance Is Not Enough\nA model can perform extremely well on training data and still fail in practice.\nThis happens when the model memorizes patterns that do not generalize.\nThis phenomenon is called overfitting.\nOverfitting occurs when:\nThe goal of machine learning is not to fit training data.\nThe goal is to generalize.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#when-good-training-performance-is-not-enough",
+    "href": "07-overfitting-and-regularization.html#when-good-training-performance-is-not-enough",
+    "title": "Overfitting and Regularization",
+    "section": "",
+    "text": "The model is too complex for the available data\n\nNoise is mistaken for signal\n\nEvaluation is performed incorrectly\n\nData leakage is present",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#load-data",
+    "href": "07-overfitting-and-regularization.html#load-data",
+    "title": "Overfitting and Regularization",
+    "section": "Load Data",
+    "text": "Load Data\n\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#traintest-split",
+    "href": "07-overfitting-and-regularization.html#traintest-split",
+    "title": "Overfitting and Regularization",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42,\n    stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#define-preprocessing",
+    "href": "07-overfitting-and-regularization.html#define-preprocessing",
+    "title": "Overfitting and Regularization",
+    "section": "Define Preprocessing",
+    "text": "Define Preprocessing\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#a-more-flexible-model",
+    "href": "07-overfitting-and-regularization.html#a-more-flexible-model",
+    "title": "Overfitting and Regularization",
+    "section": "A More Flexible Model",
+    "text": "A More Flexible Model\nDecision trees can model complex patterns.\nThey can also overfit easily.\n\nfrom sklearn.tree import DecisionTreeClassifier\n\ntree_clf = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", DecisionTreeClassifier(random_state=42))\n    ]\n)\n\ntree_clf.fit(X_train, y_train)\n\nPipeline(steps=[('preprocessor',\n                 ColumnTransformer(transformers=[('num',\n                                                  Pipeline(steps=[('scaler',\n                                                                   StandardScaler())]),\n                                                  Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')),\n                                                 ('cat',\n                                                  Pipeline(steps=[('encoder',\n                                                                   OneHotEncoder(handle_unknown='ignore'))]),\n                                                  Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))])),\n                ('classifier', DecisionTreeClassifier(random_state=42))])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('preprocessor', ...), ('classifier', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    preprocessor: ColumnTransformer?Documentation for preprocessor: ColumnTransformer\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ntransformers transformers: list of tuples\n\nList of (name, transformer, columns) tuples specifying the\ntransformer objects to be applied to subsets of the data.\n\nname : str\nLike in Pipeline and FeatureUnion, this allows the transformer and\nits parameters to be set using ``set_params`` and searched in grid\nsearch.\ntransformer : {'drop', 'passthrough'} or estimator\nEstimator must support :term:`fit` and :term:`transform`.\nSpecial-cased strings 'drop' and 'passthrough' are accepted as\nwell, to indicate to drop the columns or to pass them through\nuntransformed, respectively.\ncolumns : str, array-like of str, int, array-like of int, array-like of bool, slice or callable\nIndexes the data on its second axis. Integers are interpreted as\npositional columns, while strings can reference DataFrame columns\nby name. A scalar string or int should be used where\n``transformer`` expects X to be a 1d array-like (vector),\notherwise a 2d array will be passed to the transformer.\nA callable is passed the input data `X` and can return any of the\nabove. To select multiple columns by name or dtype, you can use\n:obj:`make_column_selector`.\n[('num', ...), ('cat', ...)]\n\n\n\nremainder remainder: {'drop', 'passthrough'} or estimator, default='drop'\n\nBy default, only the specified columns in `transformers` are\ntransformed and combined in the output, and the non-specified\ncolumns are dropped. (default of ``'drop'``).\nBy specifying ``remainder='passthrough'``, all remaining columns that\nwere not specified in `transformers`, but present in the data passed\nto `fit` will be automatically passed through. This subset of columns\nis concatenated with the output of the transformers. For dataframes,\nextra columns not seen during `fit` will be excluded from the output\nof `transform`.\nBy setting ``remainder`` to be an estimator, the remaining\nnon-specified columns will use the ``remainder`` estimator. The\nestimator must support :term:`fit` and :term:`transform`.\nNote that using this feature requires that the DataFrame columns\ninput at :term:`fit` and :term:`transform` have identical order.\n'drop'\n\n\n\nsparse_threshold sparse_threshold: float, default=0.3\n\nIf the output of the different transformers contains sparse matrices,\nthese will be stacked as a sparse matrix if the overall density is\nlower than this value. Use ``sparse_threshold=0`` to always return\ndense. When the transformed output consists of all dense data, the\nstacked result will be dense, and this keyword will be ignored.\n0.3\n\n\n\nn_jobs n_jobs: int, default=None\n\nNumber of jobs to run in parallel.\n``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.\n``-1`` means using all processors. See :term:`Glossary `\nfor more details.\nNone\n\n\n\ntransformer_weights transformer_weights: dict, default=None\n\nMultiplicative weights for features per transformer. The output of the\ntransformer is multiplied by these weights. Keys are transformer names,\nvalues the weights.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each transformer will be\nprinted as it is completed.\nFalse\n\n\n\nverbose_feature_names_out verbose_feature_names_out: bool, str or Callable[[str, str], str], default=True\n\n- If True, :meth:`ColumnTransformer.get_feature_names_out` will prefix\nall feature names with the name of the transformer that generated that\nfeature. It is equivalent to setting\n`verbose_feature_names_out=\"{transformer_name}__{feature_name}\"`.\n- If False, :meth:`ColumnTransformer.get_feature_names_out` will not\nprefix any feature names and will error if feature names are not\nunique.\n- If ``Callable[[str, str], str]``,\n:meth:`ColumnTransformer.get_feature_names_out` will rename all the features\nusing the name of the transformer. The first argument of the callable is the\ntransformer name and the second argument is the feature name. The returned\nstring will be the new feature name.\n- If ``str``, it must be a string ready for formatting. The given string will\nbe formatted using two field names: ``transformer_name`` and ``feature_name``.\ne.g. ``\"{feature_name}__{transformer_name}\"``. See :meth:`str.format` method\nfrom the standard library for more info.\n\n.. versionadded:: 1.0\n\n.. versionchanged:: 1.6\n`verbose_feature_names_out` can be a callable or a string to be formatted.\nTrue\n\n\n\nforce_int_remainder_cols force_int_remainder_cols: bool, default=False\n\nThis parameter has no effect.\n\n.. note::\nIf you do not access the list of columns for the remainder columns\nin the `transformers_` fitted attribute, you do not need to set\nthis parameter.\n\n.. versionadded:: 1.5\n\n.. versionchanged:: 1.7\nThe default value for `force_int_remainder_cols` will change from\n`True` to `False` in version 1.7.\n\n.. deprecated:: 1.7\n`force_int_remainder_cols` is deprecated and will be removed in 1.9.\n'deprecated'\n\n\n\n\n            \n        \n    numIndex(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    catIndex(['customer_id', 'contract_type', 'autopay'], dtype='str')OneHotEncoder?Documentation for OneHotEncoder\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncategories categories: 'auto' or a list of array-like, default='auto'\n\nCategories (unique values) per feature:\n\n- 'auto' : Determine categories automatically from the training data.\n- list : ``categories[i]`` holds the categories expected in the ith\ncolumn. The passed categories should not mix strings and numeric\nvalues within a single feature, and should be sorted in case of\nnumeric values.\n\nThe used categories can be found in the ``categories_`` attribute.\n\n.. versionadded:: 0.20\n'auto'\n\n\n\ndrop drop: {'first', 'if_binary'} or an array-like of shape (n_features,), default=None\n\nSpecifies a methodology to use to drop one of the categories per\nfeature. This is useful in situations where perfectly collinear\nfeatures cause problems, such as when feeding the resulting data\ninto an unregularized linear regression model.\n\nHowever, dropping one category breaks the symmetry of the original\nrepresentation and can therefore induce a bias in downstream models,\nfor instance for penalized linear classification or regression models.\n\n- None : retain all features (the default).\n- 'first' : drop the first category in each feature. If only one\ncategory is present, the feature will be dropped entirely.\n- 'if_binary' : drop the first category in each feature with two\ncategories. Features with 1 or more than 2 categories are\nleft intact.\n- array : ``drop[i]`` is the category in feature ``X[:, i]`` that\nshould be dropped.\n\nWhen `max_categories` or `min_frequency` is configured to group\ninfrequent categories, the dropping behavior is handled after the\ngrouping.\n\n.. versionadded:: 0.21\nThe parameter `drop` was added in 0.21.\n\n.. versionchanged:: 0.23\nThe option `drop='if_binary'` was added in 0.23.\n\n.. versionchanged:: 1.1\nSupport for dropping infrequent categories.\nNone\n\n\n\nsparse_output sparse_output: bool, default=True\n\nWhen ``True``, it returns a :class:`scipy.sparse.csr_matrix`,\ni.e. a sparse matrix in \"Compressed Sparse Row\" (CSR) format.\n\n.. versionadded:: 1.2\n`sparse` was renamed to `sparse_output`\nTrue\n\n\n\ndtype dtype: number type, default=np.float64\n\nDesired dtype of output.\n&lt;class 'numpy.float64'&gt;\n\n\n\nhandle_unknown handle_unknown: {'error', 'ignore', 'infrequent_if_exist', 'warn'}, default='error'\n\nSpecifies the way unknown categories are handled during :meth:`transform`.\n\n- 'error' : Raise an error if an unknown category is present during transform.\n- 'ignore' : When an unknown category is encountered during\ntransform, the resulting one-hot encoded columns for this feature\nwill be all zeros. In the inverse transform, an unknown category\nwill be denoted as None.\n- 'infrequent_if_exist' : When an unknown category is encountered\nduring transform, the resulting one-hot encoded columns for this\nfeature will map to the infrequent category if it exists. The\ninfrequent category will be mapped to the last position in the\nencoding. During inverse transform, an unknown category will be\nmapped to the category denoted `'infrequent'` if it exists. If the\n`'infrequent'` category does not exist, then :meth:`transform` and\n:meth:`inverse_transform` will handle an unknown category as with\n`handle_unknown='ignore'`. Infrequent categories exist based on\n`min_frequency` and `max_categories`. Read more in the\n:ref:`User Guide `.\n- 'warn' : When an unknown category is encountered during transform\na warning is issued, and the encoding then proceeds as described for\n`handle_unknown=\"infrequent_if_exist\"`.\n\n.. versionchanged:: 1.1\n`'infrequent_if_exist'` was added to automatically handle unknown\ncategories and infrequent categories.\n\n.. versionadded:: 1.6\nThe option `\"warn\"` was added in 1.6.\n'ignore'\n\n\n\nmin_frequency min_frequency: int or float, default=None\n\nSpecifies the minimum frequency below which a category will be\nconsidered infrequent.\n\n- If `int`, categories with a smaller cardinality will be considered\ninfrequent.\n\n- If `float`, categories with a smaller cardinality than\n`min_frequency * n_samples` will be considered infrequent.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nmax_categories max_categories: int, default=None\n\nSpecifies an upper limit to the number of output features for each input\nfeature when considering infrequent categories. If there are infrequent\ncategories, `max_categories` includes the category representing the\ninfrequent categories along with the frequent categories. If `None`,\nthere is no limit to the number of output features.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nfeature_name_combiner feature_name_combiner: \"concat\" or callable, default=\"concat\"\n\nCallable with signature `def callable(input_feature, category)` that returns a\nstring. This is used to create feature names to be returned by\n:meth:`get_feature_names_out`.\n\n`\"concat\"` concatenates encoded feature name and category with\n`feature + \"_\" + str(category)`.E.g. feature X with values 1, 6, 7 create\nfeature names `X_1, X_6, X_7`.\n\n.. versionadded:: 1.3\n'concat'\n\n\n\n\n            \n        \n    DecisionTreeClassifier?Documentation for DecisionTreeClassifier\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncriterion criterion: {\"gini\", \"entropy\", \"log_loss\"}, default=\"gini\"\n\nThe function to measure the quality of a split. Supported criteria are\n\"gini\" for the Gini impurity and \"log_loss\" and \"entropy\" both for the\nShannon information gain, see :ref:`tree_mathematical_formulation`.\n'gini'\n\n\n\nsplitter splitter: {\"best\", \"random\"}, default=\"best\"\n\nThe strategy used to choose the split at each node. Supported\nstrategies are \"best\" to choose the best split and \"random\" to choose\nthe best random split.\n'best'\n\n\n\nmax_depth max_depth: int, default=None\n\nThe maximum depth of the tree. If None, then nodes are expanded until\nall leaves are pure or until all leaves contain less than\nmin_samples_split samples.\nNone\n\n\n\nmin_samples_split min_samples_split: int or float, default=2\n\nThe minimum number of samples required to split an internal node:\n\n- If int, then consider `min_samples_split` as the minimum number.\n- If float, then `min_samples_split` is a fraction and\n`ceil(min_samples_split * n_samples)` are the minimum\nnumber of samples for each split.\n\n.. versionchanged:: 0.18\nAdded float values for fractions.\n2\n\n\n\nmin_samples_leaf min_samples_leaf: int or float, default=1\n\nThe minimum number of samples required to be at a leaf node.\nA split point at any depth will only be considered if it leaves at\nleast ``min_samples_leaf`` training samples in each of the left and\nright branches. This may have the effect of smoothing the model,\nespecially in regression.\n\n- If int, then consider `min_samples_leaf` as the minimum number.\n- If float, then `min_samples_leaf` is a fraction and\n`ceil(min_samples_leaf * n_samples)` are the minimum\nnumber of samples for each node.\n\n.. versionchanged:: 0.18\nAdded float values for fractions.\n1\n\n\n\nmin_weight_fraction_leaf min_weight_fraction_leaf: float, default=0.0\n\nThe minimum weighted fraction of the sum total of weights (of all\nthe input samples) required to be at a leaf node. Samples have\nequal weight when sample_weight is not provided.\n0.0\n\n\n\nmax_features max_features: int, float or {\"sqrt\", \"log2\"}, default=None\n\nThe number of features to consider when looking for the best split:\n\n- If int, then consider `max_features` features at each split.\n- If float, then `max_features` is a fraction and\n`max(1, int(max_features * n_features_in_))` features are considered at\neach split.\n- If \"sqrt\", then `max_features=sqrt(n_features)`.\n- If \"log2\", then `max_features=log2(n_features)`.\n- If None, then `max_features=n_features`.\n\n.. note::\n\nThe search for a split does not stop until at least one\nvalid partition of the node samples is found, even if it requires to\neffectively inspect more than ``max_features`` features.\nNone\n\n\n\nrandom_state random_state: int, RandomState instance or None, default=None\n\nControls the randomness of the estimator. The features are always\nrandomly permuted at each split, even if ``splitter`` is set to\n``\"best\"``. When ``max_features &lt; n_features``, the algorithm will\nselect ``max_features`` at random at each split before finding the best\nsplit among them. But the best found split may vary across different\nruns, even if ``max_features=n_features``. That is the case, if the\nimprovement of the criterion is identical for several splits and one\nsplit has to be selected at random. To obtain a deterministic behaviour\nduring fitting, ``random_state`` has to be fixed to an integer.\nSee :term:`Glossary ` for details.\n42\n\n\n\nmax_leaf_nodes max_leaf_nodes: int, default=None\n\nGrow a tree with ``max_leaf_nodes`` in best-first fashion.\nBest nodes are defined as relative reduction in impurity.\nIf None then unlimited number of leaf nodes.\nNone\n\n\n\nmin_impurity_decrease min_impurity_decrease: float, default=0.0\n\nA node will be split if this split induces a decrease of the impurity\ngreater than or equal to this value.\n\nThe weighted impurity decrease equation is the following::\n\nN_t / N * (impurity - N_t_R / N_t * right_impurity\n- N_t_L / N_t * left_impurity)\n\nwhere ``N`` is the total number of samples, ``N_t`` is the number of\nsamples at the current node, ``N_t_L`` is the number of samples in the\nleft child, and ``N_t_R`` is the number of samples in the right child.\n\n``N``, ``N_t``, ``N_t_R`` and ``N_t_L`` all refer to the weighted sum,\nif ``sample_weight`` is passed.\n\n.. versionadded:: 0.19\n0.0\n\n\n\nclass_weight class_weight: dict, list of dict or \"balanced\", default=None\n\nWeights associated with classes in the form ``{class_label: weight}``.\nIf None, all classes are supposed to have weight one. For\nmulti-output problems, a list of dicts can be provided in the same\norder as the columns of y.\n\nNote that for multioutput (including multilabel) weights should be\ndefined for each class of every column in its own dict. For example,\nfor four-class multilabel classification weights should be\n[{0: 1, 1: 1}, {0: 1, 1: 5}, {0: 1, 1: 1}, {0: 1, 1: 1}] instead of\n[{1:1}, {2:5}, {3:1}, {4:1}].\n\nThe \"balanced\" mode uses the values of y to automatically adjust\nweights inversely proportional to class frequencies in the input data\nas ``n_samples / (n_classes * np.bincount(y))``\n\nFor multi-output, the weights of each column of y will be multiplied.\n\nNote that these weights will be multiplied with sample_weight (passed\nthrough the fit method) if sample_weight is specified.\nNone\n\n\n\nccp_alpha ccp_alpha: non-negative float, default=0.0\n\nComplexity parameter used for Minimal Cost-Complexity Pruning. The\nsubtree with the largest cost complexity that is smaller than\n``ccp_alpha`` will be chosen. By default, no pruning is performed. See\n:ref:`minimal_cost_complexity_pruning` for details. See\n:ref:`sphx_glr_auto_examples_tree_plot_cost_complexity_pruning.py`\nfor an example of such pruning.\n\n.. versionadded:: 0.22\n0.0\n\n\n\nmonotonic_cst monotonic_cst: array-like of int of shape (n_features), default=None\n\nIndicates the monotonicity constraint to enforce on each feature.\n- 1: monotonic increase\n- 0: no constraint\n- -1: monotonic decrease\n\nIf monotonic_cst is None, no constraints are applied.\n\nMonotonicity constraints are not supported for:\n- multiclass classifications (i.e. when `n_classes &gt; 2`),\n- multioutput classifications (i.e. when `n_outputs_ &gt; 1`),\n- classifications trained on data with missing values.\n\nThe constraints hold over the probability of the positive class.\n\nRead more in the :ref:`User Guide `.\n\n.. versionadded:: 1.4\nNone",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#compare-training-vs-test-performance",
+    "href": "07-overfitting-and-regularization.html#compare-training-vs-test-performance",
+    "title": "Overfitting and Regularization",
+    "section": "Compare Training vs Test Performance",
+    "text": "Compare Training vs Test Performance\n\nfrom sklearn.metrics import accuracy_score\n\ntrain_acc = accuracy_score(y_train, tree_clf.predict(X_train))\ntest_acc = accuracy_score(y_test, tree_clf.predict(X_test))\n\ntrain_acc, test_acc\n\n(1.0, 0.6)\n\n\nIf training accuracy is much higher than test accuracy, the model is likely overfitting.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#controlling-complexity",
+    "href": "07-overfitting-and-regularization.html#controlling-complexity",
+    "title": "Overfitting and Regularization",
+    "section": "Controlling Complexity",
+    "text": "Controlling Complexity\nDecision trees have parameters that limit complexity:\n\nmax_depth\n\nmin_samples_split\n\nmin_samples_leaf\n\nReducing complexity improves generalization.\n\ntree_reg = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", DecisionTreeClassifier(\n            max_depth=3,\n            min_samples_leaf=10,\n            random_state=42\n        ))\n    ]\n)\n\ntree_reg.fit(X_train, y_train)\n\ntrain_acc_reg = accuracy_score(y_train, tree_reg.predict(X_train))\ntest_acc_reg = accuracy_score(y_test, tree_reg.predict(X_test))\n\ntrain_acc_reg, test_acc_reg\n\n(0.6734375, 0.6625)\n\n\nOften, the gap between training and test accuracy narrows.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#regularization-in-linear-models",
+    "href": "07-overfitting-and-regularization.html#regularization-in-linear-models",
+    "title": "Overfitting and Regularization",
+    "section": "Regularization in Linear Models",
+    "text": "Regularization in Linear Models\nRegularization also applies to linear models.\nIt adds a penalty for large coefficients.\nTwo common forms:\n\nRidge (L2 penalty)\n\nLasso (L1 penalty)\n\n\nfrom sklearn.linear_model import LogisticRegression\n\nlog_reg = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", LogisticRegression(\n            penalty=\"l2\",\n            C=0.5,\n            max_iter=1000\n        ))\n    ]\n)\n\nlog_reg.fit(X_train, y_train)\n\ntrain_acc_lr = accuracy_score(y_train, log_reg.predict(X_train))\ntest_acc_lr = accuracy_score(y_test, log_reg.predict(X_test))\n\ntrain_acc_lr, test_acc_lr\n\n(0.7796875, 0.63125)\n\n\nThe parameter C controls regularization strength.\nLower C means stronger regularization.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#biasvariance-tradeoff",
+    "href": "07-overfitting-and-regularization.html#biasvariance-tradeoff",
+    "title": "Overfitting and Regularization",
+    "section": "Bias–Variance Tradeoff",
+    "text": "Bias–Variance Tradeoff\nOverfitting and underfitting represent two extremes:\n\nHigh variance → overfitting\n\nHigh bias → underfitting\n\nA well-calibrated model balances bias and variance.\nThe objective is stable performance on unseen data.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
+    ]
+  },
+  {
+    "objectID": "07-overfitting-and-regularization.html#looking-ahead",
+    "href": "07-overfitting-and-regularization.html#looking-ahead",
+    "title": "Overfitting and Regularization",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nIn the next lesson, we move from generalization control to interpretation.\nFeature importance helps us understand model behavior.\nBut interpretation requires caution.",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Overfitting and Regularization</span>"
     ]
@@ -94,7 +674,97 @@
     "href": "08-feature-importance-and-interpretation.html",
     "title": "Feature Importance and Interpretation",
     "section": "",
-    "text": "ID: MLPY-FREE-08\nType: Lesson\nAudience: Public\nTheme: From prediction to cautious interpretation\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Interpretation Is Not the Same as Prediction\nA model can predict well and still be poorly understood.\nInterpretation asks different questions:\nInterpretation is useful, but it requires caution.\nFeature importance is not causality.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#interpretation-is-not-the-same-as-prediction",
+    "href": "08-feature-importance-and-interpretation.html#interpretation-is-not-the-same-as-prediction",
+    "title": "Feature Importance and Interpretation",
+    "section": "",
+    "text": "Which features does the model rely on?\n\nHow sensitive are predictions to each feature?\n\nAre relationships stable or dataset-specific?",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#load-data",
+    "href": "08-feature-importance-and-interpretation.html#load-data",
+    "title": "Feature Importance and Interpretation",
+    "section": "Load Data",
+    "text": "Load Data\n\nimport pandas as pd\n\ndf = pd.read_csv(\"data/ml-ready/cdi-customer-churn.csv\")\n\nX = df.drop(columns=\"churn\")\ny = df[\"churn\"]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#traintest-split",
+    "href": "08-feature-importance-and-interpretation.html#traintest-split",
+    "title": "Feature Importance and Interpretation",
+    "section": "Train/Test Split",
+    "text": "Train/Test Split\n\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42,\n    stratify=y\n)",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#define-preprocessing",
+    "href": "08-feature-importance-and-interpretation.html#define-preprocessing",
+    "title": "Feature Importance and Interpretation",
+    "section": "Define Preprocessing",
+    "text": "Define Preprocessing\n\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.pipeline import Pipeline\n\nnumeric_features = X.select_dtypes(include=[\"int64\", \"float64\"]).columns\ncategorical_features = X.select_dtypes(include=[\"object\"]).columns\n\nnumeric_transformer = Pipeline(\n    steps=[(\"scaler\", StandardScaler())]\n)\n\ncategorical_transformer = Pipeline(\n    steps=[(\"encoder\", OneHotEncoder(handle_unknown=\"ignore\"))]\n)\n\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\"num\", numeric_transformer, numeric_features),\n        (\"cat\", categorical_transformer, categorical_features)\n    ]\n)",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#train-a-model",
+    "href": "08-feature-importance-and-interpretation.html#train-a-model",
+    "title": "Feature Importance and Interpretation",
+    "section": "Train a Model",
+    "text": "Train a Model\nFor feature importance, tree-based models are convenient because they provide built-in importances.\n\nfrom sklearn.tree import DecisionTreeClassifier\n\ntree = Pipeline(\n    steps=[\n        (\"preprocessor\", preprocessor),\n        (\"classifier\", DecisionTreeClassifier(\n            max_depth=4,\n            min_samples_leaf=10,\n            random_state=42\n        ))\n    ]\n)\n\ntree.fit(X_train, y_train)\n\nPipeline(steps=[('preprocessor',\n                 ColumnTransformer(transformers=[('num',\n                                                  Pipeline(steps=[('scaler',\n                                                                   StandardScaler())]),\n                                                  Index(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')),\n                                                 ('cat',\n                                                  Pipeline(steps=[('encoder',\n                                                                   OneHotEncoder(handle_unknown='ignore'))]),\n                                                  Index(['customer_id', 'contract_type', 'autopay'], dtype='str'))])),\n                ('classifier',\n                 DecisionTreeClassifier(max_depth=4, min_samples_leaf=10,\n                                        random_state=42))])In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.Pipeline?Documentation for PipelineiFitted\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\nsteps steps: list of tuples\n\nList of (name of step, estimator) tuples that are to be chained in\nsequential order. To be compatible with the scikit-learn API, all steps\nmust define `fit`. All non-last steps must also define `transform`. See\n:ref:`Combining Estimators ` for more details.\n[('preprocessor', ...), ('classifier', ...)]\n\n\n\ntransform_input transform_input: list of str, default=None\n\nThe names of the :term:`metadata` parameters that should be transformed by the\npipeline before passing it to the step consuming it.\n\nThis enables transforming some input arguments to ``fit`` (other than ``X``)\nto be transformed by the steps of the pipeline up to the step which requires\nthem. Requirement is defined via :ref:`metadata routing `.\nFor instance, this can be used to pass a validation set through the pipeline.\n\nYou can only set this if metadata routing is enabled, which you\ncan enable using ``sklearn.set_config(enable_metadata_routing=True)``.\n\n.. versionadded:: 1.6\nNone\n\n\n\nmemory memory: str or object with the joblib.Memory interface, default=None\n\nUsed to cache the fitted transformers of the pipeline. The last step\nwill never be cached, even if it is a transformer. By default, no\ncaching is performed. If a string is given, it is the path to the\ncaching directory. Enabling caching triggers a clone of the transformers\nbefore fitting. Therefore, the transformer instance given to the\npipeline cannot be inspected directly. Use the attribute ``named_steps``\nor ``steps`` to inspect estimators within the pipeline. Caching the\ntransformers is advantageous when fitting is time consuming. See\n:ref:`sphx_glr_auto_examples_neighbors_plot_caching_nearest_neighbors.py`\nfor an example on how to enable caching.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each step will be printed as it\nis completed.\nFalse\n\n\n\n\n            \n        \n    preprocessor: ColumnTransformer?Documentation for preprocessor: ColumnTransformer\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ntransformers transformers: list of tuples\n\nList of (name, transformer, columns) tuples specifying the\ntransformer objects to be applied to subsets of the data.\n\nname : str\nLike in Pipeline and FeatureUnion, this allows the transformer and\nits parameters to be set using ``set_params`` and searched in grid\nsearch.\ntransformer : {'drop', 'passthrough'} or estimator\nEstimator must support :term:`fit` and :term:`transform`.\nSpecial-cased strings 'drop' and 'passthrough' are accepted as\nwell, to indicate to drop the columns or to pass them through\nuntransformed, respectively.\ncolumns : str, array-like of str, int, array-like of int, array-like of bool, slice or callable\nIndexes the data on its second axis. Integers are interpreted as\npositional columns, while strings can reference DataFrame columns\nby name. A scalar string or int should be used where\n``transformer`` expects X to be a 1d array-like (vector),\notherwise a 2d array will be passed to the transformer.\nA callable is passed the input data `X` and can return any of the\nabove. To select multiple columns by name or dtype, you can use\n:obj:`make_column_selector`.\n[('num', ...), ('cat', ...)]\n\n\n\nremainder remainder: {'drop', 'passthrough'} or estimator, default='drop'\n\nBy default, only the specified columns in `transformers` are\ntransformed and combined in the output, and the non-specified\ncolumns are dropped. (default of ``'drop'``).\nBy specifying ``remainder='passthrough'``, all remaining columns that\nwere not specified in `transformers`, but present in the data passed\nto `fit` will be automatically passed through. This subset of columns\nis concatenated with the output of the transformers. For dataframes,\nextra columns not seen during `fit` will be excluded from the output\nof `transform`.\nBy setting ``remainder`` to be an estimator, the remaining\nnon-specified columns will use the ``remainder`` estimator. The\nestimator must support :term:`fit` and :term:`transform`.\nNote that using this feature requires that the DataFrame columns\ninput at :term:`fit` and :term:`transform` have identical order.\n'drop'\n\n\n\nsparse_threshold sparse_threshold: float, default=0.3\n\nIf the output of the different transformers contains sparse matrices,\nthese will be stacked as a sparse matrix if the overall density is\nlower than this value. Use ``sparse_threshold=0`` to always return\ndense. When the transformed output consists of all dense data, the\nstacked result will be dense, and this keyword will be ignored.\n0.3\n\n\n\nn_jobs n_jobs: int, default=None\n\nNumber of jobs to run in parallel.\n``None`` means 1 unless in a :obj:`joblib.parallel_backend` context.\n``-1`` means using all processors. See :term:`Glossary `\nfor more details.\nNone\n\n\n\ntransformer_weights transformer_weights: dict, default=None\n\nMultiplicative weights for features per transformer. The output of the\ntransformer is multiplied by these weights. Keys are transformer names,\nvalues the weights.\nNone\n\n\n\nverbose verbose: bool, default=False\n\nIf True, the time elapsed while fitting each transformer will be\nprinted as it is completed.\nFalse\n\n\n\nverbose_feature_names_out verbose_feature_names_out: bool, str or Callable[[str, str], str], default=True\n\n- If True, :meth:`ColumnTransformer.get_feature_names_out` will prefix\nall feature names with the name of the transformer that generated that\nfeature. It is equivalent to setting\n`verbose_feature_names_out=\"{transformer_name}__{feature_name}\"`.\n- If False, :meth:`ColumnTransformer.get_feature_names_out` will not\nprefix any feature names and will error if feature names are not\nunique.\n- If ``Callable[[str, str], str]``,\n:meth:`ColumnTransformer.get_feature_names_out` will rename all the features\nusing the name of the transformer. The first argument of the callable is the\ntransformer name and the second argument is the feature name. The returned\nstring will be the new feature name.\n- If ``str``, it must be a string ready for formatting. The given string will\nbe formatted using two field names: ``transformer_name`` and ``feature_name``.\ne.g. ``\"{feature_name}__{transformer_name}\"``. See :meth:`str.format` method\nfrom the standard library for more info.\n\n.. versionadded:: 1.0\n\n.. versionchanged:: 1.6\n`verbose_feature_names_out` can be a callable or a string to be formatted.\nTrue\n\n\n\nforce_int_remainder_cols force_int_remainder_cols: bool, default=False\n\nThis parameter has no effect.\n\n.. note::\nIf you do not access the list of columns for the remainder columns\nin the `transformers_` fitted attribute, you do not need to set\nthis parameter.\n\n.. versionadded:: 1.5\n\n.. versionchanged:: 1.7\nThe default value for `force_int_remainder_cols` will change from\n`True` to `False` in version 1.7.\n\n.. deprecated:: 1.7\n`force_int_remainder_cols` is deprecated and will be removed in 1.9.\n'deprecated'\n\n\n\n\n            \n        \n    numIndex(['tenure_months', 'monthly_spend', 'support_calls'], dtype='str')StandardScaler?Documentation for StandardScaler\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncopy copy: bool, default=True\n\nIf False, try to avoid a copy and do inplace scaling instead.\nThis is not guaranteed to always work inplace; e.g. if the data is\nnot a NumPy array or scipy.sparse CSR matrix, a copy may still be\nreturned.\nTrue\n\n\n\nwith_mean with_mean: bool, default=True\n\nIf True, center the data before scaling.\nThis does not work (and will raise an exception) when attempted on\nsparse matrices, because centering them entails building a dense\nmatrix which in common use cases is likely to be too large to fit in\nmemory.\nTrue\n\n\n\nwith_std with_std: bool, default=True\n\nIf True, scale the data to unit variance (or equivalently,\nunit standard deviation).\nTrue\n\n\n\n\n            \n        \n    catIndex(['customer_id', 'contract_type', 'autopay'], dtype='str')OneHotEncoder?Documentation for OneHotEncoder\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncategories categories: 'auto' or a list of array-like, default='auto'\n\nCategories (unique values) per feature:\n\n- 'auto' : Determine categories automatically from the training data.\n- list : ``categories[i]`` holds the categories expected in the ith\ncolumn. The passed categories should not mix strings and numeric\nvalues within a single feature, and should be sorted in case of\nnumeric values.\n\nThe used categories can be found in the ``categories_`` attribute.\n\n.. versionadded:: 0.20\n'auto'\n\n\n\ndrop drop: {'first', 'if_binary'} or an array-like of shape (n_features,), default=None\n\nSpecifies a methodology to use to drop one of the categories per\nfeature. This is useful in situations where perfectly collinear\nfeatures cause problems, such as when feeding the resulting data\ninto an unregularized linear regression model.\n\nHowever, dropping one category breaks the symmetry of the original\nrepresentation and can therefore induce a bias in downstream models,\nfor instance for penalized linear classification or regression models.\n\n- None : retain all features (the default).\n- 'first' : drop the first category in each feature. If only one\ncategory is present, the feature will be dropped entirely.\n- 'if_binary' : drop the first category in each feature with two\ncategories. Features with 1 or more than 2 categories are\nleft intact.\n- array : ``drop[i]`` is the category in feature ``X[:, i]`` that\nshould be dropped.\n\nWhen `max_categories` or `min_frequency` is configured to group\ninfrequent categories, the dropping behavior is handled after the\ngrouping.\n\n.. versionadded:: 0.21\nThe parameter `drop` was added in 0.21.\n\n.. versionchanged:: 0.23\nThe option `drop='if_binary'` was added in 0.23.\n\n.. versionchanged:: 1.1\nSupport for dropping infrequent categories.\nNone\n\n\n\nsparse_output sparse_output: bool, default=True\n\nWhen ``True``, it returns a :class:`scipy.sparse.csr_matrix`,\ni.e. a sparse matrix in \"Compressed Sparse Row\" (CSR) format.\n\n.. versionadded:: 1.2\n`sparse` was renamed to `sparse_output`\nTrue\n\n\n\ndtype dtype: number type, default=np.float64\n\nDesired dtype of output.\n&lt;class 'numpy.float64'&gt;\n\n\n\nhandle_unknown handle_unknown: {'error', 'ignore', 'infrequent_if_exist', 'warn'}, default='error'\n\nSpecifies the way unknown categories are handled during :meth:`transform`.\n\n- 'error' : Raise an error if an unknown category is present during transform.\n- 'ignore' : When an unknown category is encountered during\ntransform, the resulting one-hot encoded columns for this feature\nwill be all zeros. In the inverse transform, an unknown category\nwill be denoted as None.\n- 'infrequent_if_exist' : When an unknown category is encountered\nduring transform, the resulting one-hot encoded columns for this\nfeature will map to the infrequent category if it exists. The\ninfrequent category will be mapped to the last position in the\nencoding. During inverse transform, an unknown category will be\nmapped to the category denoted `'infrequent'` if it exists. If the\n`'infrequent'` category does not exist, then :meth:`transform` and\n:meth:`inverse_transform` will handle an unknown category as with\n`handle_unknown='ignore'`. Infrequent categories exist based on\n`min_frequency` and `max_categories`. Read more in the\n:ref:`User Guide `.\n- 'warn' : When an unknown category is encountered during transform\na warning is issued, and the encoding then proceeds as described for\n`handle_unknown=\"infrequent_if_exist\"`.\n\n.. versionchanged:: 1.1\n`'infrequent_if_exist'` was added to automatically handle unknown\ncategories and infrequent categories.\n\n.. versionadded:: 1.6\nThe option `\"warn\"` was added in 1.6.\n'ignore'\n\n\n\nmin_frequency min_frequency: int or float, default=None\n\nSpecifies the minimum frequency below which a category will be\nconsidered infrequent.\n\n- If `int`, categories with a smaller cardinality will be considered\ninfrequent.\n\n- If `float`, categories with a smaller cardinality than\n`min_frequency * n_samples` will be considered infrequent.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nmax_categories max_categories: int, default=None\n\nSpecifies an upper limit to the number of output features for each input\nfeature when considering infrequent categories. If there are infrequent\ncategories, `max_categories` includes the category representing the\ninfrequent categories along with the frequent categories. If `None`,\nthere is no limit to the number of output features.\n\n.. versionadded:: 1.1\nRead more in the :ref:`User Guide `.\nNone\n\n\n\nfeature_name_combiner feature_name_combiner: \"concat\" or callable, default=\"concat\"\n\nCallable with signature `def callable(input_feature, category)` that returns a\nstring. This is used to create feature names to be returned by\n:meth:`get_feature_names_out`.\n\n`\"concat\"` concatenates encoded feature name and category with\n`feature + \"_\" + str(category)`.E.g. feature X with values 1, 6, 7 create\nfeature names `X_1, X_6, X_7`.\n\n.. versionadded:: 1.3\n'concat'\n\n\n\n\n            \n        \n    DecisionTreeClassifier?Documentation for DecisionTreeClassifier\n        \n            \n                Parameters\n                \n\n\n\n\n\n\n\n\n\ncriterion criterion: {\"gini\", \"entropy\", \"log_loss\"}, default=\"gini\"\n\nThe function to measure the quality of a split. Supported criteria are\n\"gini\" for the Gini impurity and \"log_loss\" and \"entropy\" both for the\nShannon information gain, see :ref:`tree_mathematical_formulation`.\n'gini'\n\n\n\nsplitter splitter: {\"best\", \"random\"}, default=\"best\"\n\nThe strategy used to choose the split at each node. Supported\nstrategies are \"best\" to choose the best split and \"random\" to choose\nthe best random split.\n'best'\n\n\n\nmax_depth max_depth: int, default=None\n\nThe maximum depth of the tree. If None, then nodes are expanded until\nall leaves are pure or until all leaves contain less than\nmin_samples_split samples.\n4\n\n\n\nmin_samples_split min_samples_split: int or float, default=2\n\nThe minimum number of samples required to split an internal node:\n\n- If int, then consider `min_samples_split` as the minimum number.\n- If float, then `min_samples_split` is a fraction and\n`ceil(min_samples_split * n_samples)` are the minimum\nnumber of samples for each split.\n\n.. versionchanged:: 0.18\nAdded float values for fractions.\n2\n\n\n\nmin_samples_leaf min_samples_leaf: int or float, default=1\n\nThe minimum number of samples required to be at a leaf node.\nA split point at any depth will only be considered if it leaves at\nleast ``min_samples_leaf`` training samples in each of the left and\nright branches. This may have the effect of smoothing the model,\nespecially in regression.\n\n- If int, then consider `min_samples_leaf` as the minimum number.\n- If float, then `min_samples_leaf` is a fraction and\n`ceil(min_samples_leaf * n_samples)` are the minimum\nnumber of samples for each node.\n\n.. versionchanged:: 0.18\nAdded float values for fractions.\n10\n\n\n\nmin_weight_fraction_leaf min_weight_fraction_leaf: float, default=0.0\n\nThe minimum weighted fraction of the sum total of weights (of all\nthe input samples) required to be at a leaf node. Samples have\nequal weight when sample_weight is not provided.\n0.0\n\n\n\nmax_features max_features: int, float or {\"sqrt\", \"log2\"}, default=None\n\nThe number of features to consider when looking for the best split:\n\n- If int, then consider `max_features` features at each split.\n- If float, then `max_features` is a fraction and\n`max(1, int(max_features * n_features_in_))` features are considered at\neach split.\n- If \"sqrt\", then `max_features=sqrt(n_features)`.\n- If \"log2\", then `max_features=log2(n_features)`.\n- If None, then `max_features=n_features`.\n\n.. note::\n\nThe search for a split does not stop until at least one\nvalid partition of the node samples is found, even if it requires to\neffectively inspect more than ``max_features`` features.\nNone\n\n\n\nrandom_state random_state: int, RandomState instance or None, default=None\n\nControls the randomness of the estimator. The features are always\nrandomly permuted at each split, even if ``splitter`` is set to\n``\"best\"``. When ``max_features &lt; n_features``, the algorithm will\nselect ``max_features`` at random at each split before finding the best\nsplit among them. But the best found split may vary across different\nruns, even if ``max_features=n_features``. That is the case, if the\nimprovement of the criterion is identical for several splits and one\nsplit has to be selected at random. To obtain a deterministic behaviour\nduring fitting, ``random_state`` has to be fixed to an integer.\nSee :term:`Glossary ` for details.\n42\n\n\n\nmax_leaf_nodes max_leaf_nodes: int, default=None\n\nGrow a tree with ``max_leaf_nodes`` in best-first fashion.\nBest nodes are defined as relative reduction in impurity.\nIf None then unlimited number of leaf nodes.\nNone\n\n\n\nmin_impurity_decrease min_impurity_decrease: float, default=0.0\n\nA node will be split if this split induces a decrease of the impurity\ngreater than or equal to this value.\n\nThe weighted impurity decrease equation is the following::\n\nN_t / N * (impurity - N_t_R / N_t * right_impurity\n- N_t_L / N_t * left_impurity)\n\nwhere ``N`` is the total number of samples, ``N_t`` is the number of\nsamples at the current node, ``N_t_L`` is the number of samples in the\nleft child, and ``N_t_R`` is the number of samples in the right child.\n\n``N``, ``N_t``, ``N_t_R`` and ``N_t_L`` all refer to the weighted sum,\nif ``sample_weight`` is passed.\n\n.. versionadded:: 0.19\n0.0\n\n\n\nclass_weight class_weight: dict, list of dict or \"balanced\", default=None\n\nWeights associated with classes in the form ``{class_label: weight}``.\nIf None, all classes are supposed to have weight one. For\nmulti-output problems, a list of dicts can be provided in the same\norder as the columns of y.\n\nNote that for multioutput (including multilabel) weights should be\ndefined for each class of every column in its own dict. For example,\nfor four-class multilabel classification weights should be\n[{0: 1, 1: 1}, {0: 1, 1: 5}, {0: 1, 1: 1}, {0: 1, 1: 1}] instead of\n[{1:1}, {2:5}, {3:1}, {4:1}].\n\nThe \"balanced\" mode uses the values of y to automatically adjust\nweights inversely proportional to class frequencies in the input data\nas ``n_samples / (n_classes * np.bincount(y))``\n\nFor multi-output, the weights of each column of y will be multiplied.\n\nNote that these weights will be multiplied with sample_weight (passed\nthrough the fit method) if sample_weight is specified.\nNone\n\n\n\nccp_alpha ccp_alpha: non-negative float, default=0.0\n\nComplexity parameter used for Minimal Cost-Complexity Pruning. The\nsubtree with the largest cost complexity that is smaller than\n``ccp_alpha`` will be chosen. By default, no pruning is performed. See\n:ref:`minimal_cost_complexity_pruning` for details. See\n:ref:`sphx_glr_auto_examples_tree_plot_cost_complexity_pruning.py`\nfor an example of such pruning.\n\n.. versionadded:: 0.22\n0.0\n\n\n\nmonotonic_cst monotonic_cst: array-like of int of shape (n_features), default=None\n\nIndicates the monotonicity constraint to enforce on each feature.\n- 1: monotonic increase\n- 0: no constraint\n- -1: monotonic decrease\n\nIf monotonic_cst is None, no constraints are applied.\n\nMonotonicity constraints are not supported for:\n- multiclass classifications (i.e. when `n_classes &gt; 2`),\n- multioutput classifications (i.e. when `n_outputs_ &gt; 1`),\n- classifications trained on data with missing values.\n\nThe constraints hold over the probability of the positive class.\n\nRead more in the :ref:`User Guide `.\n\n.. versionadded:: 1.4\nNone",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#built-in-feature-importance-expanded-features",
+    "href": "08-feature-importance-and-interpretation.html#built-in-feature-importance-expanded-features",
+    "title": "Feature Importance and Interpretation",
+    "section": "Built-in Feature Importance (Expanded Features)",
+    "text": "Built-in Feature Importance (Expanded Features)\nDecision trees provide a feature importance score.\nBecause one-hot encoding expands categorical variables into multiple columns, we first build the expanded feature names.\n\nimport numpy as np\n\nohe = (\n    tree.named_steps[\"preprocessor\"]\n        .named_transformers_[\"cat\"]\n        .named_steps[\"encoder\"]\n)\n\ncat_names = ohe.get_feature_names_out(categorical_features)\nexpanded_feature_names = np.concatenate([numeric_features, cat_names])\n\nlen(expanded_feature_names)\n\n648\n\n\nNow extract importance values from the fitted tree.\n\nimportances = tree.named_steps[\"classifier\"].feature_importances_\n\nimp_df = pd.DataFrame({\n    \"feature\": expanded_feature_names,\n    \"importance\": importances\n}).sort_values(\"importance\", ascending=False)\n\nimp_df.head(10)\n\n\n\n\n\n\n\n\nfeature\nimportance\n\n\n\n\n1\nmonthly_spend\n0.609083\n\n\n0\ntenure_months\n0.201316\n\n\n643\ncontract_type_month-to-month\n0.136050\n\n\n2\nsupport_calls\n0.053552\n\n\n435\ncustomer_id_C100544\n0.000000\n\n\n427\ncustomer_id_C100534\n0.000000\n\n\n428\ncustomer_id_C100535\n0.000000\n\n\n429\ncustomer_id_C100536\n0.000000\n\n\n430\ncustomer_id_C100538\n0.000000\n\n\n431\ncustomer_id_C100539\n0.000000\n\n\n\n\n\n\n\nPlot the top features.\n\nimport matplotlib.pyplot as plt\n\ntop = imp_df.head(10).iloc[::-1]\n\nfig, ax = plt.subplots()\nax.barh(top[\"feature\"], top[\"importance\"])\nax.set_xlabel(\"Importance\")\nax.set_title(\"Top Feature Importances (Decision Tree)\")\nplt.show()",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#permutation-importance-original-features",
+    "href": "08-feature-importance-and-interpretation.html#permutation-importance-original-features",
+    "title": "Feature Importance and Interpretation",
+    "section": "Permutation Importance (Original Features)",
+    "text": "Permutation Importance (Original Features)\nPermutation importance answers a different question:\nHow much does performance drop if we shuffle one input feature?\nWhen we compute permutation importance on a pipeline, the permutation happens on the original input columns, not on expanded one-hot columns.\nThat means the importance results align with:\nX.columns\nnot with expanded feature names.\n\nfrom sklearn.inspection import permutation_importance\n\nresult = permutation_importance(\n    tree,\n    X_test,\n    y_test,\n    n_repeats=10,\n    random_state=42,\n    scoring=\"f1\"\n)\n\nperm_df = pd.DataFrame({\n    \"feature\": X.columns,\n    \"importance_mean\": result.importances_mean,\n    \"importance_std\": result.importances_std\n}).sort_values(\"importance_mean\", ascending=False)\n\nperm_df.head(10)\n\n\n\n\n\n\n\n\nfeature\nimportance_mean\nimportance_std\n\n\n\n\n2\nmonthly_spend\n0.051062\n0.018469\n\n\n3\nsupport_calls\n0.020419\n0.014855\n\n\n4\ncontract_type\n0.014887\n0.007450\n\n\n1\ntenure_months\n0.009057\n0.011963\n\n\n0\ncustomer_id\n0.000000\n0.000000\n\n\n5\nautopay\n0.000000\n0.000000\n\n\n\n\n\n\n\nPlot the permutation importances.\n\ntop_p = perm_df.head(10).iloc[::-1]\n\nfig, ax = plt.subplots()\nax.barh(top_p[\"feature\"], top_p[\"importance_mean\"])\nax.set_xlabel(\"Mean importance (F1 drop)\")\nax.set_title(\"Top Permutation Importances (Original Features)\")\nplt.show()",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#interpreting-importances-responsibly",
+    "href": "08-feature-importance-and-interpretation.html#interpreting-importances-responsibly",
+    "title": "Feature Importance and Interpretation",
+    "section": "Interpreting Importances Responsibly",
+    "text": "Interpreting Importances Responsibly\nImportant does not mean causal.\nA feature can appear important because:\n\nit is correlated with the true driver\n\nit encodes historical behavior\n\nit captures an operational artifact\n\nit is specific to this dataset\n\nUse feature importance as a diagnostic tool.\nNot as a causal claim.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
+    ]
+  },
+  {
+    "objectID": "08-feature-importance-and-interpretation.html#looking-ahead",
+    "href": "08-feature-importance-and-interpretation.html#looking-ahead",
+    "title": "Feature Importance and Interpretation",
+    "section": "Looking Ahead",
+    "text": "Looking Ahead\nIn the next lesson, we close the free track.\nWe summarize what you can now do confidently, and what requires deeper study.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Feature Importance and Interpretation</span>"
     ]
@@ -102,21 +772,141 @@
   {
     "objectID": "09-next-steps.html",
     "href": "09-next-steps.html",
-    "title": "Next Steps",
+    "title": "Where This Workflow Goes Next",
     "section": "",
-    "text": "ID: MLPY-FREE-09\nType: Lesson\nAudience: Public\nTheme: Where this workflow goes next\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "You Now Have a Structured Foundation\nBy completing this free track, you have built a disciplined machine learning workflow:\nThis is not a collection of algorithms.\nIt is a structured predictive workflow.",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Next Steps</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#you-now-have-a-structured-foundation",
+    "href": "09-next-steps.html#you-now-have-a-structured-foundation",
+    "title": "Where This Workflow Goes Next",
+    "section": "",
+    "text": "Framing regression and classification problems\n\nSplitting data correctly\n\nPreventing leakage using pipelines\n\nTraining baseline models\n\nEvaluating with appropriate metrics\n\nControlling overfitting\n\nInterpreting feature importance cautiously",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#what-you-can-now-do-confidently",
+    "href": "09-next-steps.html#what-you-can-now-do-confidently",
+    "title": "Where This Workflow Goes Next",
+    "section": "What You Can Now Do Confidently",
+    "text": "What You Can Now Do Confidently\nYou can now:\n\nTake a tabular dataset and define a valid prediction target\n\nSeparate features and outcomes properly\n\nSplit data before transforming it\n\nBuild reproducible pipelines in scikit-learn\n\nCompare training and test performance\n\nDiagnose overfitting\n\nInterpret feature importance responsibly\n\nThese skills transfer across domains:\n\nFinance\n\nMarketing\n\nHealthcare\n\nOperations\n\nScientific research\n\nThe domain changes.\nThe workflow remains.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#what-this-free-track-does-not-cover",
+    "href": "09-next-steps.html#what-this-free-track-does-not-cover",
+    "title": "Where This Workflow Goes Next",
+    "section": "What This Free Track Does Not Cover",
+    "text": "What This Free Track Does Not Cover\nThis guide intentionally stops before advanced topics such as:\n\nHyperparameter tuning\n\nCross-validation strategy design\n\nEnsemble models (Random Forest, Gradient Boosting, XGBoost)\n\nModel calibration\n\nHandling severe class imbalance\n\nFeature engineering at scale\n\nModel deployment\n\nMonitoring and drift detection\n\nThese require deeper statistical and engineering discussion.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#the-next-logical-steps",
+    "href": "09-next-steps.html#the-next-logical-steps",
+    "title": "Where This Workflow Goes Next",
+    "section": "The Next Logical Steps",
+    "text": "The Next Logical Steps\nIf you continue this workflow, the next layers include:\n\nSystematic hyperparameter tuning using cross-validation\n\nComparing multiple model families rigorously\n\nUnderstanding bias–variance tradeoffs mathematically\n\nExploring ensemble learning\n\nBuilding validation pipelines for real-world deployment\n\nAdvanced machine learning is not about complexity.\nIt is about disciplined comparison.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#a-final-reminder",
+    "href": "09-next-steps.html#a-final-reminder",
+    "title": "Where This Workflow Goes Next",
+    "section": "A Final Reminder",
+    "text": "A Final Reminder\nHigh accuracy is not success.\nA model is successful if:\n\nIt generalizes\n\nIt aligns with operational goals\n\nIt avoids leakage\n\nIt is interpreted responsibly\n\nMachine learning is a decision-support tool.\nNot a shortcut to certainty.",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
+    ]
+  },
+  {
+    "objectID": "09-next-steps.html#closing-the-free-track",
+    "href": "09-next-steps.html#closing-the-free-track",
+    "title": "Where This Workflow Goes Next",
+    "section": "Closing the Free Track",
+    "text": "Closing the Free Track\nYou now understand the architecture of predictive modeling.\nThe premium track extends this foundation into:\n\nRobust validation strategies\n\nAdvanced models\n\nModel comparison frameworks\n\nDeployment thinking\n\nBut the core discipline remains the same.\nDesign → Data → Model → Evaluation → Interpretation",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Where This Workflow Goes Next</span>"
     ]
   },
   {
     "objectID": "99-appendix.html",
     "href": "99-appendix.html",
-    "title": "Appendix",
+    "title": "Appendix: Troubleshooting and Extra Notes",
     "section": "",
-    "text": "ID: MLPY-APP\nType: Lesson\nAudience: Public\nTheme: Troubleshooting and extra notes\n\n\nContent coming soon.\n\nNext: TBD",
+    "text": "Common Rendering Issues",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#common-rendering-issues",
+    "href": "99-appendix.html#common-rendering-issues",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "",
+    "text": "1. NameError: variable not defined\nCause: Each Quarto chapter runs in a fresh Python session.\nSolution: Ensure every chapter is self-contained: - load the dataset - split the data - define preprocessing - define the model\nDo not rely on variables from previous chapters.\n\n\n\n2. All arrays must be of the same length\nCause: Mixing expanded one-hot feature names with original column names.\nSolution: - Built-in tree feature importance → use expanded feature names\n- Permutation importance → use original X.columns\nThese are different levels of representation.\n\n\n\n3. ModuleNotFoundError\nCause: Virtual environment not activated.\nSolution:\n#| label: activate-env\nsource .venv/bin/activate\nVerify installation:\n\nimport sklearn\nimport pandas",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#reproducibility-notes",
+    "href": "99-appendix.html#reproducibility-notes",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "Reproducibility Notes",
+    "text": "Reproducibility Notes\nTo ensure consistent results:\n\nUse fixed random_state values\n\nKeep train/test splits consistent\n\nAvoid modifying datasets mid-analysis\n\nDo not evaluate on training data\n\nFor publication-quality work, consider:\n\nCross-validation\n\nMultiple random seeds\n\nVersion control for datasets",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#on-metrics-and-interpretation",
+    "href": "99-appendix.html#on-metrics-and-interpretation",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "On Metrics and Interpretation",
+    "text": "On Metrics and Interpretation\nAccuracy is not always sufficient.\nAlways ask:\n\nWhat error is more costly?\n\nFalse positive or false negative?\n\nDoes the metric match the business or research objective?\n\nMetrics should reflect consequences.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#on-feature-importance",
+    "href": "99-appendix.html#on-feature-importance",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "On Feature Importance",
+    "text": "On Feature Importance\nFeature importance indicates influence on prediction within this dataset.\nIt does not imply:\n\ncausation\n\nmechanism\n\ndomain-level truth\n\nTreat feature importance as a diagnostic tool.\nNot as a claim.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#scaling-up",
+    "href": "99-appendix.html#scaling-up",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "Scaling Up",
+    "text": "Scaling Up\nIf you apply this workflow to real-world data:\nExpect additional challenges:\n\nMissing data\n\nSevere class imbalance\n\nHigh-dimensional features\n\nTemporal leakage\n\nDeployment constraints\n\nThe structured workflow still applies.\nDesign → Data → Model → Evaluation → Interpretation",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
+    ]
+  },
+  {
+    "objectID": "99-appendix.html#final-note",
+    "href": "99-appendix.html#final-note",
+    "title": "Appendix: Troubleshooting and Extra Notes",
+    "section": "Final Note",
+    "text": "Final Note\nMachine learning is powerful when disciplined.\nThe workflow you learned here is more important than any single algorithm.\nStructure first.\nThen complexity.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Appendix: Troubleshooting and Extra Notes</span>"
     ]
   },
   {

@@ -1,16 +1,119 @@
 ---
-title: "Next Steps"
+title: "Where This Workflow Goes Next"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-09
+- **ID:** MLPY-F-L09
 - **Type:** Lesson
 - **Audience:** Public
 - **Theme:** Where this workflow goes next
 :::
 
-Content coming soon.
+## You Now Have a Structured Foundation
 
-:::next
-Next: TBD
-:::
+By completing this free track, you have built a disciplined machine learning workflow:
+
+- Framing regression and classification problems  
+- Splitting data correctly  
+- Preventing leakage using pipelines  
+- Training baseline models  
+- Evaluating with appropriate metrics  
+- Controlling overfitting  
+- Interpreting feature importance cautiously  
+
+This is not a collection of algorithms.
+
+It is a structured predictive workflow.
+
+---
+
+## What You Can Now Do Confidently
+
+You can now:
+
+- Take a tabular dataset and define a valid prediction target  
+- Separate features and outcomes properly  
+- Split data before transforming it  
+- Build reproducible pipelines in scikit-learn  
+- Compare training and test performance  
+- Diagnose overfitting  
+- Interpret feature importance responsibly  
+
+These skills transfer across domains:
+
+- Finance  
+- Marketing  
+- Healthcare  
+- Operations  
+- Scientific research  
+
+The domain changes.
+
+The workflow remains.
+
+---
+
+## What This Free Track Does Not Cover
+
+This guide intentionally stops before advanced topics such as:
+
+- Hyperparameter tuning  
+- Cross-validation strategy design  
+- Ensemble models (Random Forest, Gradient Boosting, XGBoost)  
+- Model calibration  
+- Handling severe class imbalance  
+- Feature engineering at scale  
+- Model deployment  
+- Monitoring and drift detection  
+
+These require deeper statistical and engineering discussion.
+
+---
+
+## The Next Logical Steps
+
+If you continue this workflow, the next layers include:
+
+1. Systematic hyperparameter tuning using cross-validation  
+2. Comparing multiple model families rigorously  
+3. Understanding bias–variance tradeoffs mathematically  
+4. Exploring ensemble learning  
+5. Building validation pipelines for real-world deployment  
+
+Advanced machine learning is not about complexity.
+
+It is about disciplined comparison.
+
+---
+
+## A Final Reminder
+
+High accuracy is not success.
+
+A model is successful if:
+
+- It generalizes  
+- It aligns with operational goals  
+- It avoids leakage  
+- It is interpreted responsibly  
+
+Machine learning is a decision-support tool.
+
+Not a shortcut to certainty.
+
+---
+
+## Closing the Free Track
+
+You now understand the architecture of predictive modeling.
+
+The premium track extends this foundation into:
+
+- Robust validation strategies  
+- Advanced models  
+- Model comparison frameworks  
+- Deployment thinking  
+
+But the core discipline remains the same.
+
+Design → Data → Model → Evaluation → Interpretation

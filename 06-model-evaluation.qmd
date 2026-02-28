@@ -3,14 +3,268 @@ title: "Model Evaluation"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-06
+- **ID:** MLPY-F-L06
 - **Type:** Lesson
 - **Audience:** Public
 - **Theme:** Metrics that match the question
 :::
 
-Content coming soon.
+## Evaluation Is Not a Decoration
 
-:::next
-Next: TBD
-:::
+A model is not useful because it produces predictions.
+
+It is useful if:
+
+- It generalizes to new data  
+- Its errors are acceptable in context  
+- Its evaluation matches the real decision goal  
+
+This lesson focuses on disciplined evaluation for classification models.
+
+---
+
+## Load Data
+
+```{python}
+#| label: load-data
+import pandas as pd
+
+df = pd.read_csv("data/ml-ready/cdi-customer-churn.csv")
+
+X = df.drop(columns="churn")
+y = df["churn"]
+```
+
+## Train/Test Split
+
+```{python}
+#| label: train-test-split
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+```
+
+## Define Preprocessing
+
+```{python}
+#| label: define-preprocessor
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.pipeline import Pipeline
+
+numeric_features = X.select_dtypes(include=["int64", "float64"]).columns
+categorical_features = X.select_dtypes(include=["object"]).columns
+
+numeric_transformer = Pipeline(
+    steps=[("scaler", StandardScaler())]
+)
+
+categorical_transformer = Pipeline(
+    steps=[("encoder", OneHotEncoder(handle_unknown="ignore"))]
+)
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ("num", numeric_transformer, numeric_features),
+        ("cat", categorical_transformer, categorical_features)
+    ]
+)
+```
+
+## Train a Baseline Classifier
+
+```{python}
+#| label: train-baseline-classifier
+from sklearn.linear_model import LogisticRegression
+
+clf = Pipeline(
+    steps=[
+        ("preprocessor", preprocessor),
+        ("classifier", LogisticRegression(max_iter=1000))
+    ]
+)
+
+clf.fit(X_train, y_train)
+```
+
+## Predictions and Probabilities
+
+```{python}
+#| label: predict-and-proba
+import numpy as np
+
+y_pred = clf.predict(X_test)
+y_prob = clf.predict_proba(X_test)[:, 1]
+
+y_pred[:10], np.round(y_prob[:10], 3)
+```
+
+---
+
+## Confusion Matrix
+
+A confusion matrix breaks predictions into four counts:
+
+- True positives (TP)  
+- False positives (FP)  
+- True negatives (TN)  
+- False negatives (FN)  
+
+```{python}
+#| label: confusion-matrix
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred)
+cm
+```
+
+For readability, we can label it.
+
+```{python}
+#| label: confusion-matrix-labeled
+import pandas as pd
+
+cm_df = pd.DataFrame(
+    cm,
+    index=["Actual 0", "Actual 1"],
+    columns=["Pred 0", "Pred 1"]
+)
+
+cm_df
+```
+
+---
+
+## Accuracy Can Be Misleading
+
+Accuracy answers:
+
+How often was the prediction correct?
+
+But accuracy does not reflect:
+
+- Class imbalance  
+- Asymmetric error costs  
+
+For churn, false negatives can be more costly than false positives.
+
+---
+
+## Precision, Recall, and F1
+
+```{python}
+#| label: classification-metrics
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+accuracy, precision, recall, f1
+```
+
+Interpretation:
+
+- Precision: among predicted churners, how many truly churned?  
+- Recall: among true churners, how many did we catch?  
+- F1: balance between precision and recall  
+
+---
+
+## Thresholds Change Behavior
+
+By default, classification uses threshold 0.5.
+
+We can change it.
+
+```{python}
+#| label: threshold-function
+def predict_with_threshold(probs, threshold=0.5):
+    return (probs >= threshold).astype(int)
+```
+
+Compare metrics at different thresholds.
+
+```{python}
+#| label: threshold-sweep
+thresholds = [0.3, 0.5, 0.7]
+
+rows = []
+for t in thresholds:
+    y_t = predict_with_threshold(y_prob, threshold=t)
+    rows.append({
+        "threshold": t,
+        "precision": precision_score(y_test, y_t),
+        "recall": recall_score(y_test, y_t),
+        "f1": f1_score(y_test, y_t)
+    })
+
+pd.DataFrame(rows)
+```
+
+Lower thresholds usually increase recall.  
+Higher thresholds usually increase precision.
+
+---
+
+## ROC Curve and AUC
+
+The ROC curve summarizes performance across thresholds.
+
+```{python}
+#| label: roc-curve
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, roc_auc_score
+
+fpr, tpr, thr = roc_curve(y_test, y_prob)
+auc = roc_auc_score(y_test, y_prob)
+
+auc
+```
+
+Plot the ROC curve.
+
+```{python}
+#| label: plot-roc
+fig, ax = plt.subplots()
+ax.plot(fpr, tpr)
+ax.set_xlabel("False Positive Rate")
+ax.set_ylabel("True Positive Rate")
+ax.set_title("ROC Curve")
+plt.show()
+```
+
+AUC ranges from 0.5 (no skill) to 1.0 (perfect separation).
+
+---
+
+## Cross-Validation
+
+A single train/test split can be noisy.
+
+Cross-validation provides a more stable estimate of generalization.
+
+```{python}
+#| label: cross-validation
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(clf, X, y, cv=5, scoring="f1")
+scores, scores.mean()
+```
+
+---
+
+## Looking Ahead
+
+In the next lesson, we will focus on overfitting and regularization.
+
+The goal is not to chase metrics.
+
+The goal is to build models that generalize.

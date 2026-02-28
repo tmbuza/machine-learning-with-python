@@ -3,26 +3,153 @@ title: "Preface and Setup"
 ---
 
 :::cdi-message
-- **ID:** MLPY-FREE-01
-- **Type:** Preface
+- **ID:** MLPY-F-L01
+- **Type:** Lesson
 - **Audience:** Public
-- **Theme:** CDI workflow for predictive modeling
+- **Theme:** Workflow-first machine learning
 :::
 
-Machine learning is often taught as a list of algorithms. CDI teaches it as a workflow.
+## Why This Guide Exists
 
-This free track focuses on:
+Machine learning is often presented as a collection of algorithms.
 
-- framing a prediction problem clearly
-- preparing data without leakage
-- training baseline regression and classification models
-- evaluating performance with discipline
-- interpreting outputs responsibly
+Linear regression.  
+Logistic regression.  
+Decision trees.  
+Neural networks.
 
-## Setup
+But predictive modeling is not a menu of techniques.
 
-1. Create the environment
+It is a structured workflow:
 
-```bash
+Design → Data → Model → Evaluation → Interpretation
+
+The focus of this guide is not complexity.  
+The focus is discipline.
+
+---
+
+## What This Free Track Covers
+
+This guide introduces the foundations of supervised machine learning:
+
+- Framing regression and classification problems  
+- Preparing data without leakage  
+- Training baseline models in Python  
+- Evaluating performance using appropriate metrics  
+- Interpreting results cautiously  
+
+This is the free foundational track.
+
+Advanced modeling, tuning, ensembles, and deployment belong to the premium track.
+
+---
+
+## What This Guide Does Not Do
+
+This guide does not:
+
+- Promise state-of-the-art performance  
+- Replace domain expertise  
+- Teach every algorithm  
+- Treat high accuracy as success without context  
+
+Models produce predictions.  
+Interpretation requires judgment.
+
+---
+
+## Prerequisites
+
+You should be comfortable with:
+
+- Basic Python syntax  
+- Working with pandas DataFrames  
+- Running commands in a terminal  
+
+If not, complete the CDI Data Science Free Track first.
+
+---
+
+## Environment Setup
+
+This project uses a virtual environment to isolate dependencies.
+
+### Create the environment
+
+```{bash}
+#| label: create-environment
 bash scripts/setup-env.sh
+source .venv/bin/activate
 ```
+
+This installs:
+
+- pandas  
+- numpy  
+- matplotlib  
+- scikit-learn  
+
+---
+
+## Generate the Synthetic Dataset
+
+```{bash}
+#| label: generate-dataset
+python scripts/make-cdi-customer-churn.py
+```
+
+The dataset will be saved to:
+
+data/ml-ready/cdi-customer-churn.csv
+
+This dataset will be used throughout the guide.
+
+---
+
+## Verify Installation
+
+```{python}
+#| label: verify-installation
+import sklearn
+import pandas as pd
+import numpy as np
+
+sklearn.__version__
+```
+
+If a version number prints, the environment is working correctly.
+
+---
+
+## Rendering the Book
+
+To render the Quarto book locally:
+
+```{bash}
+#| label: render-book
+bash scripts/build-all.sh
+```
+
+The rendered output will appear in:
+
+docs/
+
+Navigation is handled automatically by Quarto.
+
+---
+
+## How to Approach This Guide
+
+Do not rush.
+
+Most machine learning errors occur in:
+
+- Problem framing  
+- Data leakage  
+- Incorrect evaluation  
+- Overinterpretation  
+
+The next lesson begins with the most important skill:
+
+Framing the prediction problem correctly.
