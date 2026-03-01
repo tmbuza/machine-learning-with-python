@@ -5,19 +5,38 @@ project:
 book:
   title: "Machine Learning with Python"
   subtitle: "A Structured Workflow for Predictive Modeling"
+
   chapters:
     - index.qmd
-    - 01-preface-and-setup.qmd
-    - 02-ml-thinking-and-problem-types.qmd
-    - 03-data-preparation-for-ml.qmd
-    - 04-regression-models.qmd
-    - 05-classification-models.qmd
-    - 06-model-evaluation.qmd
-    - 07-overfitting-and-regularization.qmd
-    - 08-feature-importance-and-interpretation.qmd
-    - 09-next-steps.qmd
-    - 99-appendix.qmd
-    - 99-references.qmd
+
+    - part: "Foundations"
+      chapters:
+        - 01-preface-and-setup.qmd
+        - 02-ml-thinking-and-problem-types.qmd
+
+    - part: "Data Preparation"
+      chapters:
+        - 03-data-preparation-for-ml.qmd
+
+    - part: "Modeling"
+      chapters:
+        - 04-regression-models.qmd
+        - 05-classification-models.qmd
+
+    - part: "Evaluation & Interpretation"
+      chapters:
+        - 06-model-evaluation.qmd
+        - 07-overfitting-and-regularization.qmd
+        - 08-feature-importance-and-interpretation.qmd
+
+    - part: "Summary & Next Steps"
+      chapters:
+        - 09-next-steps.qmd
+
+    - part: "Appendix"
+      chapters:
+        - 99-appendix.qmd
+        - 99-references.qmd
 
 execute:
   echo: true
