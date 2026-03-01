@@ -1,0 +1,164 @@
+/* =========================================
+   CDI minimal styling (Quarto) — v2.1
+   Focus: readable defaults + hardened figure caption centering
+   ========================================= */
+
+:root{
+  --accent: #036281;
+  --ink:    #0f172a;
+  --muted:  #475569;
+  --bg:     #f4f8ff;
+
+  --card:   #ffffff;
+  --border: rgba(15,23,42,0.12);
+  --shadow: 0 10px 26px rgba(2, 6, 23, 0.08);
+
+  --link:   var(--accent);
+  --focus:  rgba(3, 98, 129, 0.35);
+}
+
+body{
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* Links */
+a{
+  color: var(--link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+a:hover{ text-decoration: underline; }
+a:focus-visible{
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Callouts */
+.callout{ border-radius: 14px; }
+
+/* Title block */
+#title-block-header{
+  padding-top: 1.2rem;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+
+#title-block-header .title{
+  font-size: 2.7rem;
+  font-weight: 750;
+  letter-spacing: -0.6px;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+/* Title alignment */
+body:not(.front-page) #title-block-header,
+body:not(.front-page) #title-block-header .quarto-title,
+body:not(.front-page) #title-block-header .title,
+body:not(.front-page) #title-block-header .subtitle,
+body:not(.front-page) #title-block-header .quarto-title-meta{
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+.front-page #title-block-header,
+.front-page #title-block-header .quarto-title,
+.front-page #title-block-header .title,
+.front-page #title-block-header .subtitle,
+.front-page #title-block-header .quarto-title-meta{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Right TOC spacing */
+#quarto-margin-sidebar{ margin-top: 2.2rem; }
+.sidebar.toc-right{ margin-top: 1.5rem; }
+
+/* =========================================
+   Figures: captions centered (GLOBAL, HARDENED)
+   Quarto can render captions under several classes depending on format.
+   We target the common variants and override theme alignment.
+   ========================================= */
+
+/* Keep figure containers centered across themes */
+figure,
+.quarto-figure{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure > figcaption,
+figure figcaption,
+.quarto-figure > figcaption,
+.quarto-figure figcaption,
+.quarto-figure .figure-caption,
+.quarto-figure-caption,
+.figure-caption,
+p.caption,
+.caption{
+  text-align: center !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+/* =========================================
+   Code blocks (subtle)
+   ========================================= */
+pre code{ font-size: 0.92rem; }
+pre{
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fbfdff;
+  box-shadow: 0 1px 0 rgba(2, 6, 23, 0.03);
+}
+
+/* =========================================
+   CDI next + message boxes
+   ========================================= */
+.next{
+  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  background: #f5faff;
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.next a{
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.next a:hover{ text-decoration: underline; }
+
+.cdi-message{
+  background: #f5f9fc;
+  border-left: 5px solid var(--accent);
+  padding: 1.6rem 1.8rem;
+  margin: 2.2rem 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.035);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.cdi-message ul{ margin-top: 0.8rem; }
+.cdi-message a{
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.cdi-message a:hover{ text-decoration: underline; }
+
+.cdi-message ul{
+  margin-top: 0.4rem;
+  padding-left: 1.1rem;
+}
