@@ -2,6 +2,10 @@ project:
   type: book
   output-dir: docs
 
+bibliography: library/references.bib
+date: 2026-02-22
+date-format: "MMM YYYY"
+
 book:
   title: "Machine Learning with Python"
   subtitle: "A Structured Workflow for Predictive Modeling"

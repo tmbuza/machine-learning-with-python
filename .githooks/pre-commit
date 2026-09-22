@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+QUARTO_CONFIG="_quarto.yml"
+
+# Files considered meaningful guide updates.
+if ! git diff --cached --name-only |
+  grep -Eq '(^|/)([^/]+\.qmd|_quarto\.yml|[^/]+\.css|[^/]+\.scss|[^/]+\.py|[^/]+\.R|[^/]+\.ipynb)$'; then
+  exit 0
+fi
+
+if [[ ! -f "$QUARTO_CONFIG" ]]; then
+  echo "Cannot update the guide date: $QUARTO_CONFIG was not found."
+  exit 1
+fi
+
+UPDATE_DATE="$(date +%Y-%m-%d)"
+TEMP_FILE="$(mktemp)"
+
+awk -v update_date="$UPDATE_DATE" '
+BEGIN { updated = 0 }
+
+/^date:[[:space:]]*/ && updated == 0 {
+    print "date: " update_date
+    updated = 1
+    next
+}
+
+{ print }
+
+END {
+    if (updated == 0) {
+        print "date: " update_date
+    }
+}
+' "$QUARTO_CONFIG" > "$TEMP_FILE"
+
+mv "$TEMP_FILE" "$QUARTO_CONFIG"
+git add "$QUARTO_CONFIG"
+
+echo "Guide update date set to $UPDATE_DATE."
