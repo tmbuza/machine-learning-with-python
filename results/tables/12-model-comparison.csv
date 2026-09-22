@@ -1,0 +1,4 @@
+model,validation_roc_auc,validation_balanced_accuracy,validation_brier_score
+Prior baseline,0.5,0.5,0.07864272579772852
+Logistic regression,0.7881163606354447,0.6942438621827935,0.15796614785621466
+Shallow tree,0.681383673750086,0.6952066570387181,0.17784886094662816

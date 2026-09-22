@@ -1,0 +1,4 @@
+strategy,training_rows,test_rows,training_positive_rate,test_positive_rate,customer_overlap_count,training_max_date,test_min_date,strict_time_order
+Stratified random,540,180,0.1685,0.1667,119,2026-04-30,2026-01-31,False
+Customer grouped,540,180,0.1815,0.1278,0,2026-04-30,2026-01-31,False
+Chronological,540,180,0.1481,0.2278,180,2026-03-31,2026-04-30,True

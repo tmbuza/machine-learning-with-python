@@ -1,0 +1,298 @@
+# Preface {#sec-preface}
+
+::: {.cdi-message}
+- **ID:** MLPY-000
+- **Type:** Guide orientation and reproducible workflow
+- **Audience:** Learners, analysts, researchers, and practitioners beginning applied machine learning with Python
+- **Theme:** Building reliable machine-learning solutions through a structured, responsible, and reproducible workflow
+:::
+
+## Welcome
+
+Machine learning is often introduced as a collection of algorithms: linear regression, logistic regression, decision trees, random forests, and many others. Algorithms matter, but successful applied machine learning depends on a much broader set of decisions.
+
+**Machine Learning with Python** presents machine learning as a complete analytical workflow. The guide begins with problem framing and data preparation, develops core regression and classification methods, and then moves through evaluation, tuning, interpretation, fairness, reproducibility, and an end-to-end case study.
+
+The central principle is:
+
+> A useful machine-learning model must perform well on relevant unseen data, support the intended decision, and remain understandable enough to evaluate responsibly.
+
+## A complete open guide
+
+This guide is fully available to learners as one connected learning pathway. Each chapter contributes to the complete guide, and later topics build directly on the earlier foundations.
+
+CDI practical products complement the guide by providing structured project files, exercises, datasets, and guided deliverables. They do not restrict access to the conceptual and technical knowledge developed here.
+
+## What you will learn
+
+By the end of the guide, you should be able to:
+
+- translate a real-world need into a well-defined prediction problem;
+- distinguish regression, classification, ranking, clustering, and other learning tasks;
+- prepare tabular data without introducing target leakage;
+- create reproducible training, validation, and test workflows;
+- establish meaningful baselines before comparing more complex models;
+- build regression, classification, tree-based, and ensemble models with scikit-learn;
+- combine preprocessing and estimation safely with pipelines;
+- apply feature engineering and feature selection within validation workflows;
+- use cross-validation and hyperparameter tuning without contaminating evaluation;
+- choose metrics that reflect the problem, class balance, and decision costs;
+- assess probability calibration and select decision thresholds deliberately;
+- interpret global and local model behaviour cautiously;
+- conduct error, subgroup, and fairness analyses;
+- document experiments, assumptions, limitations, and model decisions; and
+- complete an end-to-end machine-learning analysis reproducibly.
+
+## The machine-learning workflow
+
+The guide follows a reusable sequence:
+
+1. **Frame the problem:** define the prediction target, unit of observation, prediction time, users, and intended action.
+2. **Understand the data:** inspect provenance, measurement, missingness, representativeness, and possible bias.
+3. **Design evaluation:** choose data splits, metrics, baselines, and acceptance criteria before model comparison.
+4. **Prepare features:** fit transformations only on training data and apply them through pipelines.
+5. **Build models:** begin with simple baselines, then introduce complexity when evidence justifies it.
+6. **Evaluate performance:** assess discrimination, error, calibration, uncertainty, and subgroup behaviour.
+7. **Interpret responsibly:** explain what influenced predictions without turning association into causation.
+8. **Document and reproduce:** preserve code, configuration, outputs, and decisions so the work can be reviewed and repeated.
+
+The workflow is iterative. Evaluation may reveal a poorly defined target, weak data, leakage, unstable features, or a mismatch between the metric and the real decision. Returning to an earlier stage is part of sound machine-learning practice.
+
+## How the guide is organized
+
+### Foundations
+
+The opening chapters develop machine-learning thinking, problem types, environment setup, data preparation, splitting, and leakage prevention.
+
+### Core models
+
+The next chapters establish baselines and introduce regression, classification, decision trees, and ensemble methods. The emphasis is on understanding assumptions, behaviour, and appropriate use—not memorizing estimator names.
+
+### Reliable model building
+
+These chapters cover preprocessing pipelines, feature engineering, feature selection, cross-validation, model comparison, and hyperparameter tuning.
+
+### Evaluation and responsible use
+
+The guide then develops metric selection, thresholds, calibration, imbalanced data, interpretation, error analysis, subgroup assessment, and fairness.
+
+### Reproducible practice
+
+The final chapters connect experiment tracking, documentation, governance, and an end-to-end case study. Model deployment is treated in CDI's separate **Model Deployment** and **From Models to Systems** guides.
+
+## Learning approach
+
+Each chapter is designed to help you move from understanding to application:
+
+1. begin with the practical question;
+2. learn the concept and its assumptions;
+3. inspect a small, concrete example;
+4. run the chapter script from the repository root;
+5. examine the generated outputs;
+6. interpret the result and its limitations; and
+7. complete the chapter checklist before continuing.
+
+The guide uses a consistent synthetic or openly documented dataset where continuity improves learning. Additional focused datasets may be introduced when a chapter requires a different problem structure.
+
+## Code and execution policy
+
+Code displayed in `.qmd` chapters is illustrative and **does not execute during rendering**. Complete executable programs are stored separately:
+
+```text
+scripts/
+├── bash/
+│   ├── 00-create-venv.sh
+│   ├── 01-generate-ml-problem-types.sh
+│   └── ...
+└── python/
+    ├── 01-generate-ml-problem-types.py
+    └── ...
+```
+
+The rules used throughout the guide are:
+
+- Python programs belong in `scripts/python/`;
+- Bash wrappers belong in `scripts/bash/`;
+- chapter-specific scripts begin with the chapter number;
+- scripts use repository-relative paths;
+- random processes use explicit seeds;
+- generated figures are saved under `results/figures/`;
+- generated tables are saved under `results/tables/` where appropriate; and
+- chapter examples use plain `bash` and `python` code fences so they remain non-executable during rendering.
+
+For example, a chapter may show:
+
+```python
+from sklearn.dummy import DummyClassifier
+
+baseline = DummyClassifier(strategy="prior")
+baseline.fit(X_train, y_train)
+```
+
+The complete runnable workflow remains in the corresponding numbered script rather than inside the chapter source.
+
+## Create the project environment
+
+This guide uses Python 3.12, Visual Studio Code, a repository-specific `.venv`, and the packages documented in `requirements.txt`. Do not reuse the environment from another CDI guide or practical. Each repository must have its own isolated environment.
+
+Open the `machine-learning-with-python` repository folder in VS Code before creating the environment.
+
+### Recommended: VS Code Quick Create
+
+1. Open the Command Palette in VS Code.
+2. Select **Python: Create Environment**.
+3. Choose **Quick Create — venv**.
+4. Confirm that VS Code will use Python 3.12 and create `.venv` in the workspace root.
+5. Allow VS Code to install the dependencies from `requirements.txt`.
+
+When creation finishes, select the repository interpreter if VS Code has not already selected it:
+
+1. open the Command Palette;
+2. select **Python: Select Interpreter**; and
+3. choose the entry ending with `machine-learning-with-python/.venv/bin/python`.
+
+Do not select a global Python installation or the `.venv` belonging to another repository.
+
+### Alternative: create the environment with the repository script
+
+Learners who prefer the terminal can run the reproducible setup wrapper from the repository root:
+
+```bash
+bash scripts/bash/00-create-venv.sh
+```
+
+The script uses Python 3.12, creates `.venv`, upgrades the packaging tools, installs `requirements.txt`, and verifies the core imports. It stops rather than overwriting an existing `.venv`.
+
+Use either VS Code Quick Create or `00-create-venv.sh`, not both. If Quick Create has already created `.venv`, the Bash script should report that the environment exists and stop.
+
+### Activate the environment
+
+Open a new VS Code terminal after creating and selecting the interpreter. VS Code should activate `.venv` automatically. The terminal prompt normally begins with `(.venv)`.
+
+If activation does not occur automatically on macOS or Linux, run:
+
+```bash
+source .venv/bin/activate
+```
+
+### Verify the selected interpreter
+
+From the repository root, confirm that `python` resolves to this repository's environment:
+
+```bash
+python -c "import sys; print(sys.executable)"
+```
+
+The result should end with a path similar to:
+
+```text
+machine-learning-with-python/.venv/bin/python3
+```
+
+If the path points to `/usr/bin`, `/usr/local/bin`, `/opt/homebrew/bin`, another CDI repository, or another virtual environment, return to **Python: Select Interpreter** and choose the Machine Learning `.venv`.
+
+### Verify the required packages
+
+Confirm that the core packages import successfully:
+
+```bash
+python -c "import sklearn, pandas, numpy, matplotlib; print('Environment ready:', sklearn.__version__)"
+```
+
+A successful check prints the installed scikit-learn version, for example:
+
+```text
+Environment ready: 1.9.1
+```
+
+The distribution is installed as `scikit-learn` but imported in Python as `sklearn`.
+
+If a required package is missing, confirm that the correct `.venv` is selected, then install the documented dependencies with:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Run numbered chapter workflows
+
+Run chapter workflows from the repository root. For Chapter 01:
+
+```bash
+bash scripts/bash/01-generate-ml-problem-types.sh
+```
+
+The expected confirmation is:
+
+```text
+Saved results/figures/01-ml-problem-types.png
+```
+
+The Bash wrappers call the repository's `.venv` interpreter and then run the corresponding program under `scripts/python/`. Generated outputs are written to the documented paths under `results/`.
+
+## Repository conventions
+
+```text
+.
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+├── scripts/
+│   ├── bash/
+│   └── python/
+├── results/
+│   ├── figures/
+│   └── tables/
+├── library/
+│   └── references.bib
+├── notebooks/
+├── docs/
+├── 00-preface.qmd
+└── _quarto.yml
+```
+
+Generated outputs never replace the scripts, source data, and documented decisions required to reproduce them.
+
+## What this guide assumes
+
+You should be comfortable with basic Python, pandas DataFrames, and terminal commands. Prior machine-learning experience is not required. Familiarity with descriptive statistics is helpful, but the guide explains the statistical ideas needed to use and evaluate the methods responsibly.
+
+## What machine learning can and cannot establish
+
+A predictive model learns patterns present in its training data. Strong predictive performance does not prove causation, guarantee fairness, or ensure that performance will remain stable when populations and operating conditions change.
+
+Throughout the guide, interpretations must remain consistent with:
+
+- how the data were collected;
+- when predictors and outcomes became available;
+- which population the data represent;
+- how the target was defined;
+- which errors matter in practice; and
+- where the model will be used.
+
+## Before continuing
+
+Confirm that you can:
+
+- open the repository folder in VS Code;
+- create the repository-specific `.venv` using Quick Create or `00-create-venv.sh`;
+- select the Machine Learning `.venv/bin/python` interpreter;
+- open a new VS Code terminal and confirm `sys.executable`;
+- verify the required package imports;
+- run Python and Bash scripts from the repository root;
+- render the Quarto book without executing chapter code; and
+- locate generated figures and tables under `results/`.
+
+## Chapter checklist
+
+- [ ] I understand that this is one complete, openly available guide.
+- [ ] I can describe machine learning as a workflow rather than only a collection of algorithms.
+- [ ] I understand the separation between non-executing chapter examples and runnable repository scripts.
+- [ ] I know where Python programs, Bash wrappers, figures, and tables belong.
+- [ ] I can create, select, activate, and verify the repository-specific `.venv` in VS Code.
+- [ ] I understand that predictive accuracy alone does not establish causation, fairness, or future reliability.
+- [ ] I am ready to begin with machine-learning thinking and problem types.
+
+## Looking ahead
+
+The next chapter begins the professional learning sequence by developing machine-learning thinking and distinguishing the major problem types. You will learn to move from a broad real-world need to a precise prediction problem before choosing data, metrics, or models.

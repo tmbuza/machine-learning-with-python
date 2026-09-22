@@ -1,0 +1,7 @@
+feature,mean_roc_auc_decrease,sd_roc_auc_decrease
+support_contacts,0.11894,0.03397
+usage_hours,0.05441,0.01545
+tenure_months,0.03345,0.01671
+plan,0.0269,0.01131
+monthly_charge,0.0008,0.0036
+region,-0.00084,0.00244

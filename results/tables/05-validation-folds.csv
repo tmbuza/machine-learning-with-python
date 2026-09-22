@@ -1,0 +1,4 @@
+fold,training_start,training_end,validation_month,training_rows,validation_rows,training_positive_rate,validation_positive_rate
+1,2026-01-31,2026-04-30,2026-05-31,1120,280,0.083,0.0893
+2,2026-01-31,2026-05-31,2026-06-30,1400,280,0.0843,0.1071
+3,2026-01-31,2026-06-30,2026-07-31,1680,280,0.0881,0.1071

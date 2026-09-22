@@ -1,0 +1,2 @@
+reference_roc_auc,recent_drift_detected,mature_performance_drop_detected,latest_labels_available,recommended_action,automatic_retraining
+0.74475,True,True,False,prepare_and_validate_challenger,False

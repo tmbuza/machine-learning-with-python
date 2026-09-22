@@ -1,0 +1,12 @@
+transformed_feature,coefficient,odds_ratio,absolute_coefficient
+numeric__support_contacts,0.77753,2.17609,0.77753
+numeric__usage_hours,-0.46617,0.6274,0.46617
+categorical__plan_Standard,-0.39212,0.67563,0.39212
+numeric__tenure_months,-0.3664,0.69322,0.3664
+categorical__plan_Basic,0.36049,1.43403,0.36049
+categorical__plan_Premium,-0.27433,0.76008,0.27433
+categorical__region_South,-0.17123,0.84263,0.17123
+categorical__region_North,-0.10234,0.90272,0.10234
+numeric__monthly_charge,0.09515,1.09983,0.09515
+categorical__region_East,-0.09216,0.91196,0.09216
+categorical__region_West,0.05977,1.0616,0.05977

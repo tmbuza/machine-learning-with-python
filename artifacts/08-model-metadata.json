@@ -1,0 +1,18 @@
+{
+  "artifact_id": "customer-churn-pipeline",
+  "model_version": "1.0.0",
+  "created_at_utc": "2026-09-22T15:44:32.895559+00:00",
+  "training_rows": 2100,
+  "test_rows": 420,
+  "training_period_start": "2026-01-31",
+  "training_period_end": "2026-05-31",
+  "test_period": "2026-06-30",
+  "decision_threshold": 0.55,
+  "test_roc_auc": 0.76893,
+  "test_balanced_accuracy": 0.644233,
+  "python_version": "3.12.14",
+  "scikit_learn_version": "1.8.0",
+  "artifact_file": "08-churn-pipeline.joblib",
+  "artifact_sha256": "299814191b560f5a69b9bd7d235696047200377d99c0abd7a372cc47cee05dc4",
+  "schema_file": "08-feature-schema.json"
+}

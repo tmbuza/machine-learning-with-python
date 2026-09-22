@@ -15,27 +15,32 @@ book:
 
     - part: "Foundations"
       chapters:
-        - 01-preface-and-setup.qmd
-        - 02-ml-thinking-and-problem-types.qmd
+        - 00-preface.qmd
+        - 01-ml-thinking-and-problem-types.qmd
 
     - part: "Data Preparation"
       chapters:
-        - 03-data-preparation-for-ml.qmd
+        - 02-data-preparation-for-ml.qmd
 
     - part: "Modeling"
       chapters:
-        - 04-regression-models.qmd
-        - 05-classification-models.qmd
+        - 03-data-splitting-and-leakage.qmd
+        - 04-baselines-and-first-models.qmd
+        - 05-cross-validation-and-hyperparameter-tuning.qmd
 
     - part: "Evaluation & Interpretation"
       chapters:
-        - 06-model-evaluation.qmd
-        - 07-overfitting-and-regularization.qmd
-        - 08-feature-importance-and-interpretation.qmd
+        - 06-model-evaluation-and-diagnostics.qmd
+        - 07-model-interpretation-and-explainability.qmd
+        - 08-model-persistence-and-reproducible-prediction.qmd
+        - 09-batch-prediction-and-operational-validation.qmd
+        - 10-monitoring-drift-and-model-performance.qmd
+        - 11-responsible-machine-learning-and-governance.qmd
+        - 12-end-to-end-machine-learning-case-study.qmd
 
-    - part: "Summary & Next Steps"
-      chapters:
-        - 09-next-steps.qmd
+    # - part: "Summary & Next Steps"
+    #   chapters:
+    #     - 08-next-steps.qmd
 
     - part: "Appendix"
       chapters:

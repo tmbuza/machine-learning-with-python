@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Splitting and Leakage Prevention – Machine Learning with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-baselines-and-first-models.html" rel="next">
+<link href="./02-data-preparation-for-ml.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e2851886d12d134ff83effd9cfa02285.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-data-splitting-and-leakage.html">Modeling</a></li><li class="breadcrumb-item"><a href="./03-data-splitting-and-leakage.html"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Machine Learning with Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Preface</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-ml-thinking-and-problem-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-preparation-for-ml.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Preparation for Machine Learning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-splitting-and-leakage.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-baselines-and-first-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Baselines and First Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-cross-validation-and-hyperparameter-tuning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-Validation and Hyperparameter Tuning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-model-evaluation-and-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Diagnostic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-model-interpretation-and-explainability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Interpretation and Explainability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-model-persistence-and-reproducible-prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Persistence and Reproducible Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-batch-prediction-and-operational-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Batch Prediction and Operational Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-monitoring-drift-and-model-performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring Drift and Model Performance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-responsible-machine-learning-and-governance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Responsible Machine Learning and Model Governance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-end-to-end-machine-learning-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Machine Learning Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#evaluation-begins-before-modelling" id="toc-evaluation-begins-before-modelling" class="nav-link" data-scroll-target="#evaluation-begins-before-modelling">Evaluation begins before modelling</a></li>
+  <li><a href="#the-three-data-roles" id="toc-the-three-data-roles" class="nav-link" data-scroll-target="#the-three-data-roles">The three data roles</a>
+  <ul class="collapse">
+  <li><a href="#training-data" id="toc-training-data" class="nav-link" data-scroll-target="#training-data">Training data</a></li>
+  <li><a href="#validation-data" id="toc-validation-data" class="nav-link" data-scroll-target="#validation-data">Validation data</a></li>
+  <li><a href="#test-data" id="toc-test-data" class="nav-link" data-scroll-target="#test-data">Test data</a></li>
+  </ul></li>
+  <li><a href="#choose-a-split-that-matches-deployment" id="toc-choose-a-split-that-matches-deployment" class="nav-link" data-scroll-target="#choose-a-split-that-matches-deployment">Choose a split that matches deployment</a>
+  <ul class="collapse">
+  <li><a href="#random-and-stratified-random-splits" id="toc-random-and-stratified-random-splits" class="nav-link" data-scroll-target="#random-and-stratified-random-splits">Random and stratified random splits</a></li>
+  <li><a href="#grouped-splits" id="toc-grouped-splits" class="nav-link" data-scroll-target="#grouped-splits">Grouped splits</a></li>
+  <li><a href="#time-based-splits" id="toc-time-based-splits" class="nav-link" data-scroll-target="#time-based-splits">Time-based splits</a></li>
+  </ul></li>
+  <li><a href="#a-reproducible-split-audit-workbench" id="toc-a-reproducible-split-audit-workbench" class="nav-link" data-scroll-target="#a-reproducible-split-audit-workbench">A reproducible split-audit workbench</a></li>
+  <li><a href="#build-each-split-explicitly" id="toc-build-each-split-explicitly" class="nav-link" data-scroll-target="#build-each-split-explicitly">Build each split explicitly</a>
+  <ul class="collapse">
+  <li><a href="#stratified-random-split" id="toc-stratified-random-split" class="nav-link" data-scroll-target="#stratified-random-split">Stratified random split</a></li>
+  <li><a href="#grouped-split" id="toc-grouped-split" class="nav-link" data-scroll-target="#grouped-split">Grouped split</a></li>
+  <li><a href="#chronological-holdout" id="toc-chronological-holdout" class="nav-link" data-scroll-target="#chronological-holdout">Chronological holdout</a></li>
+  </ul></li>
+  <li><a href="#audit-the-assignments" id="toc-audit-the-assignments" class="nav-link" data-scroll-target="#audit-the-assignments">Audit the assignments</a></li>
+  <li><a href="#recognize-the-main-forms-of-leakage" id="toc-recognize-the-main-forms-of-leakage" class="nav-link" data-scroll-target="#recognize-the-main-forms-of-leakage">Recognize the main forms of leakage</a>
+  <ul class="collapse">
+  <li><a href="#target-leakage" id="toc-target-leakage" class="nav-link" data-scroll-target="#target-leakage">Target leakage</a></li>
+  <li><a href="#prediction-time-leakage" id="toc-prediction-time-leakage" class="nav-link" data-scroll-target="#prediction-time-leakage">Prediction-time leakage</a></li>
+  <li><a href="#preprocessing-leakage" id="toc-preprocessing-leakage" class="nav-link" data-scroll-target="#preprocessing-leakage">Preprocessing leakage</a></li>
+  <li><a href="#group-leakage" id="toc-group-leakage" class="nav-link" data-scroll-target="#group-leakage">Group leakage</a></li>
+  <li><a href="#temporal-leakage" id="toc-temporal-leakage" class="nav-link" data-scroll-target="#temporal-leakage">Temporal leakage</a></li>
+  <li><a href="#test-set-leakage-through-iteration" id="toc-test-set-leakage-through-iteration" class="nav-link" data-scroll-target="#test-set-leakage-through-iteration">Test-set leakage through iteration</a></li>
+  </ul></li>
+  <li><a href="#split-before-learned-preprocessing" id="toc-split-before-learned-preprocessing" class="nav-link" data-scroll-target="#split-before-learned-preprocessing">Split before learned preprocessing</a></li>
+  <li><a href="#preserve-a-final-test-set" id="toc-preserve-a-final-test-set" class="nav-link" data-scroll-target="#preserve-a-final-test-set">Preserve a final test set</a></li>
+  <li><a href="#a-split-design-checklist" id="toc-a-split-design-checklist" class="nav-link" data-scroll-target="#a-split-design-checklist">A split-design checklist</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-data-splitting-and-leakage.html">Modeling</a></li><li class="breadcrumb-item"><a href="./03-data-splitting-and-leakage.html"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-data-splitting-leakage" class="quarto-section-identifier"><span class="chapter-title">Data Splitting and Leakage Prevention</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Feb 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> MLPY-003</li>
+<li><strong>Type:</strong> Validation design and leakage-prevention chapter</li>
+<li><strong>Audience:</strong> Learners building trustworthy machine-learning evaluations with structured data</li>
+<li><strong>Theme:</strong> Make the evaluation population resemble future use while keeping unavailable information out of training</li>
+</ul>
+</div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you will be able to:</p>
+<ol type="1">
+<li>explain the distinct purposes of training, validation, and test data;</li>
+<li>translate a deployment scenario into a defensible splitting strategy;</li>
+<li>choose among random, stratified, grouped, and time-based splits;</li>
+<li>detect entity overlap, time-order violations, target leakage, and preprocessing leakage;</li>
+<li>keep the final test set outside model development; and</li>
+<li>produce an auditable record of split assignments and diagnostics.</li>
+</ol>
+</section>
+<section id="evaluation-begins-before-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-begins-before-modelling">Evaluation begins before modelling</h2>
+<p>A model evaluation answers a future-facing question: how well will this workflow perform on observations it did not use to learn? A split is therefore not an administrative step. It is a simulation of deployment.</p>
+<p>Suppose a retention model will score customers at the end of each month. Several evaluation questions are possible:</p>
+<ul>
+<li>How well will it score new records from customers already known to the organization?</li>
+<li>How well will it generalize to entirely new customers?</li>
+<li>How well will a model trained today perform in a later month?</li>
+</ul>
+<p>Those questions require different splits. A convenient random split can be statistically tidy and still answer the wrong operational question.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+State the generalization target first
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write down what must be new at deployment: a new row, a new entity, a later time period, a new site, or some combination. Then choose the split that keeps that boundary intact.</p>
+</div>
+</div>
+</section>
+<section id="the-three-data-roles" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-data-roles">The three data roles</h2>
+<section id="training-data" class="level3">
+<h3 class="anchored" data-anchor-id="training-data">Training data</h3>
+<p>Training data are used to estimate model parameters and every learned preprocessing parameter. Imputation values, scaling statistics, category vocabularies, feature selection, and the estimator itself all learn from this partition.</p>
+</section>
+<section id="validation-data" class="level3">
+<h3 class="anchored" data-anchor-id="validation-data">Validation data</h3>
+<p>Validation data support model development. They may be used to compare algorithms, tune hyperparameters, select thresholds, and refine features. Cross-validation repeatedly creates training and validation folds within the development data.</p>
+</section>
+<section id="test-data" class="level3">
+<h3 class="anchored" data-anchor-id="test-data">Test data</h3>
+<p>The test set provides the final estimate for the selected workflow. It must not guide feature engineering, preprocessing choices, model selection, hyperparameter tuning, or threshold selection.</p>
+<p>Repeatedly checking the test score turns the test set into another validation set. If that happens, a new untouched test set is needed for an honest final estimate.</p>
+</section>
+</section>
+<section id="choose-a-split-that-matches-deployment" class="level2">
+<h2 class="anchored" data-anchor-id="choose-a-split-that-matches-deployment">Choose a split that matches deployment</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Deployment question</th>
+<th>Appropriate starting strategy</th>
+<th>Boundary protected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>New independent rows from the same stable population</td>
+<td>Random split</td>
+<td>Observation</td>
+</tr>
+<tr class="even">
+<td>Classification with an uncommon target</td>
+<td>Stratified random split</td>
+<td>Observation and approximate class balance</td>
+</tr>
+<tr class="odd">
+<td>New patients, customers, devices, schools, or sites</td>
+<td>Grouped split</td>
+<td>Entity or organization</td>
+</tr>
+<tr class="even">
+<td>Later periods after training</td>
+<td>Time-based split</td>
+<td>Time</td>
+</tr>
+<tr class="odd">
+<td>Later periods for previously unseen entities</td>
+<td>Grouped time design</td>
+<td>Entity and time</td>
+</tr>
+</tbody>
+</table>
+<section id="random-and-stratified-random-splits" class="level3">
+<h3 class="anchored" data-anchor-id="random-and-stratified-random-splits">Random and stratified random splits</h3>
+<p>A random split assumes rows are exchangeable: after accounting for the sampled features, one row does not carry special information about another. Stratification preserves the target proportion approximately across partitions and is often useful for classification.</p>
+<p>Stratification does not prevent leakage. If the same customer appears in both partitions, a stratified split may still produce an overly optimistic estimate.</p>
+</section>
+<section id="grouped-splits" class="level3">
+<h3 class="anchored" data-anchor-id="grouped-splits">Grouped splits</h3>
+<p>A grouped split keeps every row belonging to one entity in a single partition. Use it when repeated observations, related samples, or shared environments create dependence.</p>
+<p>Common grouping units include:</p>
+<ul>
+<li>customer, patient, household, or account;</li>
+<li>machine, device, or production batch;</li>
+<li>school, hospital, branch, or geographic area; and</li>
+<li>document, speaker, or source system.</li>
+</ul>
+<p>The group must represent the unit that should be unfamiliar at deployment.</p>
+</section>
+<section id="time-based-splits" class="level3">
+<h3 class="anchored" data-anchor-id="time-based-splits">Time-based splits</h3>
+<p>A time-based split trains on earlier observations and evaluates on later observations. It is appropriate when production predictions move forward through time and conditions may drift.</p>
+<p>The boundary should include any operational delay. If labels take 30 days to mature, training data immediately before the cutoff may not yet have observable outcomes. A gap between training and evaluation can reproduce that constraint.</p>
+<p>Entity overlap in a time split is not automatically an error. It is valid when the future task scores later records for known entities. It is invalid when the intended task is generalization to unseen entities. The deployment question decides.</p>
+</section>
+</section>
+<section id="a-reproducible-split-audit-workbench" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-split-audit-workbench">A reproducible split-audit workbench</h2>
+<p>The chapter workflow creates repeated monthly customer snapshots and compares three candidate designs:</p>
+<ol type="1">
+<li>a stratified random split;</li>
+<li>a customer-grouped split; and</li>
+<li>a chronological holdout using the latest month.</li>
+</ol>
+<p>Run it from the repository root:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/03-audit-data-splits.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The workflow writes:</p>
+<pre class="text"><code>data/processed/03-customer-snapshots.csv
+results/figures/03-splitting-strategies.png
+results/tables/03-split-assignments.csv
+results/tables/03-split-audit.csv</code></pre>
+<div id="fig-splitting-strategies" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels compare target rates, customer overlap, chronological coverage, and row counts for stratified random, customer-grouped, and chronological holdout strategies.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-splitting-strategies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/03-splitting-strategies.png" class="img-fluid figure-img" style="width:100.0%" alt="Four panels compare target rates, customer overlap, chronological coverage, and row counts for stratified random, customer-grouped, and chronological holdout strategies.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-splitting-strategies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Comparison of class balance, customer overlap, time coverage, and partition sizes for random, grouped, and chronological data splits.
+</figcaption>
+</figure>
+</div>
+<p>The audit in <a href="#fig-splitting-strategies" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> makes trade-offs visible. The grouped split prevents customer overlap. The chronological split preserves the arrow of time. The random split approximately preserves class balance, but repeated customers appear on both sides of its boundary.</p>
+</section>
+<section id="build-each-split-explicitly" class="level2">
+<h2 class="anchored" data-anchor-id="build-each-split-explicitly">Build each split explicitly</h2>
+<p>The complete implementation is in <code>scripts/python/03-audit-data-splits.py</code>. The essential patterns are shown here as non-executable examples.</p>
+<section id="stratified-random-split" class="level3">
+<h3 class="anchored" data-anchor-id="stratified-random-split">Stratified random split</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>train_index, test_index <span class="op">=</span> train_test_split(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    data.index,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>data[<span class="st">"churned_next_month"</span>],</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Fixing <code>random_state</code> makes the assignment reproducible. It does not make the design valid; validity still depends on the independence of rows.</p>
+</section>
+<section id="grouped-split" class="level3">
+<h3 class="anchored" data-anchor-id="grouped-split">Grouped split</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GroupShuffleSplit</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>splitter <span class="op">=</span> GroupShuffleSplit(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    n_splits<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>train_position, test_position <span class="op">=</span> <span class="bu">next</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    splitter.split(data, groups<span class="op">=</span>data[<span class="st">"customer_id"</span>])</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Scikit-learn returns row positions here. The workbench converts them to index labels before recording assignments.</p>
+</section>
+<section id="chronological-holdout" class="level3">
+<h3 class="anchored" data-anchor-id="chronological-holdout">Chronological holdout</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cutoff <span class="op">=</span> data[<span class="st">"snapshot_date"</span>].<span class="bu">max</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>train_index <span class="op">=</span> data.index[data[<span class="st">"snapshot_date"</span>] <span class="op">&lt;</span> cutoff]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>test_index <span class="op">=</span> data.index[data[<span class="st">"snapshot_date"</span>] <span class="op">&gt;=</span> cutoff]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In a real project, choose the cutoff from the evaluation design rather than simply using the latest available date. Confirm that training labels and every feature would have been available before that boundary.</p>
+</section>
+</section>
+<section id="audit-the-assignments" class="level2">
+<h2 class="anchored" data-anchor-id="audit-the-assignments">Audit the assignments</h2>
+<p>A split should be tested as data, not trusted because the code ran. At minimum, record:</p>
+<ul>
+<li>row counts and target rates by partition;</li>
+<li>entity counts and entity overlap;</li>
+<li>minimum and maximum dates;</li>
+<li>whether training precedes evaluation when time order is required;</li>
+<li>missing targets or group identifiers; and</li>
+<li>the random seed, cutoff date, and splitting method.</li>
+</ul>
+<p>An entity-overlap assertion for a grouped design is simple:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>train_customers <span class="op">=</span> <span class="bu">set</span>(train_data[<span class="st">"customer_id"</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>test_customers <span class="op">=</span> <span class="bu">set</span>(test_data[<span class="st">"customer_id"</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> train_customers.isdisjoint(test_customers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For a chronological design, verify the time boundary:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> train_data[<span class="st">"snapshot_date"</span>].<span class="bu">max</span>() <span class="op">&lt;</span> test_data[<span class="st">"snapshot_date"</span>].<span class="bu">min</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Assertions convert design requirements into executable checks. If an upstream data refresh violates an assumption, the workflow should fail visibly.</p>
+</section>
+<section id="recognize-the-main-forms-of-leakage" class="level2">
+<h2 class="anchored" data-anchor-id="recognize-the-main-forms-of-leakage">Recognize the main forms of leakage</h2>
+<section id="target-leakage" class="level3">
+<h3 class="anchored" data-anchor-id="target-leakage">Target leakage</h3>
+<p>A feature directly or indirectly reveals the outcome. A cancellation reason, final account status, or refund issued after cancellation can make churn prediction appear effortless.</p>
+</section>
+<section id="prediction-time-leakage" class="level3">
+<h3 class="anchored" data-anchor-id="prediction-time-leakage">Prediction-time leakage</h3>
+<p>A feature exists in the dataset but was not available when the prediction would have been made. Timestamps and source-system histories are essential for checking availability.</p>
+</section>
+<section id="preprocessing-leakage" class="level3">
+<h3 class="anchored" data-anchor-id="preprocessing-leakage">Preprocessing leakage</h3>
+<p>Statistics are learned from validation or test data. Computing a global median, scaling the complete dataset, or selecting features before cross-validation allows held-out observations to influence training.</p>
+<p>The safe order is:</p>
+<ol type="1">
+<li>define the evaluation design;</li>
+<li>assign rows to partitions;</li>
+<li>fit learned preprocessing on the training partition;</li>
+<li>apply the fitted transformations to validation or test data; and</li>
+<li>evaluate without refitting on held-out observations.</li>
+</ol>
+</section>
+<section id="group-leakage" class="level3">
+<h3 class="anchored" data-anchor-id="group-leakage">Group leakage</h3>
+<p>Related observations occur in different partitions. The model may recognize an entity or its environment instead of learning a relationship that generalizes.</p>
+</section>
+<section id="temporal-leakage" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-leakage">Temporal leakage</h3>
+<p>Future observations, future-derived aggregates, or revised records influence earlier predictions. A random split of time-dependent data is a common cause.</p>
+</section>
+<section id="test-set-leakage-through-iteration" class="level3">
+<h3 class="anchored" data-anchor-id="test-set-leakage-through-iteration">Test-set leakage through iteration</h3>
+<p>The analyst repeatedly adapts the workflow after viewing test performance. No column has crossed the boundary, but information from the test results has influenced development.</p>
+</section>
+</section>
+<section id="split-before-learned-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="split-before-learned-preprocessing">Split before learned preprocessing</h2>
+<p>The following sequence leaks because the imputer sees all rows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data[<span class="st">"income"</span>] <span class="op">=</span> data[<span class="st">"income"</span>].fillna(data[<span class="st">"income"</span>].median())</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> train_test_split(data, test_size<span class="op">=</span><span class="fl">0.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Instead, split first and place learned transformations in a pipeline:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">=</span> make_pipeline(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>workflow.fit(X_train, y_train)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> workflow.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>During cross-validation, the entire pipeline must be passed to the validation routine so each fold learns preprocessing from its own training portion.</p>
+</section>
+<section id="preserve-a-final-test-set" class="level2">
+<h2 class="anchored" data-anchor-id="preserve-a-final-test-set">Preserve a final test set</h2>
+<p>A professional workflow commonly uses two levels:</p>
+<ul>
+<li>reserve the final test set according to the deployment boundary; and</li>
+<li>perform model selection with validation or cross-validation inside the remaining development data.</li>
+</ul>
+<p>After selecting the workflow, refit it on all permitted development data and evaluate it once on the test set. Report the split definition alongside the metric so readers know what kind of generalization was measured.</p>
+</section>
+<section id="a-split-design-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="a-split-design-checklist">A split-design checklist</h2>
+<p>Before modelling, confirm:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">The intended prediction time and horizon are documented.</label></li>
+<li><label><input type="checkbox">The population represented by the test set matches intended use.</label></li>
+<li><label><input type="checkbox">Repeated or related observations have an explicit grouping policy.</label></li>
+<li><label><input type="checkbox">Time order and label-availability delays are respected.</label></li>
+<li><label><input type="checkbox">Learned preprocessing is fitted inside the training workflow.</label></li>
+<li><label><input type="checkbox">The test set is excluded from model and threshold selection.</label></li>
+<li><label><input type="checkbox">Split assignments can be reproduced from code and saved metadata.</label></li>
+<li><label><input type="checkbox">Automated checks detect overlap and boundary violations.</label></li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>A data split is a simulation of deployment, not merely a percentage allocation.</li>
+<li>Random stratification preserves class balance but does not prevent entity or temporal leakage.</li>
+<li>Grouped splitting protects the boundary around related observations.</li>
+<li>Chronological splitting protects future evaluation, but entity overlap must still match the use case.</li>
+<li>Learned preprocessing belongs inside the training and validation workflow.</li>
+<li>A final test set remains informative only while it is isolated from development decisions.</li>
+<li>Saved assignments, diagnostics, and assertions make evaluation design auditable.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>With a defensible evaluation boundary in place, the next chapter establishes simple baselines and trains the first classification and regression models. Those models will provide reference points for judging whether additional complexity produces a meaningful improvement.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-data-preparation-for-ml.html" class="pagination-link" aria-label="Data Preparation for Machine Learning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Data Preparation for Machine Learning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-baselines-and-first-models.html" class="pagination-link" aria-label="Baselines and First Models">
+        <span class="nav-page-text"><span class="chapter-title">Baselines and First Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

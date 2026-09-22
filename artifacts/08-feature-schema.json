@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "required_features": [
+    "tenure_months",
+    "monthly_charge",
+    "support_contacts",
+    "usage_hours",
+    "plan",
+    "region"
+  ],
+  "identifier_fields": [
+    "customer_id",
+    "prediction_date"
+  ],
+  "numeric_features": [
+    "tenure_months",
+    "monthly_charge",
+    "support_contacts",
+    "usage_hours"
+  ],
+  "categorical_features": [
+    "plan",
+    "region"
+  ],
+  "allowed_categories": {
+    "plan": [
+      "Basic",
+      "Standard",
+      "Premium"
+    ],
+    "region": [
+      "North",
+      "South",
+      "East",
+      "West"
+    ]
+  },
+  "missing_values_permitted": [
+    "monthly_charge",
+    "plan"
+  ],
+  "target": "churned_next_month",
+  "positive_class": 1
+}

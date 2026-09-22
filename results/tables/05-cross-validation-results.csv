@@ -1,0 +1,10 @@
+model,fold,roc_auc,balanced_accuracy
+Prior baseline,1,0.5,0.5
+Prior baseline,2,0.5,0.5
+Prior baseline,3,0.5,0.5
+Logistic regression,1,0.6755,0.5725
+Logistic regression,2,0.7575,0.7467
+Logistic regression,3,0.7335,0.6967
+Untuned tree,1,0.6029,0.5384
+Untuned tree,2,0.6323,0.6187
+Untuned tree,3,0.6343,0.632

@@ -1,0 +1,7 @@
+metric,value
+input_rows,200.0
+accepted_rows,192.0
+rejected_rows,8.0
+rejection_rate,0.04
+predicted_positive_rate,0.1875
+mean_churn_probability,0.35350405098903986

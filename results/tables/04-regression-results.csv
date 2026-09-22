@@ -1,0 +1,4 @@
+model,mae,rmse,r_squared
+Mean baseline,9.8385,12.2002,-0.0332
+Linear regression,3.9847,5.1888,0.8131
+Shallow tree,4.6779,6.0034,0.7498

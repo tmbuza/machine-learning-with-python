@@ -1,0 +1,7 @@
+control_area,required_control,review_frequency
+Purpose limitation,Use only for voluntary retention-support prioritization,Pre-release and annual review
+Audit-field separation,Exclude access_group from model inputs and ordinary prediction outputs,Every release
+Human review,No adverse automated action; reviewer can override,Every decision
+Appeal,Record and investigate disputed actions,Ongoing
+Privacy,"Role-based access, minimal logs, retention schedule",Quarterly review
+Stop condition,"Pause on schema failure, material subgroup harm, or stale performance",Continuous

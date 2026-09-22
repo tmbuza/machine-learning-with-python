@@ -1,0 +1,7 @@
+risk_id,risk_statement,lifecycle_stage,likelihood,impact,control,owner,status
+R01,Historical labels may encode unequal service processes,Problem and data,Medium,High,Review label provenance and subgroup outcomes,Data owner,Open
+R02,Recall and false-positive rates differ across audit groups,Evaluation,Medium,High,"Review thresholds, data quality, harms, and uncertainty",Model owner,Open
+R03,Predictions or explanations could expose personal information,Use,Medium,High,Minimize outputs; restrict access and retention,Privacy owner,Controlled
+R04,Score may be used outside voluntary retention support,Use,Medium,High,Document prohibited uses and require use-case approval,Business owner,Controlled
+R05,Performance may become stale after population change,Monitoring,Medium,Medium,Monitor drift and mature-label performance,Model owner,Controlled
+R06,Reviewers may follow scores without meaningful judgment,Human oversight,Medium,High,Train reviewers; audit overrides and appeals,Operations owner,Open

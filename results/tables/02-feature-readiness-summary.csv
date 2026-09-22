@@ -1,0 +1,11 @@
+column,role,dtype,missing_count,missing_percent,unique_values,next_action
+customer_id,Identifier,str,0,0.0,420,Retain for audit and grouped splitting; exclude from estimator
+snapshot_date,Time,datetime64[us],0,0.0,1,Retain for temporal splitting and audit
+tenure_months,Numeric feature,float64,8,1.9,95,Impute within training pipeline if required
+monthly_charges,Numeric feature,float64,32,7.62,376,Impute and scale within training pipeline
+support_calls_30d,Numeric feature,float64,0,0.0,7,Validate distribution; transform only inside pipeline
+usage_hours_30d,Numeric feature,float64,20,4.76,281,Impute and scale within training pipeline
+plan,Categorical feature,str,13,3.1,3,Impute and encode within training pipeline
+contract_type,Categorical feature,str,0,0.0,3,Encode within training pipeline
+region,Group / candidate feature,str,0,0.0,4,Retain for subgroup evaluation; decide modelling role
+churned_30d,Target,int64,0,0.0,2,Separate from feature matrix

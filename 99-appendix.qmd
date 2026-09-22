@@ -1,153 +1,547 @@
-# Appendix: Troubleshooting and Extra Notes
+# Appendix: Professional Machine-Learning Reference {#sec-appendix}
 
-:::cdi-message
-- **ID:** MLPY-APP
-- **Type:** Lesson
-- **Audience:** Public
-- **Theme:** Troubleshooting and extra notes
+::: {.cdi-message}
+**ID:** MLPY-APP  
+**Type:** Professional reference appendix  
+**Audience:** Learners applying the complete machine-learning workflow  
+**Theme:** Definitions, formulas, decisions, checklists, repository conventions, and troubleshooting
 :::
 
-## Common Rendering Issues
+## How to use this appendix
 
-### NameError: variable not defined
+This appendix is a working reference for the full guide. Return to it when you need to choose a metric, audit a split, diagnose an environment problem, prepare a model artifact, or review a project before handoff.
 
-Cause:
-Each Quarto chapter runs in a fresh Python session.
+The examples are intentionally non-executable. Run the maintained workflows from `scripts/python/` through their corresponding launchers in `scripts/bash/`.
 
-Solution:
-Ensure every chapter is self-contained:
-- load the dataset
-- split the data
-- define preprocessing
-- define the model
+## Guide map
 
-Do not rely on variables from previous chapters.
+| Chapter | ID | Main question |
+|---|---|---|
+| `00-preface.qmd` | MLPY-000 | How do I create and verify the project environment? |
+| `01-ml-thinking-and-problem-types.qmd` | MLPY-001 | Is this problem suitable for machine learning? |
+| `02-data-preparation-for-ml.qmd` | MLPY-002 | How should raw data become model-ready data? |
+| `03-data-splitting-and-leakage.qmd` | MLPY-003 | How do I estimate future performance honestly? |
+| `04-baselines-and-first-models.qmd` | MLPY-004 | Does a first model improve on a simple reference? |
+| `05-cross-validation-and-hyperparameter-tuning.qmd` | MLPY-005 | How do I compare candidate configurations reliably? |
+| `06-model-evaluation-and-diagnostics.qmd` | MLPY-006 | Where does the selected model succeed or fail? |
+| `07-model-interpretation-and-explainability.qmd` | MLPY-007 | What is driving predictions, and what can we claim? |
+| `08-model-persistence-and-reproducible-prediction.qmd` | MLPY-008 | How do I save and reload the complete prediction workflow? |
+| `09-batch-prediction-and-operational-validation.qmd` | MLPY-009 | How do I score new records safely? |
+| `10-monitoring-drift-and-model-performance.qmd` | MLPY-010 | How do I detect changes after release? |
+| `11-responsible-machine-learning-and-governance.qmd` | MLPY-011 | How do I make the system accountable and reviewable? |
+| `12-end-to-end-machine-learning-case-study.qmd` | MLPY-012 | How do the decisions connect in one complete project? |
+| `99-appendix.qmd` | MLPY-APP | Where can I find quick-reference material? |
 
----
+## Core terminology
 
-### All arrays must be of the same length
+| Term | Practical meaning |
+|---|---|
+| Observation unit | The entity represented by one row, such as a customer, transaction, or device-day. |
+| Feature | Information available to the model at prediction time. |
+| Target | The outcome the model is trained to predict. |
+| Prediction time | The moment at which a prediction must be produced. |
+| Prediction horizon | The future interval covered by the target. |
+| Estimator | An algorithm that learns parameters from data. |
+| Parameter | A value learned during fitting, such as a regression coefficient. |
+| Hyperparameter | A setting chosen before fitting, such as tree depth. |
+| Pipeline | An ordered, reusable sequence of preprocessing and modeling steps. |
+| Training set | Data used to fit model parameters. |
+| Validation data | Data used to compare choices during development. |
+| Test set | Data reserved for the final, unbiased evaluation. |
+| Baseline | A simple reference that a useful model should beat. |
+| Leakage | Information used during training that would not be legitimately available at prediction time. |
+| Calibration | Agreement between predicted probabilities and observed event rates. |
+| Residual | The difference between an observed and predicted numeric outcome. |
+| Drift | A change in data, predictions, or relationships after deployment. |
+| Artifact | A saved model or pipeline plus the information required to use it correctly. |
+| Inference | Applying a fitted model to new observations. |
+| Audit field | Metadata that makes a prediction traceable, such as model version or scoring time. |
 
-Cause:
-Mixing expanded one-hot feature names with original column names.
+## Problem-definition template
 
-Solution:
-- Built-in tree feature importance → use expanded feature names  
-- Permutation importance → use original X.columns  
+Complete this table before selecting an algorithm.
 
-These represent different feature spaces.
+| Decision element | Question to answer |
+|---|---|
+| Decision | What action will the prediction support? |
+| Observation unit | What does one row represent? |
+| Population | Which entities are eligible for scoring? |
+| Prediction time | When must the prediction be available? |
+| Target | What exactly counts as the outcome? |
+| Horizon | How far into the future is the outcome measured? |
+| Features | Which information is legitimately available at prediction time? |
+| Error costs | What are the consequences of false positives, false negatives, or large numeric errors? |
+| Constraints | What latency, interpretability, fairness, privacy, or resource limits apply? |
+| Success criterion | Which metric and operational result define acceptable performance? |
 
----
+## Common problem types
 
-### ModuleNotFoundError
+| Problem type | Output | Typical examples | Common metrics |
+|---|---|---|---|
+| Binary classification | One of two classes or an event probability | Churn, fraud, default | Precision, recall, F1, ROC AUC, PR AUC, log loss |
+| Multiclass classification | One of several classes | Document category, product type | Macro F1, weighted F1, log loss |
+| Regression | A continuous number | Demand, duration, price | MAE, RMSE, $R^2$ |
+| Ranking | An ordered list | Search results, recommendations | Precision@k, recall@k, NDCG |
+| Clustering | Unlabeled groups | Customer or document segments | Stability and domain usefulness |
+| Anomaly detection | An anomaly score or flag | Equipment faults, suspicious behavior | Precision@k, recall with reviewed labels |
+| Forecasting | Future values indexed by time | Sales, traffic, workload | MAE, RMSE, MASE, interval coverage |
 
-Cause:
-Virtual environment not activated.
+## Split-strategy guide
 
-Solution:
+| Data structure | Preferred split | Why |
+|---|---|---|
+| Independent observations | Random or stratified split | Preserves an approximately representative sample. |
+| Repeated entities | Grouped split | Prevents the same entity appearing across train and evaluation sets. |
+| Time-ordered observations | Chronological or rolling split | Reproduces prediction into the future. |
+| Spatial data | Geographic grouping or blocking | Reduces overly optimistic results from nearby observations. |
+| Rare classes | Stratification, when compatible with grouping and time | Preserves enough positive cases for evaluation. |
 
-```{bash}
-#| label: activate-env
+### Leakage audit
+
+Before fitting, ask:
+
+- Was every feature genuinely available at prediction time?
+- Was the target or a close proxy included among the features?
+- Were aggregates computed using future observations?
+- Were preprocessing steps fitted only on training data?
+- Could the same person, device, account, or event appear in both training and evaluation data?
+- Did tuning, threshold selection, or feature selection use the final test set?
+- Does the split reproduce the way the model will encounter future data?
+
+## Classification metrics
+
+Let $TP$, $TN$, $FP$, and $FN$ denote true positives, true negatives, false positives, and false negatives.
+
+$$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+$$
+\text{Recall} = \frac{TP}{TP + FN}
+$$
+
+$$
+\text{Specificity} = \frac{TN}{TN + FP}
+$$
+
+$$
+F_1 = 2\frac{\text{Precision}\times\text{Recall}}{\text{Precision}+\text{Recall}}
+$$
+
+$$
+\text{Balanced accuracy} = \frac{\text{Recall}+\text{Specificity}}{2}
+$$
+
+For a binary outcome $y_i$ and predicted probability $p_i$, the Brier score is:
+
+$$
+\text{Brier score} = \frac{1}{n}\sum_{i=1}^{n}(p_i-y_i)^2
+$$
+
+Lower Brier scores indicate more accurate probability predictions.
+
+| Metric | Use it when | Important caution |
+|---|---|---|
+| Accuracy | Classes and error costs are reasonably balanced. | Can hide failure on a rare positive class. |
+| Precision | False positives are expensive. | Can improve by predicting fewer positives. |
+| Recall | False negatives are expensive. | Can improve at the cost of many false positives. |
+| F1 | Precision and recall both matter. | Ignores true negatives. |
+| ROC AUC | You need threshold-independent ranking performance. | May look strong under severe class imbalance. |
+| PR AUC | Positive cases are rare and important. | Depends on the event prevalence. |
+| Log loss | Probability quality matters. | Penalizes confident wrong predictions strongly. |
+| Brier score | Calibration and probability accuracy matter. | Should be interpreted against a baseline. |
+
+Never choose a threshold automatically from `0.5`. Connect the threshold to capacity, costs, risks, and the intended intervention.
+
+## Regression metrics
+
+For observed values $y_i$, predictions $\hat{y}_i$, and mean target $\bar{y}$:
+
+$$
+\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+$$
+
+$$
+\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+$$
+
+$$
+R^2 = 1-\frac{\sum_i(y_i-\hat{y}_i)^2}{\sum_i(y_i-\bar{y})^2}
+$$
+
+| Metric | Interpretation | Important caution |
+|---|---|---|
+| MAE | Typical absolute error in target units. | Treats all absolute errors linearly. |
+| RMSE | Error in target units with extra weight on large misses. | Sensitive to outliers. |
+| $R^2$ | Improvement over predicting the mean on the evaluated data. | Can be negative and does not express error in target units. |
+
+Inspect residuals across predicted values, time, and important subgroups. A single average metric can conceal systematic error.
+
+## Preprocessing reference
+
+| Data condition | Typical treatment | Fit on |
+|---|---|---|
+| Missing numeric values | Median imputation or a domain rule | Training data only |
+| Missing categorical values | Most-frequent or explicit missing category | Training data only |
+| Differently scaled numeric features | Standardization for scale-sensitive models | Training data only |
+| Nominal categories | One-hot encoding with unknown-category handling | Training data only |
+| Ordered categories | Explicit ordinal encoding with documented order | Training data only |
+| Skewed positive values | Log or power transformation if justified | Training data only |
+| Free text | A text-specific vectorizer or embedding workflow | Training data only |
+| Dates and times | Prediction-safe calendar and elapsed-time features | Defined before splitting; learned values from training only |
+
+Keep preprocessing and the estimator in one pipeline:
+
+```python
+model = Pipeline(
+    steps=[
+        ("preprocess", preprocessor),
+        ("classifier", LogisticRegression(max_iter=1000)),
+    ]
+)
+```
+
+This structure makes cross-validation, persistence, and prediction safer because each transformation follows the same fitted workflow.
+
+## Baselines and first models
+
+Choose at least one baseline that reflects the problem:
+
+- majority-class prediction for classification;
+- class-prevalence probabilities when probability quality matters;
+- mean or median prediction for regression;
+- last-known value or seasonal naive prediction for forecasting;
+- an existing rule or current business process when one exists.
+
+A first professional model should be understandable, reproducible, and difficult to misuse. Linear or logistic models and shallow trees are often strong starting points. Complexity is justified only when evaluation shows a meaningful benefit.
+
+## Cross-validation and tuning checklist
+
+- Select the split strategy before comparing models.
+- Keep all learned preprocessing inside the pipeline.
+- Use metrics that match the decision and class balance.
+- Define a restrained search space with plausible values.
+- Compare score distributions, not only the best mean score.
+- Record the random seed, folds, scoring rule, and search space.
+- Tune decision thresholds separately from model fitting.
+- Evaluate the final selected workflow once on untouched test data.
+
+## Evaluation and diagnostic checklist
+
+### Classification
+
+- Compare against the baseline.
+- Review the confusion matrix at the operating threshold.
+- Examine precision, recall, and error counts.
+- Inspect ROC and precision-recall behavior where appropriate.
+- Check calibration if probabilities drive decisions.
+- Evaluate important slices and small subgroups cautiously.
+- Review representative false positives and false negatives.
+- Report uncertainty or resampling variability when feasible.
+
+### Regression
+
+- Compare MAE and RMSE with a naive baseline.
+- Plot observed versus predicted values.
+- Inspect residuals for curvature, changing variance, and extreme errors.
+- Evaluate errors over time and across important subgroups.
+- Confirm predictions remain plausible at the edges of the feature range.
+- Report errors in units decision-makers understand.
+
+## Interpretation guide
+
+| Question | Suitable approach | Limitation |
+|---|---|---|
+| How does the model work overall? | Coefficients, global permutation importance, aggregate partial dependence | Global summaries can hide subgroup behavior. |
+| Why did one prediction change? | Local contribution method, counterfactual analysis, nearest examples | Explanation methods can be unstable or correlated. |
+| Does a feature cause the outcome? | A causal design, experiment, or justified identification strategy | Predictive importance is not causal evidence. |
+| Is the model using an undesirable proxy? | Feature audit, subgroup evaluation, sensitivity tests | Removing a protected attribute may not remove its proxies. |
+
+Interpret the fitted pipeline, not an isolated estimator with differently processed inputs. State whether an explanation is global or local and avoid causal language unless the study design supports it.
+
+## Artifact-release checklist
+
+Before releasing a model artifact, record:
+
+- artifact filename and version;
+- creation time and source revision;
+- Python and package versions;
+- feature names, types, and expected units;
+- target definition and training-data period;
+- validation design and accepted metrics;
+- operating threshold, when applicable;
+- approved population and known limitations;
+- owner, review date, and rollback procedure.
+
+Persist the complete pipeline whenever possible. Loading a model should restore preprocessing and prediction behavior together.
+
+> **Security warning:** Never load a Python model file from an untrusted source. Common persistence formats can execute code during loading.
+
+## Batch-scoring checklist
+
+Validate inputs before calling `predict()` or `predict_proba()`:
+
+- required columns are present;
+- unexpected columns are handled deliberately;
+- data types can be converted safely;
+- identifiers are unique when required;
+- missingness and category levels are within expected bounds;
+- numeric values and dates fall within plausible ranges;
+- row counts and rejection counts are recorded.
+
+Every output should include enough audit information to trace the result:
+
+- stable record identifier;
+- prediction and, when relevant, probability or score;
+- decision threshold or decision rule;
+- model version;
+- scoring timestamp;
+- validation status or reason for rejection.
+
+## Monitoring reference
+
+Monitor several layers because no single signal describes model health.
+
+| Layer | Examples | Can be measured without labels? |
+|---|---|---|
+| Service health | Job success, latency, throughput, missing outputs | Yes |
+| Data quality | Schema failures, missingness, invalid ranges | Yes |
+| Feature drift | Distribution changes, unseen categories | Yes |
+| Prediction drift | Score and decision-rate changes | Yes |
+| Performance | Precision, recall, calibration, MAE | No; outcomes are required |
+| Outcome and impact | Intervention success, workload, harm indicators | Usually requires downstream data |
+
+For binned proportions $a_j$ from a reference period and $b_j$ from a current period, a common population stability index is:
+
+$$
+\text{PSI}=\sum_j(a_j-b_j)\ln\left(\frac{a_j}{b_j}\right)
+$$
+
+For two categorical distributions $p$ and $q$, total variation distance is:
+
+$$
+\text{TVD}=\frac{1}{2}\sum_j|p_j-q_j|
+$$
+
+These statistics are alerting signals, not automatic proof that a model must be retrained. Investigate causes and connect thresholds to operational consequences.
+
+## Responsible-machine-learning checklist
+
+- Document the intended use and explicitly excluded uses.
+- Identify affected people and possible harms.
+- Confirm a lawful, proportionate basis for using the data.
+- Minimize sensitive and unnecessary features.
+- Evaluate performance and error rates across relevant groups.
+- Define human review and appeal paths for consequential decisions.
+- Protect training data, artifacts, predictions, and logs.
+- Assign owners for approval, monitoring, incidents, and retirement.
+- Record limitations in language users can understand.
+- Reassess the system when its population, process, or purpose changes.
+
+## Repository conventions
+
+The guide separates instructional prose from executable workflows:
+
+```text
+machine-learning-with-python/
+├── 00-preface.qmd
+├── 01-ml-thinking-and-problem-types.qmd
+├── ...
+├── 12-end-to-end-machine-learning-case-study.qmd
+├── 99-appendix.qmd
+├── requirements.txt
+├── scripts/
+│   ├── bash/
+│   │   ├── 00-create-venv.sh
+│   │   ├── 01-run-ml-thinking-workbench.sh
+│   │   └── ...
+│   └── python/
+│       ├── 01-ml-thinking-workbench.py
+│       └── ...
+└── results/
+    ├── figures/
+    ├── models/
+    └── predictions/
+```
+
+Apply these rules consistently:
+
+- QMD examples use plain `bash` and `python` fences and do not execute during rendering.
+- Maintained code lives in `scripts/python/`.
+- Bash launchers resolve the repository root and call `.venv/bin/python` directly.
+- Generated figures, models, metrics, and predictions belong under `results/`.
+- Numbered scripts correspond to numbered chapters.
+- Generated results should not silently overwrite important reviewed artifacts.
+
+## Environment quick reference
+
+From the repository root, create the dedicated environment:
+
+```bash
+bash scripts/bash/00-create-venv.sh
+```
+
+Activate it in a new terminal:
+
+```bash
 source .venv/bin/activate
 ```
 
-Verify installation:
+Confirm which interpreter the terminal is using:
 
-```{python}
-#| label: verify-packages
-import sklearn
-import pandas
+```bash
+python -c "import sys; print(sys.executable)"
 ```
 
----
+The output should point inside this repository, ending in `.venv/bin/python` or `.venv/bin/python3`.
 
-## Reproducibility Notes
+Verify the core packages:
 
-To ensure consistent results:
+```bash
+python -c "import sklearn, pandas, numpy, matplotlib; print('Environment ready:', sklearn.__version__)"
+```
 
-- Use fixed random_state values  
-- Keep train/test splits consistent  
-- Avoid modifying datasets mid-analysis  
-- Do not evaluate on training data  
+In VS Code, use **Python: Select Interpreter** and select the interpreter under this repository's `.venv`. Then open a new integrated terminal so activation reflects the selection.
 
-For more robust validation, consider:
+## Troubleshooting
 
-- Cross-validation  
-- Multiple random seeds  
-- Version control for datasets  
+### `ModuleNotFoundError: No module named 'sklearn'`
 
----
+The current interpreter does not contain scikit-learn. Activate the repository environment and verify it:
 
-## Model Reuse and Persistence
+```bash
+source .venv/bin/activate
+python -c "import sys, sklearn; print(sys.executable); print(sklearn.__version__)"
+```
 
-Applied machine learning rarely ends at evaluation.
+If the interpreter is correct but the import still fails, install the declared dependencies with `.venv/bin/python -m pip install -r requirements.txt`.
 
-In real settings, you often need to reuse a trained pipeline outside the notebook.
+### A Bash launcher reports `python: command not found`
 
-Deployment does not automatically mean cloud infrastructure.
+The launcher should not depend on a shell alias or a generic `python` command. It should resolve the repository root and invoke the environment explicitly:
 
-A practical first step is being able to:
+```bash
+"${REPO_ROOT}/.venv/bin/python" "${REPO_ROOT}/scripts/python/01-ml-thinking-workbench.py"
+```
 
-- save a trained model or pipeline  
-- reload it in a fresh session  
-- run predictions reliably on new records  
+If `.venv/bin/python` does not exist, create the environment with `00-create-venv.sh`.
 
-The format matters less than the habit.
+### VS Code lists several `.venv` environments
 
-Reproducibility and versioning are more important than the specific deployment tool.
+Select the interpreter whose path includes `machine-learning-with-python/.venv/bin/python`. Open a new terminal and confirm `sys.executable`; do not rely only on the environment name displayed in the menu.
 
----
+### `NameError` in an interactive session
 
-## On Metrics and Interpretation
+The required variable or import was defined in a cell that has not run in the current session. Restart and run the notebook from the beginning, or use the numbered script to reproduce the complete workflow.
 
-Accuracy is not always sufficient.
+### `ValueError: All arrays must be of the same length`
 
-Always ask:
+Inputs used to create a DataFrame have inconsistent lengths. Print or assert their lengths before construction and trace where the shorter object was produced.
 
-- What error is more costly?  
-- False positive or false negative?  
-- Does the metric match the operational objective?  
+### The model reports that input contains `NaN`
 
-Metrics should reflect consequences.
+Confirm that missing-value handling is inside the fitted pipeline. Also check whether new parsing or type conversion introduced missing values before inference.
 
----
+### New data contains unknown categories
 
-## On Feature Importance
+Use an encoder configured to handle unknown categories and monitor how often they occur. A sudden increase may indicate upstream change or drift.
 
-Feature importance indicates influence on prediction within this dataset.
+### Cross-validation results are unexpectedly high
 
-It does not imply:
+Audit for target leakage, duplicate records, repeated entities across folds, future information, preprocessing performed before splitting, and tuning decisions informed by the test set.
 
-- causation  
-- mechanism  
-- domain-level truth  
+### Accuracy is high, but the model finds few positive cases
 
-Treat feature importance as a diagnostic tool.
+Inspect the class distribution, confusion matrix, recall, precision-recall curve, and threshold. A majority-class baseline can achieve high accuracy when the positive class is rare.
 
-Not as a claim.
+### Probability predictions are poorly calibrated
 
----
+Inspect a calibration curve and Brier score on held-out data. Consider calibration using a separate validation procedure; do not calibrate and assess on the same observations.
 
-## Scaling Up
+### A reloaded model warns about versions or gives different results
 
-If you apply this workflow to real-world data, expect additional challenges:
+Compare the Python and library versions with the artifact metadata. Confirm that the same complete pipeline was saved and that inputs have identical names, types, units, and ordering.
 
-- Missing data  
-- Severe class imbalance  
-- High-dimensional features  
-- Temporal leakage  
-- Deployment constraints  
+### Drift is detected, but outcomes are not yet available
 
-The structured workflow still applies:
+Treat drift as an investigation signal. Check data quality, upstream system changes, score distributions, and decision rates. Delay claims about predictive performance until trustworthy outcomes arrive.
 
-Design → Data → Model → Evaluation → Interpretation
+### Quarto tries to execute an example
 
----
+Use an ordinary Markdown fence:
 
-## Final Note
+````text
+```python
+print("This example is displayed but not executed.")
+```
+````
 
-Machine learning is powerful when disciplined.
+Do not add braces around the language name, because that changes a displayed example into an executable Quarto cell.
 
-The workflow you learned here is more important than any single algorithm.
+## Complete project handoff checklist
 
-Structure first.  
-Then complexity.
+### Problem and data
+
+- The decision, population, prediction time, horizon, and target are explicit.
+- Feature availability is documented at prediction time.
+- Data provenance, exclusions, and quality checks are recorded.
+- The split strategy matches the deployment setting.
+
+### Modeling and evaluation
+
+- A meaningful baseline is reported.
+- Preprocessing and the estimator are contained in one pipeline.
+- Cross-validation and tuning are reproducible.
+- The final test set was used only after model selection.
+- Metrics, thresholds, slices, uncertainty, and failure cases are documented.
+
+### Release and operation
+
+- The artifact, metadata, dependencies, and prediction contract are versioned.
+- Batch inputs are validated before scoring.
+- Prediction outputs contain audit fields.
+- Monitoring includes service, data, drift, performance, and impact signals.
+- Alert owners, escalation paths, rollback, and retirement procedures exist.
+
+### Responsibility and communication
+
+- Intended and prohibited uses are stated.
+- Relevant subgroup performance and harms were reviewed.
+- Human oversight and recourse are defined where needed.
+- Security and privacy controls cover the full lifecycle.
+- The model card or equivalent release record is understandable to its audience.
+
+
+## Continue learning
+
+After completing this guide, continue with the CDI guides that move from model development into production systems:
+
+- **Model Deployment** for serving, packaging, release strategies, and deployment operations;
+- **From Models to Systems** for architecture, feedback loops, reliability, and system-level tradeoffs;
+- **Advanced Data Science** for deeper statistical, computational, and research-oriented methods.
+
+## Evidence base and further reading
+
+The guide’s treatment of machine-learning foundations, statistical learning, model assessment, and applied predictive modeling draws on established textbooks and methodological references [@James2021; @Hastie2009; @Kuhn2013].
+
+The chapters covering tree-based models, cross-validation, probability calibration, and probabilistic evaluation are supported by foundational work in these areas [@Breiman2001; @Kohavi1995; @NiculescuMizil2005; @Brier1950].
+
+The Python workflows use scikit-learn, an open-source machine-learning library described by @Pedregosa2011.
+
+The interpretation chapter introduces approaches associated with LIME and SHAP [@Ribeiro2016; @Lundberg2017].
+
+The guide’s treatment of reproducibility, batch prediction, monitoring, and operational risk reflects established concerns about technical debt in machine-learning systems [@Sculley2015].
+
+Documentation and responsible-machine-learning practices are informed by model cards, datasheets for datasets, and the NIST AI Risk Management Framework [@Mitchell2019; @Gebru2021; @Tabassi2023].
+
+## Final note
+
+Professional machine learning is not a single fit-and-score operation. It is a traceable lifecycle:
+
+> Define the decision, establish the data contract, split honestly, build a baseline, validate carefully, diagnose failures, interpret cautiously, release reproducibly, monitor continuously, and govern responsibly.
+
+Use this sequence as the standard against which future projects are designed and reviewed.

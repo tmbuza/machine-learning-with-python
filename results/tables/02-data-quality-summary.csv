@@ -1,0 +1,6 @@
+issue,count,action,stage
+Exact duplicate snapshots,9,Removed confirmed exact duplicates,Structural preparation
+Negative tenure values,8,Converted to missing; no imputation performed,Structural preparation
+Negative monthly charges,5,Converted to missing; no imputation performed,Structural preparation
+Non-canonical plan labels,129,Mapped documented variants to canonical labels,Structural preparation
+Post-outcome leakage columns,2,Excluded from processed modelling table,Prediction-time boundary

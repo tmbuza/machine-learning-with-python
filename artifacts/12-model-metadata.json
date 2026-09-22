@@ -1,0 +1,11 @@
+{
+  "model_version": "1.0.0",
+  "selected_model": "Logistic regression",
+  "decision_threshold": 0.68,
+  "training_end": "2026-06-30",
+  "test_period": "2026-07-31",
+  "test_roc_auc": 0.747491136349979,
+  "artifact_sha256": "45f9303b9e434af9051ec016412107d8fb8cee42d88cff70cf2315b3dd2c2544",
+  "python_version": "3.12.14",
+  "scikit_learn_version": "1.8.0"
+}

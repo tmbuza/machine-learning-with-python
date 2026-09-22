@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "required_features": [
+    "tenure_months",
+    "monthly_charge",
+    "support_contacts",
+    "usage_hours",
+    "plan",
+    "region"
+  ],
+  "identifier_fields": [
+    "customer_id",
+    "snapshot_date"
+  ],
+  "audit_only_fields": [
+    "audit_group"
+  ],
+  "target": "churned_next_month"
+}

@@ -1,11 +1,4 @@
-# References
+# References {.unnumbered}
 
-:::cdi-message
-- **ID:** MLPY-REF
-- **Type:** Lesson
-- **Audience:** Public
-- **Theme:** Sources and recommended reading
+::: {#refs}
 :::
-
-Content coming soon.
-

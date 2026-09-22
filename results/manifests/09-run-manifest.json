@@ -1,0 +1,19 @@
+{
+  "run_id": "run-09-reproducible-example",
+  "batch_id": "retention-2026-07",
+  "status": "succeeded_with_rejections",
+  "model_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "decision_threshold": 0.55,
+  "started_at_utc": "2026-09-22T15:52:15.904874+00:00",
+  "completed_at_utc": "2026-09-22T15:52:15.986538+00:00",
+  "duration_seconds": 0.0817,
+  "input_rows": 200,
+  "accepted_rows": 192,
+  "rejected_rows": 8,
+  "prediction_rows": 192,
+  "input_file": "data/scoring/09-input-batch.csv",
+  "input_sha256": "7e4516d58cfa4bd383612c635b6a30d8d7664ef6c8777680d508129293c9d631",
+  "prediction_file": "results/tables/09-batch-predictions.csv",
+  "prediction_sha256": "ba50a6fb3afde2177cc1916c5aef3672941bf570ac6598880c970f7b431afc66"
+}

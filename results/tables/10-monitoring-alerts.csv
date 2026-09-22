@@ -1,0 +1,15 @@
+month,alert_type,item,value,severity
+2026-07,feature_drift,tenure_months,0.15021,warning
+2026-07,feature_drift,usage_hours,0.17825,warning
+2026-08,feature_drift,tenure_months,0.2966,critical
+2026-08,feature_drift,support_contacts,0.11396,warning
+2026-08,feature_drift,usage_hours,0.2736,critical
+2026-08,performance_drop,roc_auc,0.65347,critical
+2026-09,feature_drift,tenure_months,1.22413,critical
+2026-09,feature_drift,support_contacts,0.26984,critical
+2026-09,feature_drift,usage_hours,0.46126,critical
+2026-09,feature_drift,plan,0.11154,warning
+2026-10,feature_drift,tenure_months,1.28942,critical
+2026-10,feature_drift,support_contacts,0.38391,critical
+2026-10,feature_drift,usage_hours,0.79641,critical
+2026-10,feature_drift,plan,0.11923,warning

@@ -1,0 +1,8 @@
+month,label_status,roc_auc,brier_score,auc_change_from_reference
+2026-04,mature,0.67711,0.20888,-0.06764
+2026-05,mature,0.78982,0.20819,0.04507
+2026-06,mature,0.69112,0.23505,-0.05363
+2026-07,mature,0.74072,0.25144,-0.00403
+2026-08,mature,0.65347,0.29019,-0.09128
+2026-09,unavailable,,,
+2026-10,unavailable,,,

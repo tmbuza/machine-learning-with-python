@@ -1,0 +1,4 @@
+access_group,rows,positive_cases,base_rate,selected_rows,selection_rate,true_positive_rate,false_positive_rate,precision,roc_auc
+Group A,133,4,0.0301,20,0.1504,0.75,0.1318,0.15,0.9438
+Group B,70,3,0.0429,13,0.1857,1.0,0.1493,0.2308,0.8856
+Group C,50,8,0.16,10,0.2,0.125,0.2143,0.1,0.5655

@@ -1,0 +1,2 @@
+rows,positive_cases,base_rate,selected_rows,selection_rate,true_positive_rate,false_positive_rate,precision,roc_auc
+253,15,0.0593,43,0.17,0.4667,0.1513,0.1628,0.7395

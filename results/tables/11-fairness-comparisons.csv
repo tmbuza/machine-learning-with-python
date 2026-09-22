@@ -1,0 +1,4 @@
+access_group,rows,positive_cases,base_rate,selected_rows,selection_rate,true_positive_rate,false_positive_rate,precision,roc_auc,selection_rate_difference_from_Group_A,selection_rate_ratio_to_Group_A,true_positive_rate_difference_from_Group_A,true_positive_rate_ratio_to_Group_A,false_positive_rate_difference_from_Group_A,false_positive_rate_ratio_to_Group_A,precision_difference_from_Group_A,precision_ratio_to_Group_A
+Group A,133,4,0.0301,20,0.1504,0.75,0.1318,0.15,0.9438,0.0,1.0,0.0,1.0,0.0,1.0,0.0,1.0
+Group B,70,3,0.0429,13,0.1857,1.0,0.1493,0.2308,0.8856,0.0353,1.235,0.25,1.3333,0.0175,1.1326,0.0808,1.5385
+Group C,50,8,0.16,10,0.2,0.125,0.2143,0.1,0.5655,0.0496,1.33,-0.625,0.1667,0.0825,1.6261,-0.05,0.6667

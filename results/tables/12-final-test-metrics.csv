@@ -1,0 +1,2 @@
+selected_model,threshold,roc_auc,average_precision,accuracy,balanced_accuracy,precision,recall,f1,brier_score,true_negative,false_positive,false_negative,true_positive
+Logistic regression,0.68,0.747491136349979,0.257948298390094,0.8534883720930233,0.6085271317829457,0.2826086956521739,0.3023255813953488,0.29213483146067415,0.17166324123422524,354,33,30,13
