@@ -15,7 +15,7 @@ _freeze/
 *_files/
 !docs/*_files/
 !docs/*_files/**
-figures/
+!results/figures/
 !docs/figures/
 !docs/figures/**
 
