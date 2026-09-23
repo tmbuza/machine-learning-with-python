@@ -4,39 +4,59 @@ set -euo pipefail
 
 QUARTO_CONFIG="_quarto.yml"
 
-# Files considered meaningful guide updates.
-if ! git diff --cached --name-only |
-  grep -Eq '(^|/)([^/]+\.qmd|_quarto\.yml|[^/]+\.css|[^/]+\.scss|[^/]+\.py|[^/]+\.R|[^/]+\.ipynb)$'; then
+CHANGED_FILES="$(
+  git diff --cached \
+    --name-only \
+    --diff-filter=ACMRD |
+    grep -Ev '^docs/' || true
+)"
+
+# Update the guide date only when meaningful source files change.
+if ! printf '%s\n' "${CHANGED_FILES}" |
+  grep -Eq '(^|/)[^/]+\.(qmd|md|yml|yaml|css|scss|py|R|ipynb|bib|sh)$'; then
   exit 0
 fi
 
-if [[ ! -f "$QUARTO_CONFIG" ]]; then
-  echo "Cannot update the guide date: $QUARTO_CONFIG was not found."
+if [[ ! -f "${QUARTO_CONFIG}" ]]; then
+  echo "Cannot update the guide date: ${QUARTO_CONFIG} was not found." >&2
   exit 1
 fi
 
 UPDATE_DATE="$(date +%Y-%m-%d)"
-TEMP_FILE="$(mktemp)"
+TEMP_FILE="$(mktemp "${TMPDIR:-/tmp}/cdi-guide-date.XXXXXX")"
 
-awk -v update_date="$UPDATE_DATE" '
-BEGIN { updated = 0 }
+cleanup() {
+  rm -f "${TEMP_FILE}"
+}
+
+trap cleanup EXIT
+
+awk -v update_date="${UPDATE_DATE}" '
+BEGIN {
+  updated = 0
+}
 
 /^date:[[:space:]]*/ && updated == 0 {
-    print "date: " update_date
-    updated = 1
-    next
+  print "date: " update_date
+  updated = 1
+  next
 }
 
-{ print }
+{
+  print
+}
 
 END {
-    if (updated == 0) {
-        print "date: " update_date
-    }
+  if (updated == 0) {
+    print ""
+    print "date: " update_date
+  }
 }
-' "$QUARTO_CONFIG" > "$TEMP_FILE"
+' "${QUARTO_CONFIG}" > "${TEMP_FILE}"
 
-mv "$TEMP_FILE" "$QUARTO_CONFIG"
-git add "$QUARTO_CONFIG"
-
-echo "Guide update date set to $UPDATE_DATE."
+if ! cmp -s "${TEMP_FILE}" "${QUARTO_CONFIG}"; then
+  # Redirection preserves the existing file permissions.
+  sed -n 'p' "${TEMP_FILE}" > "${QUARTO_CONFIG}"
+  git add "${QUARTO_CONFIG}"
+  echo "Guide update date set to ${UPDATE_DATE}."
+fi

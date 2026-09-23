@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 bibliography: library/references.bib
-date: 2026-02-22
+date: 2026-09-23
 date-format: "MMM YYYY"
 
 book:
@@ -12,19 +12,19 @@ book:
 
   chapters:
     - index.qmd
+    - 00-preface.qmd
 
     - part: "Foundations"
       chapters:
-        - 00-preface.qmd
         - 01-ml-thinking-and-problem-types.qmd
 
     - part: "Data Preparation"
       chapters:
         - 02-data-preparation-for-ml.qmd
+        - 03-data-splitting-and-leakage.qmd
 
     - part: "Modeling"
       chapters:
-        - 03-data-splitting-and-leakage.qmd
         - 04-baselines-and-first-models.qmd
         - 05-cross-validation-and-hyperparameter-tuning.qmd
 
@@ -32,21 +32,22 @@ book:
       chapters:
         - 06-model-evaluation-and-diagnostics.qmd
         - 07-model-interpretation-and-explainability.qmd
+
+    - part: "Operational ML"
+      chapters:
         - 08-model-persistence-and-reproducible-prediction.qmd
         - 09-batch-prediction-and-operational-validation.qmd
         - 10-monitoring-drift-and-model-performance.qmd
+
+    - part: "Practice & Governance"
+      chapters:
         - 11-responsible-machine-learning-and-governance.qmd
         - 12-end-to-end-machine-learning-case-study.qmd
 
-    # - part: "Summary & Next Steps"
-    #   chapters:
-    #     - 08-next-steps.qmd
+    - 99-references.qmd
 
-    - part: "Appendix"
-      chapters:
-        - 99-appendix.qmd
-        - 99-references.qmd
-
+  appendices:
+    - 99-appendix.qmd
 execute:
   echo: true
   warning: false

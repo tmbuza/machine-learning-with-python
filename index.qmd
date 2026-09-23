@@ -1,15 +1,19 @@
 ---
-title: ""
-engine: knitr
 format:
   html:
     body-classes: front-page
 ---
 
+# {-}
+
 <div style="text-align: center; margin-top: 1.5em;">
-  <img src="assets/images/cover/machine-learning-with-python-cover-free.png" width="75%" />
+  <img
+    src="assets/images/cover/machine-learning-with-python-cover-free.png"
+    width="75%"
+    alt="Machine Learning with Python guide cover"
+  />
 </div>
 
 <div style="text-align: center; font-style: normal; margin-top: 1em;">
-Free Guide · Updated `r format(Sys.Date(), "%b %Y")`
+Free Guide · Updated {{< meta date >}}
 </div>
