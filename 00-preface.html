@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Preface – Machine Learning with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01-ml-thinking-and-problem-types.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e2851886d12d134ff83effd9cfa02285.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-preface.html">Preface</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Machine Learning with Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-ml-thinking-and-problem-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-preparation-for-ml.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Preparation for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-splitting-and-leakage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-baselines-and-first-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Baselines and First Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-cross-validation-and-hyperparameter-tuning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-Validation and Hyperparameter Tuning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-model-evaluation-and-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Diagnostic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-model-interpretation-and-explainability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Interpretation and Explainability</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Operational ML</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-model-persistence-and-reproducible-prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Persistence and Reproducible Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-batch-prediction-and-operational-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Batch Prediction and Operational Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-monitoring-drift-and-model-performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring Drift and Model Performance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Practice &amp; Governance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-responsible-machine-learning-and-governance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Responsible Machine Learning and Model Governance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-end-to-end-machine-learning-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Machine Learning Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#a-complete-open-guide" id="toc-a-complete-open-guide" class="nav-link" data-scroll-target="#a-complete-open-guide">A complete open guide</a></li>
+  <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What you will learn</a></li>
+  <li><a href="#the-machine-learning-workflow" id="toc-the-machine-learning-workflow" class="nav-link" data-scroll-target="#the-machine-learning-workflow">The machine-learning workflow</a></li>
+  <li><a href="#how-the-guide-is-organized" id="toc-how-the-guide-is-organized" class="nav-link" data-scroll-target="#how-the-guide-is-organized">How the guide is organized</a>
+  <ul class="collapse">
+  <li><a href="#foundations" id="toc-foundations" class="nav-link" data-scroll-target="#foundations">Foundations</a></li>
+  <li><a href="#core-models" id="toc-core-models" class="nav-link" data-scroll-target="#core-models">Core models</a></li>
+  <li><a href="#reliable-model-building" id="toc-reliable-model-building" class="nav-link" data-scroll-target="#reliable-model-building">Reliable model building</a></li>
+  <li><a href="#evaluation-and-responsible-use" id="toc-evaluation-and-responsible-use" class="nav-link" data-scroll-target="#evaluation-and-responsible-use">Evaluation and responsible use</a></li>
+  <li><a href="#reproducible-practice" id="toc-reproducible-practice" class="nav-link" data-scroll-target="#reproducible-practice">Reproducible practice</a></li>
+  </ul></li>
+  <li><a href="#learning-approach" id="toc-learning-approach" class="nav-link" data-scroll-target="#learning-approach">Learning approach</a></li>
+  <li><a href="#code-and-execution-policy" id="toc-code-and-execution-policy" class="nav-link" data-scroll-target="#code-and-execution-policy">Code and execution policy</a></li>
+  <li><a href="#create-the-project-environment" id="toc-create-the-project-environment" class="nav-link" data-scroll-target="#create-the-project-environment">Create the project environment</a>
+  <ul class="collapse">
+  <li><a href="#recommended-vs-code-quick-create" id="toc-recommended-vs-code-quick-create" class="nav-link" data-scroll-target="#recommended-vs-code-quick-create">Recommended: VS Code Quick Create</a></li>
+  <li><a href="#alternative-create-the-environment-with-the-repository-script" id="toc-alternative-create-the-environment-with-the-repository-script" class="nav-link" data-scroll-target="#alternative-create-the-environment-with-the-repository-script">Alternative: create the environment with the repository script</a></li>
+  <li><a href="#activate-the-environment" id="toc-activate-the-environment" class="nav-link" data-scroll-target="#activate-the-environment">Activate the environment</a></li>
+  <li><a href="#verify-the-selected-interpreter" id="toc-verify-the-selected-interpreter" class="nav-link" data-scroll-target="#verify-the-selected-interpreter">Verify the selected interpreter</a></li>
+  <li><a href="#verify-the-required-packages" id="toc-verify-the-required-packages" class="nav-link" data-scroll-target="#verify-the-required-packages">Verify the required packages</a></li>
+  <li><a href="#run-numbered-chapter-workflows" id="toc-run-numbered-chapter-workflows" class="nav-link" data-scroll-target="#run-numbered-chapter-workflows">Run numbered chapter workflows</a></li>
+  </ul></li>
+  <li><a href="#repository-conventions" id="toc-repository-conventions" class="nav-link" data-scroll-target="#repository-conventions">Repository conventions</a></li>
+  <li><a href="#what-this-guide-assumes" id="toc-what-this-guide-assumes" class="nav-link" data-scroll-target="#what-this-guide-assumes">What this guide assumes</a></li>
+  <li><a href="#what-machine-learning-can-and-cannot-establish" id="toc-what-machine-learning-can-and-cannot-establish" class="nav-link" data-scroll-target="#what-machine-learning-can-and-cannot-establish">What machine learning can and cannot establish</a></li>
+  <li><a href="#before-continuing" id="toc-before-continuing" class="nav-link" data-scroll-target="#before-continuing">Before continuing</a></li>
+  <li><a href="#chapter-checklist" id="toc-chapter-checklist" class="nav-link" data-scroll-target="#chapter-checklist">Chapter checklist</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-preface" class="quarto-section-identifier">Preface</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sep 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> MLPY-000</li>
+<li><strong>Type:</strong> Guide orientation and reproducible workflow</li>
+<li><strong>Audience:</strong> Learners, analysts, researchers, and practitioners beginning applied machine learning with Python</li>
+<li><strong>Theme:</strong> Building reliable machine-learning solutions through a structured, responsible, and reproducible workflow</li>
+</ul>
+</div>
+<section id="welcome" class="level2">
+<h2 class="anchored" data-anchor-id="welcome">Welcome</h2>
+<p>Machine learning is often introduced as a collection of algorithms: linear regression, logistic regression, decision trees, random forests, and many others. Algorithms matter, but successful applied machine learning depends on a much broader set of decisions.</p>
+<p><strong>Machine Learning with Python</strong> presents machine learning as a complete analytical workflow. The guide begins with problem framing and data preparation, develops core regression and classification methods, and then moves through evaluation, tuning, interpretation, fairness, reproducibility, and an end-to-end case study.</p>
+<p>The central principle is:</p>
+<blockquote class="blockquote">
+<p>A useful machine-learning model must perform well on relevant unseen data, support the intended decision, and remain understandable enough to evaluate responsibly.</p>
+</blockquote>
+</section>
+<section id="a-complete-open-guide" class="level2">
+<h2 class="anchored" data-anchor-id="a-complete-open-guide">A complete open guide</h2>
+<p>This guide is fully available to learners as one connected learning pathway. Each chapter contributes to the complete guide, and later topics build directly on the earlier foundations.</p>
+<p>CDI practical products complement the guide by providing structured project files, exercises, datasets, and guided deliverables. They do not restrict access to the conceptual and technical knowledge developed here.</p>
+</section>
+<section id="what-you-will-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-learn">What you will learn</h2>
+<p>By the end of the guide, you should be able to:</p>
+<ul>
+<li>translate a real-world need into a well-defined prediction problem;</li>
+<li>distinguish regression, classification, ranking, clustering, and other learning tasks;</li>
+<li>prepare tabular data without introducing target leakage;</li>
+<li>create reproducible training, validation, and test workflows;</li>
+<li>establish meaningful baselines before comparing more complex models;</li>
+<li>build regression, classification, tree-based, and ensemble models with scikit-learn;</li>
+<li>combine preprocessing and estimation safely with pipelines;</li>
+<li>apply feature engineering and feature selection within validation workflows;</li>
+<li>use cross-validation and hyperparameter tuning without contaminating evaluation;</li>
+<li>choose metrics that reflect the problem, class balance, and decision costs;</li>
+<li>assess probability calibration and select decision thresholds deliberately;</li>
+<li>interpret global and local model behaviour cautiously;</li>
+<li>conduct error, subgroup, and fairness analyses;</li>
+<li>document experiments, assumptions, limitations, and model decisions; and</li>
+<li>complete an end-to-end machine-learning analysis reproducibly.</li>
+</ul>
+</section>
+<section id="the-machine-learning-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-machine-learning-workflow">The machine-learning workflow</h2>
+<p>The guide follows a reusable sequence:</p>
+<ol type="1">
+<li><strong>Frame the problem:</strong> define the prediction target, unit of observation, prediction time, users, and intended action.</li>
+<li><strong>Understand the data:</strong> inspect provenance, measurement, missingness, representativeness, and possible bias.</li>
+<li><strong>Design evaluation:</strong> choose data splits, metrics, baselines, and acceptance criteria before model comparison.</li>
+<li><strong>Prepare features:</strong> fit transformations only on training data and apply them through pipelines.</li>
+<li><strong>Build models:</strong> begin with simple baselines, then introduce complexity when evidence justifies it.</li>
+<li><strong>Evaluate performance:</strong> assess discrimination, error, calibration, uncertainty, and subgroup behaviour.</li>
+<li><strong>Interpret responsibly:</strong> explain what influenced predictions without turning association into causation.</li>
+<li><strong>Document and reproduce:</strong> preserve code, configuration, outputs, and decisions so the work can be reviewed and repeated.</li>
+</ol>
+<p>The workflow is iterative. Evaluation may reveal a poorly defined target, weak data, leakage, unstable features, or a mismatch between the metric and the real decision. Returning to an earlier stage is part of sound machine-learning practice.</p>
+</section>
+<section id="how-the-guide-is-organized" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-guide-is-organized">How the guide is organized</h2>
+<section id="foundations" class="level3">
+<h3 class="anchored" data-anchor-id="foundations">Foundations</h3>
+<p>The opening chapters develop machine-learning thinking, problem types, environment setup, data preparation, splitting, and leakage prevention.</p>
+</section>
+<section id="core-models" class="level3">
+<h3 class="anchored" data-anchor-id="core-models">Core models</h3>
+<p>The next chapters establish baselines and introduce regression, classification, decision trees, and ensemble methods. The emphasis is on understanding assumptions, behaviour, and appropriate use—not memorizing estimator names.</p>
+</section>
+<section id="reliable-model-building" class="level3">
+<h3 class="anchored" data-anchor-id="reliable-model-building">Reliable model building</h3>
+<p>These chapters cover preprocessing pipelines, feature engineering, feature selection, cross-validation, model comparison, and hyperparameter tuning.</p>
+</section>
+<section id="evaluation-and-responsible-use" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-and-responsible-use">Evaluation and responsible use</h3>
+<p>The guide then develops metric selection, thresholds, calibration, imbalanced data, interpretation, error analysis, subgroup assessment, and fairness.</p>
+</section>
+<section id="reproducible-practice" class="level3">
+<h3 class="anchored" data-anchor-id="reproducible-practice">Reproducible practice</h3>
+<p>The final chapters connect experiment tracking, documentation, governance, and an end-to-end case study. Model deployment is treated in CDI’s separate <strong>Model Deployment</strong> and <strong>From Models to Systems</strong> guides.</p>
+</section>
+</section>
+<section id="learning-approach" class="level2">
+<h2 class="anchored" data-anchor-id="learning-approach">Learning approach</h2>
+<p>Each chapter is designed to help you move from understanding to application:</p>
+<ol type="1">
+<li>begin with the practical question;</li>
+<li>learn the concept and its assumptions;</li>
+<li>inspect a small, concrete example;</li>
+<li>run the chapter script from the repository root;</li>
+<li>examine the generated outputs;</li>
+<li>interpret the result and its limitations; and</li>
+<li>complete the chapter checklist before continuing.</li>
+</ol>
+<p>The guide uses a consistent synthetic or openly documented dataset where continuity improves learning. Additional focused datasets may be introduced when a chapter requires a different problem structure.</p>
+</section>
+<section id="code-and-execution-policy" class="level2">
+<h2 class="anchored" data-anchor-id="code-and-execution-policy">Code and execution policy</h2>
+<p>Code displayed in <code>.qmd</code> chapters is illustrative and <strong>does not execute during rendering</strong>. Complete executable programs are stored separately:</p>
+<pre class="text"><code>scripts/
+├── bash/
+│   ├── 00-create-venv.sh
+│   ├── 01-generate-ml-problem-types.sh
+│   └── ...
+└── python/
+    ├── 01-generate-ml-problem-types.py
+    └── ...</code></pre>
+<p>The rules used throughout the guide are:</p>
+<ul>
+<li>Python programs belong in <code>scripts/python/</code>;</li>
+<li>Bash wrappers belong in <code>scripts/bash/</code>;</li>
+<li>chapter-specific scripts begin with the chapter number;</li>
+<li>scripts use repository-relative paths;</li>
+<li>random processes use explicit seeds;</li>
+<li>generated figures are saved under <code>results/figures/</code>;</li>
+<li>generated tables are saved under <code>results/tables/</code> where appropriate; and</li>
+<li>chapter examples use plain <code>bash</code> and <code>python</code> code fences so they remain non-executable during rendering.</li>
+</ul>
+<p>For example, a chapter may show:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>baseline <span class="op">=</span> DummyClassifier(strategy<span class="op">=</span><span class="st">"prior"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>baseline.fit(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The complete runnable workflow remains in the corresponding numbered script rather than inside the chapter source.</p>
+</section>
+<section id="create-the-project-environment" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-project-environment">Create the project environment</h2>
+<p>This guide uses Python 3.12, Visual Studio Code, a repository-specific <code>.venv</code>, and the packages documented in <code>requirements.txt</code>. Do not reuse the environment from another CDI guide or practical. Each repository must have its own isolated environment.</p>
+<p>Open the <code>machine-learning-with-python</code> repository folder in VS Code before creating the environment.</p>
+<section id="recommended-vs-code-quick-create" class="level3">
+<h3 class="anchored" data-anchor-id="recommended-vs-code-quick-create">Recommended: VS Code Quick Create</h3>
+<ol type="1">
+<li>Open the Command Palette in VS Code.</li>
+<li>Select <strong>Python: Create Environment</strong>.</li>
+<li>Choose <strong>Quick Create — venv</strong>.</li>
+<li>Confirm that VS Code will use Python 3.12 and create <code>.venv</code> in the workspace root.</li>
+<li>Allow VS Code to install the dependencies from <code>requirements.txt</code>.</li>
+</ol>
+<p>When creation finishes, select the repository interpreter if VS Code has not already selected it:</p>
+<ol type="1">
+<li>open the Command Palette;</li>
+<li>select <strong>Python: Select Interpreter</strong>; and</li>
+<li>choose the entry ending with <code>machine-learning-with-python/.venv/bin/python</code>.</li>
+</ol>
+<p>Do not select a global Python installation or the <code>.venv</code> belonging to another repository.</p>
+</section>
+<section id="alternative-create-the-environment-with-the-repository-script" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-create-the-environment-with-the-repository-script">Alternative: create the environment with the repository script</h3>
+<p>Learners who prefer the terminal can run the reproducible setup wrapper from the repository root:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/00-create-venv.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script uses Python 3.12, creates <code>.venv</code>, upgrades the packaging tools, installs <code>requirements.txt</code>, and verifies the core imports. It stops rather than overwriting an existing <code>.venv</code>.</p>
+<p>Use either VS Code Quick Create or <code>00-create-venv.sh</code>, not both. If Quick Create has already created <code>.venv</code>, the Bash script should report that the environment exists and stop.</p>
+</section>
+<section id="activate-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="activate-the-environment">Activate the environment</h3>
+<p>Open a new VS Code terminal after creating and selecting the interpreter. VS Code should activate <code>.venv</code> automatically. The terminal prompt normally begins with <code>(.venv)</code>.</p>
+<p>If activation does not occur automatically on macOS or Linux, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="verify-the-selected-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="verify-the-selected-interpreter">Verify the selected interpreter</h3>
+<p>From the repository root, confirm that <code>python</code> resolves to this repository’s environment:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sys; print(sys.executable)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The result should end with a path similar to:</p>
+<pre class="text"><code>machine-learning-with-python/.venv/bin/python3</code></pre>
+<p>If the path points to <code>/usr/bin</code>, <code>/usr/local/bin</code>, <code>/opt/homebrew/bin</code>, another CDI repository, or another virtual environment, return to <strong>Python: Select Interpreter</strong> and choose the Machine Learning <code>.venv</code>.</p>
+</section>
+<section id="verify-the-required-packages" class="level3">
+<h3 class="anchored" data-anchor-id="verify-the-required-packages">Verify the required packages</h3>
+<p>Confirm that the core packages import successfully:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sklearn, pandas, numpy, matplotlib; print('Environment ready:', sklearn.__version__)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A successful check prints the installed scikit-learn version, for example:</p>
+<pre class="text"><code>Environment ready: 1.9.1</code></pre>
+<p>The distribution is installed as <code>scikit-learn</code> but imported in Python as <code>sklearn</code>.</p>
+<p>If a required package is missing, confirm that the correct <code>.venv</code> is selected, then install the documented dependencies with:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pip install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-numbered-chapter-workflows" class="level3">
+<h3 class="anchored" data-anchor-id="run-numbered-chapter-workflows">Run numbered chapter workflows</h3>
+<p>Run chapter workflows from the repository root. For Chapter 01:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/01-generate-ml-problem-types.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The expected confirmation is:</p>
+<pre class="text"><code>Saved results/figures/01-ml-problem-types.png</code></pre>
+<p>The Bash wrappers call the repository’s <code>.venv</code> interpreter and then run the corresponding program under <code>scripts/python/</code>. Generated outputs are written to the documented paths under <code>results/</code>.</p>
+</section>
+</section>
+<section id="repository-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="repository-conventions">Repository conventions</h2>
+<pre class="text"><code>.
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── reference/
+├── scripts/
+│   ├── bash/
+│   └── python/
+├── results/
+│   ├── figures/
+│   └── tables/
+├── library/
+│   └── references.bib
+├── notebooks/
+├── docs/
+├── 00-preface.qmd
+└── _quarto.yml</code></pre>
+<p>Generated outputs never replace the scripts, source data, and documented decisions required to reproduce them.</p>
+</section>
+<section id="what-this-guide-assumes" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-guide-assumes">What this guide assumes</h2>
+<p>You should be comfortable with basic Python, pandas DataFrames, and terminal commands. Prior machine-learning experience is not required. Familiarity with descriptive statistics is helpful, but the guide explains the statistical ideas needed to use and evaluate the methods responsibly.</p>
+</section>
+<section id="what-machine-learning-can-and-cannot-establish" class="level2">
+<h2 class="anchored" data-anchor-id="what-machine-learning-can-and-cannot-establish">What machine learning can and cannot establish</h2>
+<p>A predictive model learns patterns present in its training data. Strong predictive performance does not prove causation, guarantee fairness, or ensure that performance will remain stable when populations and operating conditions change.</p>
+<p>Throughout the guide, interpretations must remain consistent with:</p>
+<ul>
+<li>how the data were collected;</li>
+<li>when predictors and outcomes became available;</li>
+<li>which population the data represent;</li>
+<li>how the target was defined;</li>
+<li>which errors matter in practice; and</li>
+<li>where the model will be used.</li>
+</ul>
+</section>
+<section id="before-continuing" class="level2">
+<h2 class="anchored" data-anchor-id="before-continuing">Before continuing</h2>
+<p>Confirm that you can:</p>
+<ul>
+<li>open the repository folder in VS Code;</li>
+<li>create the repository-specific <code>.venv</code> using Quick Create or <code>00-create-venv.sh</code>;</li>
+<li>select the Machine Learning <code>.venv/bin/python</code> interpreter;</li>
+<li>open a new VS Code terminal and confirm <code>sys.executable</code>;</li>
+<li>verify the required package imports;</li>
+<li>run Python and Bash scripts from the repository root;</li>
+<li>render the Quarto book without executing chapter code; and</li>
+<li>locate generated figures and tables under <code>results/</code>.</li>
+</ul>
+</section>
+<section id="chapter-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-checklist">Chapter checklist</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">I understand that this is one complete, openly available guide.</label></li>
+<li><label><input type="checkbox">I can describe machine learning as a workflow rather than only a collection of algorithms.</label></li>
+<li><label><input type="checkbox">I understand the separation between non-executing chapter examples and runnable repository scripts.</label></li>
+<li><label><input type="checkbox">I know where Python programs, Bash wrappers, figures, and tables belong.</label></li>
+<li><label><input type="checkbox">I can create, select, activate, and verify the repository-specific <code>.venv</code> in VS Code.</label></li>
+<li><label><input type="checkbox">I understand that predictive accuracy alone does not establish causation, fairness, or future reliability.</label></li>
+<li><label><input type="checkbox">I am ready to begin with machine-learning thinking and problem types.</label></li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>The next chapter begins the professional learning sequence by developing machine-learning thinking and distinguishing the major problem types. You will learn to move from a broad real-world need to a precise prediction problem before choosing data, metrics, or models.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="index.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">index.html</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01-ml-thinking-and-problem-types.html" class="pagination-link" aria-label="Machine-Learning Thinking and Problem Types">
+        <span class="nav-page-text"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

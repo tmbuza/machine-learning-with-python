@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Preparation for Machine Learning – Machine Learning with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-data-splitting-and-leakage.html" rel="next">
+<link href="./01-ml-thinking-and-problem-types.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e2851886d12d134ff83effd9cfa02285.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-preparation-for-ml.html">Data Preparation</a></li><li class="breadcrumb-item"><a href="./02-data-preparation-for-ml.html"><span class="chapter-title">Data Preparation for Machine Learning</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Machine Learning with Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-ml-thinking-and-problem-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-preparation-for-ml.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Data Preparation for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-splitting-and-leakage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-baselines-and-first-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Baselines and First Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-cross-validation-and-hyperparameter-tuning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-Validation and Hyperparameter Tuning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-model-evaluation-and-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Diagnostic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-model-interpretation-and-explainability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Interpretation and Explainability</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Operational ML</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-model-persistence-and-reproducible-prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Persistence and Reproducible Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-batch-prediction-and-operational-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Batch Prediction and Operational Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-monitoring-drift-and-model-performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring Drift and Model Performance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Practice &amp; Governance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-responsible-machine-learning-and-governance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Responsible Machine Learning and Model Governance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-end-to-end-machine-learning-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Machine Learning Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-appendix.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#from-a-prediction-problem-to-a-modelling-table" id="toc-from-a-prediction-problem-to-a-modelling-table" class="nav-link" data-scroll-target="#from-a-prediction-problem-to-a-modelling-table">From a prediction problem to a modelling table</a></li>
+  <li><a href="#three-layers-of-preparation" id="toc-three-layers-of-preparation" class="nav-link" data-scroll-target="#three-layers-of-preparation">Three layers of preparation</a>
+  <ul class="collapse">
+  <li><a href="#structural-preparation" id="toc-structural-preparation" class="nav-link" data-scroll-target="#structural-preparation">Structural preparation</a></li>
+  <li><a href="#learned-preprocessing" id="toc-learned-preprocessing" class="nav-link" data-scroll-target="#learned-preprocessing">Learned preprocessing</a></li>
+  <li><a href="#evaluation-specific-preparation" id="toc-evaluation-specific-preparation" class="nav-link" data-scroll-target="#evaluation-specific-preparation">Evaluation-specific preparation</a></li>
+  </ul></li>
+  <li><a href="#the-preparation-boundary" id="toc-the-preparation-boundary" class="nav-link" data-scroll-target="#the-preparation-boundary">The preparation boundary</a></li>
+  <li><a href="#audit-the-data-before-changing-it" id="toc-audit-the-data-before-changing-it" class="nav-link" data-scroll-target="#audit-the-data-before-changing-it">Audit the data before changing it</a>
+  <ul class="collapse">
+  <li><a href="#shape-and-observation-unit" id="toc-shape-and-observation-unit" class="nav-link" data-scroll-target="#shape-and-observation-unit">Shape and observation unit</a></li>
+  <li><a href="#column-roles" id="toc-column-roles" class="nav-link" data-scroll-target="#column-roles">Column roles</a></li>
+  <li><a href="#data-types-and-domains" id="toc-data-types-and-domains" class="nav-link" data-scroll-target="#data-types-and-domains">Data types and domains</a></li>
+  <li><a href="#missingness" id="toc-missingness" class="nav-link" data-scroll-target="#missingness">Missingness</a></li>
+  <li><a href="#categories" id="toc-categories" class="nav-link" data-scroll-target="#categories">Categories</a></li>
+  <li><a href="#numeric-values" id="toc-numeric-values" class="nav-link" data-scroll-target="#numeric-values">Numeric values</a></li>
+  </ul></li>
+  <li><a href="#a-reproducible-preparation-workbench" id="toc-a-reproducible-preparation-workbench" class="nav-link" data-scroll-target="#a-reproducible-preparation-workbench">A reproducible preparation workbench</a></li>
+  <li><a href="#preserve-raw-data-and-create-traceable-outputs" id="toc-preserve-raw-data-and-create-traceable-outputs" class="nav-link" data-scroll-target="#preserve-raw-data-and-create-traceable-outputs">Preserve raw data and create traceable outputs</a></li>
+  <li><a href="#duplicates-require-a-definition" id="toc-duplicates-require-a-definition" class="nav-link" data-scroll-target="#duplicates-require-a-definition">Duplicates require a definition</a></li>
+  <li><a href="#invalid-values-should-become-explicit" id="toc-invalid-values-should-become-explicit" class="nav-link" data-scroll-target="#invalid-values-should-become-explicit">Invalid values should become explicit</a></li>
+  <li><a href="#standardize-categories-deliberately" id="toc-standardize-categories-deliberately" class="nav-link" data-scroll-target="#standardize-categories-deliberately">Standardize categories deliberately</a></li>
+  <li><a href="#protect-the-prediction-time-boundary" id="toc-protect-the-prediction-time-boundary" class="nav-link" data-scroll-target="#protect-the-prediction-time-boundary">Protect the prediction-time boundary</a></li>
+  <li><a href="#handle-missing-values-after-splitting" id="toc-handle-missing-values-after-splitting" class="nav-link" data-scroll-target="#handle-missing-values-after-splitting">Handle missing values after splitting</a></li>
+  <li><a href="#separate-the-audit-table-from-the-feature-matrix" id="toc-separate-the-audit-table-from-the-feature-matrix" class="nav-link" data-scroll-target="#separate-the-audit-table-from-the-feature-matrix">Separate the audit table from the feature matrix</a></li>
+  <li><a href="#create-quality-and-readiness-summaries" id="toc-create-quality-and-readiness-summaries" class="nav-link" data-scroll-target="#create-quality-and-readiness-summaries">Create quality and readiness summaries</a>
+  <ul class="collapse">
+  <li><a href="#data-quality-summary" id="toc-data-quality-summary" class="nav-link" data-scroll-target="#data-quality-summary">Data-quality summary</a></li>
+  <li><a href="#feature-readiness-summary" id="toc-feature-readiness-summary" class="nav-link" data-scroll-target="#feature-readiness-summary">Feature-readiness summary</a></li>
+  </ul></li>
+  <li><a href="#common-preparation-failures" id="toc-common-preparation-failures" class="nav-link" data-scroll-target="#common-preparation-failures">Common preparation failures</a>
+  <ul class="collapse">
+  <li><a href="#cleaning-without-preserving-evidence" id="toc-cleaning-without-preserving-evidence" class="nav-link" data-scroll-target="#cleaning-without-preserving-evidence">Cleaning without preserving evidence</a></li>
+  <li><a href="#imputing-before-the-split" id="toc-imputing-before-the-split" class="nav-link" data-scroll-target="#imputing-before-the-split">Imputing before the split</a></li>
+  <li><a href="#treating-all-identifiers-as-useless" id="toc-treating-all-identifiers-as-useless" class="nav-link" data-scroll-target="#treating-all-identifiers-as-useless">Treating all identifiers as useless</a></li>
+  <li><a href="#dropping-every-incomplete-row" id="toc-dropping-every-incomplete-row" class="nav-link" data-scroll-target="#dropping-every-incomplete-row">Dropping every incomplete row</a></li>
+  <li><a href="#removing-every-outlier" id="toc-removing-every-outlier" class="nav-link" data-scroll-target="#removing-every-outlier">Removing every outlier</a></li>
+  <li><a href="#encoding-categories-manually-before-validation" id="toc-encoding-categories-manually-before-validation" class="nav-link" data-scroll-target="#encoding-categories-manually-before-validation">Encoding categories manually before validation</a></li>
+  <li><a href="#allowing-post-outcome-fields-into-features" id="toc-allowing-post-outcome-fields-into-features" class="nav-link" data-scroll-target="#allowing-post-outcome-fields-into-features">Allowing post-outcome fields into features</a></li>
+  </ul></li>
+  <li><a href="#a-preparation-decision-record" id="toc-a-preparation-decision-record" class="nav-link" data-scroll-target="#a-preparation-decision-record">A preparation decision record</a></li>
+  <li><a href="#practice-decide-when-the-step-belongs" id="toc-practice-decide-when-the-step-belongs" class="nav-link" data-scroll-target="#practice-decide-when-the-step-belongs">Practice: decide when the step belongs</a></li>
+  <li><a href="#chapter-checklist" id="toc-chapter-checklist" class="nav-link" data-scroll-target="#chapter-checklist">Chapter checklist</a></li>
+  <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key takeaways</a></li>
+  <li><a href="#looking-ahead" id="toc-looking-ahead" class="nav-link" data-scroll-target="#looking-ahead">Looking ahead</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-data-preparation-for-ml.html">Data Preparation</a></li><li class="breadcrumb-item"><a href="./02-data-preparation-for-ml.html"><span class="chapter-title">Data Preparation for Machine Learning</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-data-preparation-ml" class="quarto-section-identifier"><span class="chapter-title">Data Preparation for Machine Learning</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sep 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<ul>
+<li><strong>ID:</strong> MLPY-002</li>
+<li><strong>Type:</strong> Data preparation and leakage-prevention chapter</li>
+<li><strong>Audience:</strong> Learners preparing structured tabular data for predictive modelling</li>
+<li><strong>Theme:</strong> Build trustworthy model inputs without allowing future or held-out information to influence training</li>
+</ul>
+</div>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this chapter, you will be able to:</p>
+<ol type="1">
+<li>distinguish general data cleaning from model-specific preprocessing;</li>
+<li>define the modelling population, observation unit, target, and prediction-time boundary;</li>
+<li>identify duplicate records, invalid values, inconsistent categories, missing data, and leakage-prone fields;</li>
+<li>decide which preparation steps may be applied before splitting and which must be learned from training data only;</li>
+<li>preserve raw data while producing an auditable modelling table;</li>
+<li>assign appropriate roles to identifiers, features, targets, grouping variables, timestamps, and audit fields; and</li>
+<li>document a reproducible data-preparation workflow for later modelling chapters.</li>
+</ol>
+</section>
+<section id="from-a-prediction-problem-to-a-modelling-table" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-prediction-problem-to-a-modelling-table">From a prediction problem to a modelling table</h2>
+<p>Chapter 01 established that machine learning begins with a decision, not an algorithm. Once the unit of observation, target, prediction time, horizon, and intended action are defined, the next task is to construct the table that represents that problem faithfully.</p>
+<p>A modelling table is not merely a cleaned spreadsheet. Each row must represent the stated unit at the prediction time, each candidate feature must be legitimately available at that time, and the target must be defined consistently over the future prediction horizon.</p>
+<p>For a monthly customer-retention problem, one row might represent:</p>
+<blockquote class="blockquote">
+<p>One active customer at the final day of a month, using information recorded by that date, with a target indicating whether the customer cancels within the following 30 days.</p>
+</blockquote>
+<p>That definition determines which records are eligible, how repeated customer histories are handled, which dates matter, and which columns are prohibited.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Data preparation is part of model validity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A sophisticated estimator cannot repair an incorrectly defined row, a target measured inconsistently, or a feature recorded after the outcome. Preparation choices determine what the model is actually allowed to learn.</p>
+</div>
+</div>
+</section>
+<section id="three-layers-of-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="three-layers-of-preparation">Three layers of preparation</h2>
+<p>It is useful to separate data preparation into three layers.</p>
+<section id="structural-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="structural-preparation">Structural preparation</h3>
+<p>Structural preparation makes the data internally coherent without estimating patterns from the modelling sample. Typical steps include:</p>
+<ul>
+<li>assigning stable column names and data types;</li>
+<li>parsing dates with explicit rules;</li>
+<li>standardizing known spelling variants;</li>
+<li>enforcing documented units;</li>
+<li>identifying impossible values;</li>
+<li>removing confirmed duplicate records;</li>
+<li>defining the eligible population;</li>
+<li>constructing the target from approved source fields; and</li>
+<li>removing fields known to occur after prediction time.</li>
+</ul>
+<p>These rules should come from the data specification and problem definition, not from the distribution of the future test set.</p>
+</section>
+<section id="learned-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="learned-preprocessing">Learned preprocessing</h3>
+<p>Learned preprocessing estimates values or parameters from data. Examples include:</p>
+<ul>
+<li>median or most-frequent imputation;</li>
+<li>means and standard deviations for scaling;</li>
+<li>category vocabularies for encoding;</li>
+<li>feature-selection thresholds;</li>
+<li>transformations chosen after inspecting distributions; and</li>
+<li>outlier thresholds estimated from sample quantiles.</li>
+</ul>
+<p>These steps must be fitted on training data only and later applied unchanged to validation and test data. Scikit-learn pipelines provide the safest general mechanism, which we develop in a later chapter.</p>
+</section>
+<section id="evaluation-specific-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-specific-preparation">Evaluation-specific preparation</h3>
+<p>Some preparation decisions belong to evaluation design:</p>
+<ul>
+<li>grouping repeated observations from the same person or organization;</li>
+<li>preserving temporal order;</li>
+<li>stratifying a classification split;</li>
+<li>defining geographic or organizational holdouts; and</li>
+<li>reserving the final test set from all model-selection decisions.</li>
+</ul>
+<p>These choices must be planned before exploratory modelling because they determine which observations may legitimately inform one another.</p>
+</section>
+</section>
+<section id="the-preparation-boundary" class="level2">
+<h2 class="anchored" data-anchor-id="the-preparation-boundary">The preparation boundary</h2>
+<p>The central rule is:</p>
+<blockquote class="blockquote">
+<p>Apply fixed, documented validity rules to the full source data when appropriate, but fit any data-dependent transformation using training data only.</p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Preparation step</th>
+<th style="text-align: right;">Before splitting?</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rename columns using a data dictionary</td>
+<td style="text-align: right;">Yes</td>
+<td>Fixed structural rule</td>
+</tr>
+<tr class="even">
+<td>Parse a documented date format</td>
+<td style="text-align: right;">Yes</td>
+<td>Fixed structural rule</td>
+</tr>
+<tr class="odd">
+<td>Standardize <code>premium</code>, <code>Premium</code>, and <code>PREMIUM</code></td>
+<td style="text-align: right;">Yes</td>
+<td>Known semantic equivalence</td>
+</tr>
+<tr class="even">
+<td>Remove exact duplicate extracts</td>
+<td style="text-align: right;">Usually</td>
+<td>Corrects duplicated records, if confirmed</td>
+</tr>
+<tr class="odd">
+<td>Replace impossible negative tenure with missing</td>
+<td style="text-align: right;">Yes</td>
+<td>Fixed validity constraint</td>
+</tr>
+<tr class="even">
+<td>Drop a post-cancellation reason field</td>
+<td style="text-align: right;">Yes</td>
+<td>Known leakage field</td>
+</tr>
+<tr class="odd">
+<td>Estimate median for missing income</td>
+<td style="text-align: right;">No</td>
+<td>Median must come from training data</td>
+</tr>
+<tr class="even">
+<td>Learn scaling mean and standard deviation</td>
+<td style="text-align: right;">No</td>
+<td>Parameters must come from training data</td>
+</tr>
+<tr class="odd">
+<td>Choose rare-category threshold from frequencies</td>
+<td style="text-align: right;">No</td>
+<td>Frequency is sample-dependent</td>
+</tr>
+<tr class="even">
+<td>Select features using association with target</td>
+<td style="text-align: right;">No</td>
+<td>Selection must occur inside validation</td>
+</tr>
+</tbody>
+</table>
+<p>This distinction prevents a common error: creating a perfectly clean table by using information from all observations, then pretending the test set remained unseen.</p>
+</section>
+<section id="audit-the-data-before-changing-it" class="level2">
+<h2 class="anchored" data-anchor-id="audit-the-data-before-changing-it">Audit the data before changing it</h2>
+<p>Begin with a read-only audit. Record what exists before applying corrections.</p>
+<section id="shape-and-observation-unit" class="level3">
+<h3 class="anchored" data-anchor-id="shape-and-observation-unit">Shape and observation unit</h3>
+<p>Confirm:</p>
+<ul>
+<li>the number of rows and columns;</li>
+<li>whether one row really represents the intended unit;</li>
+<li>whether entities appear more than once;</li>
+<li>whether repeated rows are duplicates or legitimate snapshots; and</li>
+<li>whether the date coverage matches the prediction design.</li>
+</ul>
+<p>An identifier duplicated across months may be expected. The same identifier and snapshot date repeated with identical values may indicate duplicate extraction.</p>
+</section>
+<section id="column-roles" class="level3">
+<h3 class="anchored" data-anchor-id="column-roles">Column roles</h3>
+<p>Assign every column a role.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Role</th>
+<th>Purpose</th>
+<th>Typical treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Identifier</td>
+<td>Links or distinguishes entities</td>
+<td>Preserve for audit; usually exclude as feature</td>
+</tr>
+<tr class="even">
+<td>Feature</td>
+<td>Supplies information available at prediction time</td>
+<td>Evaluate quality and modelling treatment</td>
+</tr>
+<tr class="odd">
+<td>Target</td>
+<td>Defines the outcome</td>
+<td>Validate definition, timing, and missingness</td>
+</tr>
+<tr class="even">
+<td>Time</td>
+<td>Establishes ordering and prediction boundary</td>
+<td>Parse and retain for splitting or auditing</td>
+</tr>
+<tr class="odd">
+<td>Group</td>
+<td>Identifies related observations</td>
+<td>Use in grouped splitting or subgroup checks</td>
+</tr>
+<tr class="even">
+<td>Audit</td>
+<td>Supports traceability</td>
+<td>Retain outside the feature matrix</td>
+</tr>
+<tr class="odd">
+<td>Leakage field</td>
+<td>Reveals outcome or post-prediction information</td>
+<td>Exclude from modelling inputs</td>
+</tr>
+</tbody>
+</table>
+<p>Do not drop identifiers immediately. They are often essential for detecting duplicates, preventing entity overlap, tracing errors, and joining predictions back to source records.</p>
+</section>
+<section id="data-types-and-domains" class="level3">
+<h3 class="anchored" data-anchor-id="data-types-and-domains">Data types and domains</h3>
+<p>A numeric storage type does not guarantee a quantitative meaning. Postal code, product code, and disease stage may be stored as integers but require categorical or ordinal treatment.</p>
+<p>For each field, document:</p>
+<ul>
+<li>semantic type;</li>
+<li>storage type;</li>
+<li>unit;</li>
+<li>valid range or allowed values;</li>
+<li>missing-value codes;</li>
+<li>availability time; and</li>
+<li>intended model role.</li>
+</ul>
+</section>
+<section id="missingness" class="level3">
+<h3 class="anchored" data-anchor-id="missingness">Missingness</h3>
+<p>Measure missingness by column and, when relevant, by time, source, location, or subgroup. Missing values can arise because:</p>
+<ul>
+<li>measurement was not attempted;</li>
+<li>a question was not applicable;</li>
+<li>collection failed;</li>
+<li>a system changed;</li>
+<li>a value was suppressed; or</li>
+<li>an invalid value was converted to missing.</li>
+</ul>
+<p>These mechanisms have different implications. A single imputation rule should not be chosen before the reasons are understood.</p>
+</section>
+<section id="categories" class="level3">
+<h3 class="anchored" data-anchor-id="categories">Categories</h3>
+<p>Inspect distinct values, whitespace, letter case, spelling, unexpected codes, and rare levels. Standardize categories only when the values are known to mean the same thing. Do not merge categories merely because one is uncommon.</p>
+</section>
+<section id="numeric-values" class="level3">
+<h3 class="anchored" data-anchor-id="numeric-values">Numeric values</h3>
+<p>Inspect ranges, quantiles, units, impossible values, and suspicious spikes. An extreme value may be a valid observation, a unit error, or a data-entry problem. Treating every statistical outlier as an error removes precisely the cases a model may need to understand.</p>
+</section>
+</section>
+<section id="a-reproducible-preparation-workbench" class="level2">
+<h2 class="anchored" data-anchor-id="a-reproducible-preparation-workbench">A reproducible preparation workbench</h2>
+<p>The chapter workflow creates a synthetic customer snapshot table containing realistic quality problems, applies fixed structural rules, and preserves missing values for later pipeline-based preprocessing.</p>
+<p>Run it from the repository root:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/02-prepare-ml-data.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script writes:</p>
+<pre class="text"><code>data/raw/02-customer-retention-raw.csv
+data/processed/02-customer-retention-ml-ready.csv
+results/figures/02-data-preparation-profile.png
+results/tables/02-data-quality-summary.csv
+results/tables/02-feature-readiness-summary.csv</code></pre>
+<div id="fig-data-preparation-profile" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Four panels show missing percentages before structural cleaning, distributions of tenure and monthly charges, counts for standardized plan categories, and churn percentages across regions.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-preparation-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/02-data-preparation-profile.png" class="img-fluid figure-img" style="width:100.0%" alt="Four panels show missing percentages before structural cleaning, distributions of tenure and monthly charges, counts for standardized plan categories, and churn percentages across regions.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-preparation-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Four-panel profile of missingness, tenure and charge distributions, standardized plan counts, and observed churn rates by region.
+</figcaption>
+</figure>
+</div>
+<p>The profile in <a href="#fig-data-preparation-profile" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> is a diagnostic artifact, not a modelling result. It helps the analyst verify that structural preparation behaved as intended and identify decisions that must be deferred until after splitting.</p>
+</section>
+<section id="preserve-raw-data-and-create-traceable-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="preserve-raw-data-and-create-traceable-outputs">Preserve raw data and create traceable outputs</h2>
+<p>Raw source data should remain unchanged. A reproducible project normally separates:</p>
+<pre class="text"><code>data/
+├── raw/
+├── processed/
+└── reference/</code></pre>
+<ul>
+<li><code>data/raw/</code> stores immutable source extracts or reproducibly generated examples.</li>
+<li><code>data/processed/</code> stores tables created through documented code.</li>
+<li><code>data/reference/</code> stores data dictionaries, code lists, mappings, and other supporting definitions.</li>
+</ul>
+<p>Never manually edit the raw CSV and save over it. If a correction is justified, express it in code so it can be reviewed, tested, and applied again.</p>
+</section>
+<section id="duplicates-require-a-definition" class="level2">
+<h2 class="anchored" data-anchor-id="duplicates-require-a-definition">Duplicates require a definition</h2>
+<p>The word “duplicate” can describe different situations:</p>
+<ol type="1">
+<li><strong>Exact duplicate:</strong> every field is repeated because a row was ingested twice.</li>
+<li><strong>Duplicate key:</strong> the supposed unique identifier appears more than once.</li>
+<li><strong>Repeated observation:</strong> the same entity is legitimately measured at several times.</li>
+<li><strong>Near duplicate:</strong> records probably refer to the same entity but disagree in some fields.</li>
+</ol>
+<p>Only the first case can often be removed mechanically. Duplicate keys and near duplicates require domain rules. Repeated observations may be essential and may require grouped or temporal splitting rather than deletion.</p>
+<p>The chapter script removes only confirmed duplicate customer snapshots—rows with the same customer and snapshot date that are otherwise identical.</p>
+</section>
+<section id="invalid-values-should-become-explicit" class="level2">
+<h2 class="anchored" data-anchor-id="invalid-values-should-become-explicit">Invalid values should become explicit</h2>
+<p>When a value violates a documented constraint, do not silently force it into range. Convert it to a clearly recorded missing value or quarantine the record, depending on the meaning and severity.</p>
+<p>Examples include:</p>
+<ul>
+<li>negative account tenure;</li>
+<li>charges below zero;</li>
+<li>an end date before a start date;</li>
+<li>a category outside the approved code list; and</li>
+<li>a target that cannot be mapped to its documented definition.</li>
+</ul>
+<p>The correction rule should be visible in code and counted in a quality summary. Later imputation is a separate modelling decision.</p>
+</section>
+<section id="standardize-categories-deliberately" class="level2">
+<h2 class="anchored" data-anchor-id="standardize-categories-deliberately">Standardize categories deliberately</h2>
+<p>Known variants can be mapped to one canonical representation:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plan_map <span class="op">=</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"basic"</span>: <span class="st">"Basic"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BASIC"</span>: <span class="st">"Basic"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"premium"</span>: <span class="st">"Premium"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Premium "</span>: <span class="st">"Premium"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>customers[<span class="st">"plan"</span>] <span class="op">=</span> customers[<span class="st">"plan"</span>].<span class="bu">map</span>(plan_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This example is intentionally displayed rather than executed in the chapter. The complete implementation is in <code>scripts/python/02-prepare-ml-data.py</code>.</p>
+<p>Unknown values should not be guessed into the nearest category. Preserve them as missing or an explicitly documented <code>Unknown</code> level according to the data specification and modelling purpose.</p>
+</section>
+<section id="protect-the-prediction-time-boundary" class="level2">
+<h2 class="anchored" data-anchor-id="protect-the-prediction-time-boundary">Protect the prediction-time boundary</h2>
+<p>For every candidate feature, ask:</p>
+<blockquote class="blockquote">
+<p>Could this value be known, in this form, at the exact moment the prediction would be issued?</p>
+</blockquote>
+<p>Fields such as <code>cancellation_date</code>, <code>cancellation_reason</code>, final account status, completed treatment outcome, or a manually assigned post-review code may reveal the target.</p>
+<p>Leakage can also hide inside aggregates. “Number of support calls in the next 30 days” is future information. “Number of support calls in the 30 days before the snapshot” may be legitimate if it can be computed at prediction time.</p>
+<p>The chapter workflow retains leakage fields in the raw example so learners can recognize them, but excludes them from the processed modelling table.</p>
+</section>
+<section id="handle-missing-values-after-splitting" class="level2">
+<h2 class="anchored" data-anchor-id="handle-missing-values-after-splitting">Handle missing values after splitting</h2>
+<p>The processed table produced in this chapter intentionally retains missing numeric and categorical values. It does not fill them using medians, means, modes, or learned categories.</p>
+<p>This is correct because an imputer must learn its replacement values from the training partition only. The fitted imputer is then applied unchanged to validation and test data.</p>
+<p>Conceptually:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>imputer.fit(X_train[[<span class="st">"monthly_charges"</span>]])</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>X_train_charges <span class="op">=</span> imputer.transform(X_train[[<span class="st">"monthly_charges"</span>]])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>X_test_charges <span class="op">=</span> imputer.transform(X_test[[<span class="st">"monthly_charges"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In practice, the imputer should be placed inside a scikit-learn pipeline so that cross-validation repeats the fitting correctly within every training fold.</p>
+</section>
+<section id="separate-the-audit-table-from-the-feature-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="separate-the-audit-table-from-the-feature-matrix">Separate the audit table from the feature matrix</h2>
+<p>A processed modelling table may contain columns that should not enter the estimator directly:</p>
+<ul>
+<li><code>customer_id</code> for traceability and grouped splitting;</li>
+<li><code>snapshot_date</code> for temporal splitting;</li>
+<li><code>region</code> for subgroup evaluation, even if it is excluded from training;</li>
+<li>source-system fields for auditing; and</li>
+<li>the target column.</li>
+</ul>
+<p>The feature matrix <span class="math inline">\(X\)</span> and target vector <span class="math inline">\(y\)</span> should therefore be selected explicitly rather than created by “dropping whatever looks unnecessary.”</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>feature_columns <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tenure_months"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monthly_charges"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"support_calls_30d"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"usage_hours_30d"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"plan"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"contract_type"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> customers[feature_columns]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> customers[<span class="st">"churned_30d"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Explicit selection makes the modelling contract reviewable and reduces the risk of accidentally including an identifier or leakage field.</p>
+</section>
+<section id="create-quality-and-readiness-summaries" class="level2">
+<h2 class="anchored" data-anchor-id="create-quality-and-readiness-summaries">Create quality and readiness summaries</h2>
+<p>The workflow produces two complementary tables.</p>
+<section id="data-quality-summary" class="level3">
+<h3 class="anchored" data-anchor-id="data-quality-summary">Data-quality summary</h3>
+<p>The quality summary records issues found and structural actions taken, such as:</p>
+<ul>
+<li>exact duplicate snapshots removed;</li>
+<li>invalid tenure values converted to missing;</li>
+<li>invalid charges converted to missing;</li>
+<li>category variants standardized; and</li>
+<li>post-outcome leakage columns excluded.</li>
+</ul>
+</section>
+<section id="feature-readiness-summary" class="level3">
+<h3 class="anchored" data-anchor-id="feature-readiness-summary">Feature-readiness summary</h3>
+<p>The readiness summary records each processed column’s role, type, missingness, and next modelling action. It makes clear that “processed” does not mean “ready to pass directly into every estimator.”</p>
+<p>For example, a numeric feature with missing values may be structurally valid but still require a training-fitted imputer. A categorical feature may require one-hot encoding inside a pipeline. An identifier may be ready for audit but prohibited as a predictor.</p>
+</section>
+</section>
+<section id="common-preparation-failures" class="level2">
+<h2 class="anchored" data-anchor-id="common-preparation-failures">Common preparation failures</h2>
+<section id="cleaning-without-preserving-evidence" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-without-preserving-evidence">Cleaning without preserving evidence</h3>
+<p>Overwriting the raw source removes the ability to reconstruct or challenge a correction. Preserve the source and write processed outputs separately.</p>
+</section>
+<section id="imputing-before-the-split" class="level3">
+<h3 class="anchored" data-anchor-id="imputing-before-the-split">Imputing before the split</h3>
+<p>Using the full dataset to estimate replacement values allows validation and test observations to influence training. Fit imputation inside the training workflow.</p>
+</section>
+<section id="treating-all-identifiers-as-useless" class="level3">
+<h3 class="anchored" data-anchor-id="treating-all-identifiers-as-useless">Treating all identifiers as useless</h3>
+<p>Identifiers usually should not be predictors, but they remain valuable for duplicate checks, grouping, traceability, and joining predictions back to records.</p>
+</section>
+<section id="dropping-every-incomplete-row" class="level3">
+<h3 class="anchored" data-anchor-id="dropping-every-incomplete-row">Dropping every incomplete row</h3>
+<p>Complete-case analysis can remove large or systematically different groups. Investigate missingness before deciding whether exclusion is defensible.</p>
+</section>
+<section id="removing-every-outlier" class="level3">
+<h3 class="anchored" data-anchor-id="removing-every-outlier">Removing every outlier</h3>
+<p>Extreme observations may be valid and important. Use domain constraints to identify impossibilities; treat statistical unusualness as a diagnostic, not automatic proof of error.</p>
+</section>
+<section id="encoding-categories-manually-before-validation" class="level3">
+<h3 class="anchored" data-anchor-id="encoding-categories-manually-before-validation">Encoding categories manually before validation</h3>
+<p>Building dummy variables or category dictionaries from the full dataset can expose held-out category information. Let a pipeline learn encodings from training data and handle unseen levels deliberately.</p>
+</section>
+<section id="allowing-post-outcome-fields-into-features" class="level3">
+<h3 class="anchored" data-anchor-id="allowing-post-outcome-fields-into-features">Allowing post-outcome fields into features</h3>
+<p>A highly predictive field may simply reveal the outcome. Availability at prediction time is more important than correlation with the target.</p>
+</section>
+</section>
+<section id="a-preparation-decision-record" class="level2">
+<h2 class="anchored" data-anchor-id="a-preparation-decision-record">A preparation decision record</h2>
+<p>For every material change, record:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Issue</td>
+<td>What was observed?</td>
+</tr>
+<tr class="even">
+<td>Evidence</td>
+<td>Why is it invalid, inconsistent, or risky?</td>
+</tr>
+<tr class="odd">
+<td>Rule</td>
+<td>What correction or exclusion is applied?</td>
+</tr>
+<tr class="even">
+<td>Scope</td>
+<td>Which rows or columns are affected?</td>
+</tr>
+<tr class="odd">
+<td>Timing</td>
+<td>Is the rule fixed, or must it be fitted after splitting?</td>
+</tr>
+<tr class="even">
+<td>Impact</td>
+<td>How many observations or values changed?</td>
+</tr>
+<tr class="odd">
+<td>Verification</td>
+<td>How was the result checked?</td>
+</tr>
+</tbody>
+</table>
+<p>This record prevents preparation from becoming an undocumented sequence of convenient edits.</p>
+</section>
+<section id="practice-decide-when-the-step-belongs" class="level2">
+<h2 class="anchored" data-anchor-id="practice-decide-when-the-step-belongs">Practice: decide when the step belongs</h2>
+<p>For each proposed action, decide whether it is a structural rule, a training-fitted transformation, an evaluation-design decision, or an unjustified action.</p>
+<ol type="1">
+<li>Map <code>PREM</code>, <code>premium</code>, and <code>Premium</code> to the documented <code>Premium</code> plan.</li>
+<li>Fill missing charges with the median of all available rows.</li>
+<li>Keep all monthly snapshots from one customer in the same evaluation group.</li>
+<li>Drop customers with unusually high support use because they distort the distribution.</li>
+<li>Remove <code>cancellation_reason</code> from features used to predict cancellation.</li>
+<li>Learn one-hot categories independently inside each cross-validation training fold.</li>
+</ol>
+<p>Defensible answers are:</p>
+<ol type="1">
+<li>structural rule, if the equivalence is documented;</li>
+<li>training-fitted transformation—the full-data median is leakage;</li>
+<li>evaluation-design decision;</li>
+<li>unjustified without evidence that the values are invalid;</li>
+<li>structural exclusion based on prediction-time availability; and</li>
+<li>training-fitted transformation implemented through a pipeline.</li>
+</ol>
+</section>
+<section id="chapter-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-checklist">Chapter checklist</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">I can define the observation unit and prediction-time boundary before cleaning.</label></li>
+<li><label><input type="checkbox">I can assign each column a modelling or audit role.</label></li>
+<li><label><input type="checkbox">I understand the difference between fixed structural rules and learned preprocessing.</label></li>
+<li><label><input type="checkbox">I preserve raw data and generate processed outputs through code.</label></li>
+<li><label><input type="checkbox">I do not impute, scale, encode, or select features using the complete dataset.</label></li>
+<li><label><input type="checkbox">I retain identifiers and timestamps needed for splitting, auditing, and traceability.</label></li>
+<li><label><input type="checkbox">I can document preparation decisions and their impact.</label></li>
+</ul>
+</section>
+<section id="key-takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="key-takeaways">Key takeaways</h2>
+<ul>
+<li>A modelling table must represent the prediction problem at the correct unit and time.</li>
+<li>Structural cleaning and learned preprocessing are different stages with different leakage risks.</li>
+<li>Fixed validity rules may be applied reproducibly, while data-dependent transformations must be fitted on training data only.</li>
+<li>Raw data should remain immutable; processed data, quality summaries, and figures should be generated by code.</li>
+<li>Missing values and extreme observations require investigation, not automatic deletion or global imputation.</li>
+<li>Identifiers, timestamps, group fields, and audit columns may be essential even when they are excluded from the estimator.</li>
+<li>Explicit feature selection is safer than allowing every remaining column into a model.</li>
+</ul>
+</section>
+<section id="looking-ahead" class="level2">
+<h2 class="anchored" data-anchor-id="looking-ahead">Looking ahead</h2>
+<p>The next chapter turns the prediction problem into a trustworthy modelling table. You will audit data quality, assign column roles, distinguish structural cleaning from training-fitted preprocessing, preserve raw data, and prevent leakage while preparing reproducible model inputs.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-ml-thinking-and-problem-types.html" class="pagination-link" aria-label="Machine-Learning Thinking and Problem Types">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-data-splitting-and-leakage.html" class="pagination-link" aria-label="Data Splitting and Leakage Prevention">
+        <span class="nav-page-text"><span class="chapter-title">Data Splitting and Leakage Prevention</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Appendix A — Appendix: Professional Machine-Learning Reference – Machine Learning with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./99-references.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e2851886d12d134ff83effd9cfa02285.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="assets/css/cdi.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./99-appendix.html">Appendices</a></li><li class="breadcrumb-item"><a href="./99-appendix.html"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Machine Learning with Python</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">index.html</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Foundations</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-ml-thinking-and-problem-types.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Machine-Learning Thinking and Problem Types</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preparation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-data-preparation-for-ml.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Preparation for Machine Learning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-data-splitting-and-leakage.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Data Splitting and Leakage Prevention</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Modeling</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-baselines-and-first-models.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Baselines and First Models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-cross-validation-and-hyperparameter-tuning.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Cross-Validation and Hyperparameter Tuning</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Evaluation &amp; Interpretation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-model-evaluation-and-diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Evaluation and Diagnostic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-model-interpretation-and-explainability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Interpretation and Explainability</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Operational ML</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-model-persistence-and-reproducible-prediction.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Model Persistence and Reproducible Prediction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-batch-prediction-and-operational-validation.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Batch Prediction and Operational Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-monitoring-drift-and-model-performance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring Drift and Model Performance</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Practice &amp; Governance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-responsible-machine-learning-and-governance.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Responsible Machine Learning and Model Governance</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-end-to-end-machine-learning-case-study.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">End-to-End Machine Learning Case Study</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-appendix.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#how-to-use-this-appendix" id="toc-how-to-use-this-appendix" class="nav-link active" data-scroll-target="#how-to-use-this-appendix">How to use this appendix</a></li>
+  <li><a href="#guide-map" id="toc-guide-map" class="nav-link" data-scroll-target="#guide-map">Guide map</a></li>
+  <li><a href="#core-terminology" id="toc-core-terminology" class="nav-link" data-scroll-target="#core-terminology">Core terminology</a></li>
+  <li><a href="#problem-definition-template" id="toc-problem-definition-template" class="nav-link" data-scroll-target="#problem-definition-template">Problem-definition template</a></li>
+  <li><a href="#common-problem-types" id="toc-common-problem-types" class="nav-link" data-scroll-target="#common-problem-types">Common problem types</a></li>
+  <li><a href="#split-strategy-guide" id="toc-split-strategy-guide" class="nav-link" data-scroll-target="#split-strategy-guide">Split-strategy guide</a>
+  <ul class="collapse">
+  <li><a href="#leakage-audit" id="toc-leakage-audit" class="nav-link" data-scroll-target="#leakage-audit">Leakage audit</a></li>
+  </ul></li>
+  <li><a href="#classification-metrics" id="toc-classification-metrics" class="nav-link" data-scroll-target="#classification-metrics">Classification metrics</a></li>
+  <li><a href="#regression-metrics" id="toc-regression-metrics" class="nav-link" data-scroll-target="#regression-metrics">Regression metrics</a></li>
+  <li><a href="#preprocessing-reference" id="toc-preprocessing-reference" class="nav-link" data-scroll-target="#preprocessing-reference">Preprocessing reference</a></li>
+  <li><a href="#baselines-and-first-models" id="toc-baselines-and-first-models" class="nav-link" data-scroll-target="#baselines-and-first-models">Baselines and first models</a></li>
+  <li><a href="#cross-validation-and-tuning-checklist" id="toc-cross-validation-and-tuning-checklist" class="nav-link" data-scroll-target="#cross-validation-and-tuning-checklist">Cross-validation and tuning checklist</a></li>
+  <li><a href="#evaluation-and-diagnostic-checklist" id="toc-evaluation-and-diagnostic-checklist" class="nav-link" data-scroll-target="#evaluation-and-diagnostic-checklist">Evaluation and diagnostic checklist</a>
+  <ul class="collapse">
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression">Regression</a></li>
+  </ul></li>
+  <li><a href="#interpretation-guide" id="toc-interpretation-guide" class="nav-link" data-scroll-target="#interpretation-guide">Interpretation guide</a></li>
+  <li><a href="#artifact-release-checklist" id="toc-artifact-release-checklist" class="nav-link" data-scroll-target="#artifact-release-checklist">Artifact-release checklist</a></li>
+  <li><a href="#batch-scoring-checklist" id="toc-batch-scoring-checklist" class="nav-link" data-scroll-target="#batch-scoring-checklist">Batch-scoring checklist</a></li>
+  <li><a href="#monitoring-reference" id="toc-monitoring-reference" class="nav-link" data-scroll-target="#monitoring-reference">Monitoring reference</a></li>
+  <li><a href="#responsible-machine-learning-checklist" id="toc-responsible-machine-learning-checklist" class="nav-link" data-scroll-target="#responsible-machine-learning-checklist">Responsible-machine-learning checklist</a></li>
+  <li><a href="#repository-conventions" id="toc-repository-conventions" class="nav-link" data-scroll-target="#repository-conventions">Repository conventions</a></li>
+  <li><a href="#environment-quick-reference" id="toc-environment-quick-reference" class="nav-link" data-scroll-target="#environment-quick-reference">Environment quick reference</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#modulenotfounderror-no-module-named-sklearn" id="toc-modulenotfounderror-no-module-named-sklearn" class="nav-link" data-scroll-target="#modulenotfounderror-no-module-named-sklearn"><code>ModuleNotFoundError: No module named 'sklearn'</code></a></li>
+  <li><a href="#a-bash-launcher-reports-python-command-not-found" id="toc-a-bash-launcher-reports-python-command-not-found" class="nav-link" data-scroll-target="#a-bash-launcher-reports-python-command-not-found">A Bash launcher reports <code>python: command not found</code></a></li>
+  <li><a href="#vs-code-lists-several-.venv-environments" id="toc-vs-code-lists-several-.venv-environments" class="nav-link" data-scroll-target="#vs-code-lists-several-.venv-environments">VS Code lists several <code>.venv</code> environments</a></li>
+  <li><a href="#nameerror-in-an-interactive-session" id="toc-nameerror-in-an-interactive-session" class="nav-link" data-scroll-target="#nameerror-in-an-interactive-session"><code>NameError</code> in an interactive session</a></li>
+  <li><a href="#valueerror-all-arrays-must-be-of-the-same-length" id="toc-valueerror-all-arrays-must-be-of-the-same-length" class="nav-link" data-scroll-target="#valueerror-all-arrays-must-be-of-the-same-length"><code>ValueError: All arrays must be of the same length</code></a></li>
+  <li><a href="#the-model-reports-that-input-contains-nan" id="toc-the-model-reports-that-input-contains-nan" class="nav-link" data-scroll-target="#the-model-reports-that-input-contains-nan">The model reports that input contains <code>NaN</code></a></li>
+  <li><a href="#new-data-contains-unknown-categories" id="toc-new-data-contains-unknown-categories" class="nav-link" data-scroll-target="#new-data-contains-unknown-categories">New data contains unknown categories</a></li>
+  <li><a href="#cross-validation-results-are-unexpectedly-high" id="toc-cross-validation-results-are-unexpectedly-high" class="nav-link" data-scroll-target="#cross-validation-results-are-unexpectedly-high">Cross-validation results are unexpectedly high</a></li>
+  <li><a href="#accuracy-is-high-but-the-model-finds-few-positive-cases" id="toc-accuracy-is-high-but-the-model-finds-few-positive-cases" class="nav-link" data-scroll-target="#accuracy-is-high-but-the-model-finds-few-positive-cases">Accuracy is high, but the model finds few positive cases</a></li>
+  <li><a href="#probability-predictions-are-poorly-calibrated" id="toc-probability-predictions-are-poorly-calibrated" class="nav-link" data-scroll-target="#probability-predictions-are-poorly-calibrated">Probability predictions are poorly calibrated</a></li>
+  <li><a href="#a-reloaded-model-warns-about-versions-or-gives-different-results" id="toc-a-reloaded-model-warns-about-versions-or-gives-different-results" class="nav-link" data-scroll-target="#a-reloaded-model-warns-about-versions-or-gives-different-results">A reloaded model warns about versions or gives different results</a></li>
+  <li><a href="#drift-is-detected-but-outcomes-are-not-yet-available" id="toc-drift-is-detected-but-outcomes-are-not-yet-available" class="nav-link" data-scroll-target="#drift-is-detected-but-outcomes-are-not-yet-available">Drift is detected, but outcomes are not yet available</a></li>
+  <li><a href="#quarto-tries-to-execute-an-example" id="toc-quarto-tries-to-execute-an-example" class="nav-link" data-scroll-target="#quarto-tries-to-execute-an-example">Quarto tries to execute an example</a></li>
+  </ul></li>
+  <li><a href="#complete-project-handoff-checklist" id="toc-complete-project-handoff-checklist" class="nav-link" data-scroll-target="#complete-project-handoff-checklist">Complete project handoff checklist</a>
+  <ul class="collapse">
+  <li><a href="#problem-and-data" id="toc-problem-and-data" class="nav-link" data-scroll-target="#problem-and-data">Problem and data</a></li>
+  <li><a href="#modeling-and-evaluation" id="toc-modeling-and-evaluation" class="nav-link" data-scroll-target="#modeling-and-evaluation">Modeling and evaluation</a></li>
+  <li><a href="#release-and-operation" id="toc-release-and-operation" class="nav-link" data-scroll-target="#release-and-operation">Release and operation</a></li>
+  <li><a href="#responsibility-and-communication" id="toc-responsibility-and-communication" class="nav-link" data-scroll-target="#responsibility-and-communication">Responsibility and communication</a></li>
+  </ul></li>
+  <li><a href="#continue-learning" id="toc-continue-learning" class="nav-link" data-scroll-target="#continue-learning">Continue learning</a></li>
+  <li><a href="#evidence-base-and-further-reading" id="toc-evidence-base-and-further-reading" class="nav-link" data-scroll-target="#evidence-base-and-further-reading">Evidence base and further reading</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final note</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./99-appendix.html">Appendices</a></li><li class="breadcrumb-item"><a href="./99-appendix.html"><span class="chapter-title">Appendix: Professional Machine-Learning Reference</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-appendix" class="quarto-section-identifier">Appendix A — Appendix: Professional Machine-Learning Reference</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sep 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cdi-message">
+<p><strong>ID:</strong> MLPY-APP<br>
+<strong>Type:</strong> Professional reference appendix<br>
+<strong>Audience:</strong> Learners applying the complete machine-learning workflow<br>
+<strong>Theme:</strong> Definitions, formulas, decisions, checklists, repository conventions, and troubleshooting</p>
+</div>
+<section id="how-to-use-this-appendix" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-this-appendix">How to use this appendix</h2>
+<p>This appendix is a working reference for the full guide. Return to it when you need to choose a metric, audit a split, diagnose an environment problem, prepare a model artifact, or review a project before handoff.</p>
+<p>The examples are intentionally non-executable. Run the maintained workflows from <code>scripts/python/</code> through their corresponding launchers in <code>scripts/bash/</code>.</p>
+</section>
+<section id="guide-map" class="level2">
+<h2 class="anchored" data-anchor-id="guide-map">Guide map</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Chapter</th>
+<th>ID</th>
+<th>Main question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>00-preface.qmd</code></td>
+<td>MLPY-000</td>
+<td>How do I create and verify the project environment?</td>
+</tr>
+<tr class="even">
+<td><code>01-ml-thinking-and-problem-types.qmd</code></td>
+<td>MLPY-001</td>
+<td>Is this problem suitable for machine learning?</td>
+</tr>
+<tr class="odd">
+<td><code>02-data-preparation-for-ml.qmd</code></td>
+<td>MLPY-002</td>
+<td>How should raw data become model-ready data?</td>
+</tr>
+<tr class="even">
+<td><code>03-data-splitting-and-leakage.qmd</code></td>
+<td>MLPY-003</td>
+<td>How do I estimate future performance honestly?</td>
+</tr>
+<tr class="odd">
+<td><code>04-baselines-and-first-models.qmd</code></td>
+<td>MLPY-004</td>
+<td>Does a first model improve on a simple reference?</td>
+</tr>
+<tr class="even">
+<td><code>05-cross-validation-and-hyperparameter-tuning.qmd</code></td>
+<td>MLPY-005</td>
+<td>How do I compare candidate configurations reliably?</td>
+</tr>
+<tr class="odd">
+<td><code>06-model-evaluation-and-diagnostics.qmd</code></td>
+<td>MLPY-006</td>
+<td>Where does the selected model succeed or fail?</td>
+</tr>
+<tr class="even">
+<td><code>07-model-interpretation-and-explainability.qmd</code></td>
+<td>MLPY-007</td>
+<td>What is driving predictions, and what can we claim?</td>
+</tr>
+<tr class="odd">
+<td><code>08-model-persistence-and-reproducible-prediction.qmd</code></td>
+<td>MLPY-008</td>
+<td>How do I save and reload the complete prediction workflow?</td>
+</tr>
+<tr class="even">
+<td><code>09-batch-prediction-and-operational-validation.qmd</code></td>
+<td>MLPY-009</td>
+<td>How do I score new records safely?</td>
+</tr>
+<tr class="odd">
+<td><code>10-monitoring-drift-and-model-performance.qmd</code></td>
+<td>MLPY-010</td>
+<td>How do I detect changes after release?</td>
+</tr>
+<tr class="even">
+<td><code>11-responsible-machine-learning-and-governance.qmd</code></td>
+<td>MLPY-011</td>
+<td>How do I make the system accountable and reviewable?</td>
+</tr>
+<tr class="odd">
+<td><code>12-end-to-end-machine-learning-case-study.qmd</code></td>
+<td>MLPY-012</td>
+<td>How do the decisions connect in one complete project?</td>
+</tr>
+<tr class="even">
+<td><code>99-appendix.qmd</code></td>
+<td>MLPY-APP</td>
+<td>Where can I find quick-reference material?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="core-terminology" class="level2">
+<h2 class="anchored" data-anchor-id="core-terminology">Core terminology</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Practical meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Observation unit</td>
+<td>The entity represented by one row, such as a customer, transaction, or device-day.</td>
+</tr>
+<tr class="even">
+<td>Feature</td>
+<td>Information available to the model at prediction time.</td>
+</tr>
+<tr class="odd">
+<td>Target</td>
+<td>The outcome the model is trained to predict.</td>
+</tr>
+<tr class="even">
+<td>Prediction time</td>
+<td>The moment at which a prediction must be produced.</td>
+</tr>
+<tr class="odd">
+<td>Prediction horizon</td>
+<td>The future interval covered by the target.</td>
+</tr>
+<tr class="even">
+<td>Estimator</td>
+<td>An algorithm that learns parameters from data.</td>
+</tr>
+<tr class="odd">
+<td>Parameter</td>
+<td>A value learned during fitting, such as a regression coefficient.</td>
+</tr>
+<tr class="even">
+<td>Hyperparameter</td>
+<td>A setting chosen before fitting, such as tree depth.</td>
+</tr>
+<tr class="odd">
+<td>Pipeline</td>
+<td>An ordered, reusable sequence of preprocessing and modeling steps.</td>
+</tr>
+<tr class="even">
+<td>Training set</td>
+<td>Data used to fit model parameters.</td>
+</tr>
+<tr class="odd">
+<td>Validation data</td>
+<td>Data used to compare choices during development.</td>
+</tr>
+<tr class="even">
+<td>Test set</td>
+<td>Data reserved for the final, unbiased evaluation.</td>
+</tr>
+<tr class="odd">
+<td>Baseline</td>
+<td>A simple reference that a useful model should beat.</td>
+</tr>
+<tr class="even">
+<td>Leakage</td>
+<td>Information used during training that would not be legitimately available at prediction time.</td>
+</tr>
+<tr class="odd">
+<td>Calibration</td>
+<td>Agreement between predicted probabilities and observed event rates.</td>
+</tr>
+<tr class="even">
+<td>Residual</td>
+<td>The difference between an observed and predicted numeric outcome.</td>
+</tr>
+<tr class="odd">
+<td>Drift</td>
+<td>A change in data, predictions, or relationships after deployment.</td>
+</tr>
+<tr class="even">
+<td>Artifact</td>
+<td>A saved model or pipeline plus the information required to use it correctly.</td>
+</tr>
+<tr class="odd">
+<td>Inference</td>
+<td>Applying a fitted model to new observations.</td>
+</tr>
+<tr class="even">
+<td>Audit field</td>
+<td>Metadata that makes a prediction traceable, such as model version or scoring time.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="problem-definition-template" class="level2">
+<h2 class="anchored" data-anchor-id="problem-definition-template">Problem-definition template</h2>
+<p>Complete this table before selecting an algorithm.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Decision element</th>
+<th>Question to answer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Decision</td>
+<td>What action will the prediction support?</td>
+</tr>
+<tr class="even">
+<td>Observation unit</td>
+<td>What does one row represent?</td>
+</tr>
+<tr class="odd">
+<td>Population</td>
+<td>Which entities are eligible for scoring?</td>
+</tr>
+<tr class="even">
+<td>Prediction time</td>
+<td>When must the prediction be available?</td>
+</tr>
+<tr class="odd">
+<td>Target</td>
+<td>What exactly counts as the outcome?</td>
+</tr>
+<tr class="even">
+<td>Horizon</td>
+<td>How far into the future is the outcome measured?</td>
+</tr>
+<tr class="odd">
+<td>Features</td>
+<td>Which information is legitimately available at prediction time?</td>
+</tr>
+<tr class="even">
+<td>Error costs</td>
+<td>What are the consequences of false positives, false negatives, or large numeric errors?</td>
+</tr>
+<tr class="odd">
+<td>Constraints</td>
+<td>What latency, interpretability, fairness, privacy, or resource limits apply?</td>
+</tr>
+<tr class="even">
+<td>Success criterion</td>
+<td>Which metric and operational result define acceptable performance?</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="common-problem-types" class="level2">
+<h2 class="anchored" data-anchor-id="common-problem-types">Common problem types</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Problem type</th>
+<th>Output</th>
+<th>Typical examples</th>
+<th>Common metrics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Binary classification</td>
+<td>One of two classes or an event probability</td>
+<td>Churn, fraud, default</td>
+<td>Precision, recall, F1, ROC AUC, PR AUC, log loss</td>
+</tr>
+<tr class="even">
+<td>Multiclass classification</td>
+<td>One of several classes</td>
+<td>Document category, product type</td>
+<td>Macro F1, weighted F1, log loss</td>
+</tr>
+<tr class="odd">
+<td>Regression</td>
+<td>A continuous number</td>
+<td>Demand, duration, price</td>
+<td>MAE, RMSE, <span class="math inline">\(R^2\)</span></td>
+</tr>
+<tr class="even">
+<td>Ranking</td>
+<td>An ordered list</td>
+<td>Search results, recommendations</td>
+<td>Precision@k, recall@k, NDCG</td>
+</tr>
+<tr class="odd">
+<td>Clustering</td>
+<td>Unlabeled groups</td>
+<td>Customer or document segments</td>
+<td>Stability and domain usefulness</td>
+</tr>
+<tr class="even">
+<td>Anomaly detection</td>
+<td>An anomaly score or flag</td>
+<td>Equipment faults, suspicious behavior</td>
+<td>Precision@k, recall with reviewed labels</td>
+</tr>
+<tr class="odd">
+<td>Forecasting</td>
+<td>Future values indexed by time</td>
+<td>Sales, traffic, workload</td>
+<td>MAE, RMSE, MASE, interval coverage</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="split-strategy-guide" class="level2">
+<h2 class="anchored" data-anchor-id="split-strategy-guide">Split-strategy guide</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data structure</th>
+<th>Preferred split</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Independent observations</td>
+<td>Random or stratified split</td>
+<td>Preserves an approximately representative sample.</td>
+</tr>
+<tr class="even">
+<td>Repeated entities</td>
+<td>Grouped split</td>
+<td>Prevents the same entity appearing across train and evaluation sets.</td>
+</tr>
+<tr class="odd">
+<td>Time-ordered observations</td>
+<td>Chronological or rolling split</td>
+<td>Reproduces prediction into the future.</td>
+</tr>
+<tr class="even">
+<td>Spatial data</td>
+<td>Geographic grouping or blocking</td>
+<td>Reduces overly optimistic results from nearby observations.</td>
+</tr>
+<tr class="odd">
+<td>Rare classes</td>
+<td>Stratification, when compatible with grouping and time</td>
+<td>Preserves enough positive cases for evaluation.</td>
+</tr>
+</tbody>
+</table>
+<section id="leakage-audit" class="level3">
+<h3 class="anchored" data-anchor-id="leakage-audit">Leakage audit</h3>
+<p>Before fitting, ask:</p>
+<ul>
+<li>Was every feature genuinely available at prediction time?</li>
+<li>Was the target or a close proxy included among the features?</li>
+<li>Were aggregates computed using future observations?</li>
+<li>Were preprocessing steps fitted only on training data?</li>
+<li>Could the same person, device, account, or event appear in both training and evaluation data?</li>
+<li>Did tuning, threshold selection, or feature selection use the final test set?</li>
+<li>Does the split reproduce the way the model will encounter future data?</li>
+</ul>
+</section>
+</section>
+<section id="classification-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="classification-metrics">Classification metrics</h2>
+<p>Let <span class="math inline">\(TP\)</span>, <span class="math inline">\(TN\)</span>, <span class="math inline">\(FP\)</span>, and <span class="math inline">\(FN\)</span> denote true positives, true negatives, false positives, and false negatives.</p>
+<p><span class="math display">\[
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+\]</span></p>
+<p><span class="math display">\[
+\text{Precision} = \frac{TP}{TP + FP}
+\]</span></p>
+<p><span class="math display">\[
+\text{Recall} = \frac{TP}{TP + FN}
+\]</span></p>
+<p><span class="math display">\[
+\text{Specificity} = \frac{TN}{TN + FP}
+\]</span></p>
+<p><span class="math display">\[
+F_1 = 2\frac{\text{Precision}\times\text{Recall}}{\text{Precision}+\text{Recall}}
+\]</span></p>
+<p><span class="math display">\[
+\text{Balanced accuracy} = \frac{\text{Recall}+\text{Specificity}}{2}
+\]</span></p>
+<p>For a binary outcome <span class="math inline">\(y_i\)</span> and predicted probability <span class="math inline">\(p_i\)</span>, the Brier score is:</p>
+<p><span class="math display">\[
+\text{Brier score} = \frac{1}{n}\sum_{i=1}^{n}(p_i-y_i)^2
+\]</span></p>
+<p>Lower Brier scores indicate more accurate probability predictions.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Use it when</th>
+<th>Important caution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accuracy</td>
+<td>Classes and error costs are reasonably balanced.</td>
+<td>Can hide failure on a rare positive class.</td>
+</tr>
+<tr class="even">
+<td>Precision</td>
+<td>False positives are expensive.</td>
+<td>Can improve by predicting fewer positives.</td>
+</tr>
+<tr class="odd">
+<td>Recall</td>
+<td>False negatives are expensive.</td>
+<td>Can improve at the cost of many false positives.</td>
+</tr>
+<tr class="even">
+<td>F1</td>
+<td>Precision and recall both matter.</td>
+<td>Ignores true negatives.</td>
+</tr>
+<tr class="odd">
+<td>ROC AUC</td>
+<td>You need threshold-independent ranking performance.</td>
+<td>May look strong under severe class imbalance.</td>
+</tr>
+<tr class="even">
+<td>PR AUC</td>
+<td>Positive cases are rare and important.</td>
+<td>Depends on the event prevalence.</td>
+</tr>
+<tr class="odd">
+<td>Log loss</td>
+<td>Probability quality matters.</td>
+<td>Penalizes confident wrong predictions strongly.</td>
+</tr>
+<tr class="even">
+<td>Brier score</td>
+<td>Calibration and probability accuracy matter.</td>
+<td>Should be interpreted against a baseline.</td>
+</tr>
+</tbody>
+</table>
+<p>Never choose a threshold automatically from <code>0.5</code>. Connect the threshold to capacity, costs, risks, and the intended intervention.</p>
+</section>
+<section id="regression-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="regression-metrics">Regression metrics</h2>
+<p>For observed values <span class="math inline">\(y_i\)</span>, predictions <span class="math inline">\(\hat{y}_i\)</span>, and mean target <span class="math inline">\(\bar{y}\)</span>:</p>
+<p><span class="math display">\[
+\text{MAE} = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|
+\]</span></p>
+<p><span class="math display">\[
+\text{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}
+\]</span></p>
+<p><span class="math display">\[
+R^2 = 1-\frac{\sum_i(y_i-\hat{y}_i)^2}{\sum_i(y_i-\bar{y})^2}
+\]</span></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Interpretation</th>
+<th>Important caution</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MAE</td>
+<td>Typical absolute error in target units.</td>
+<td>Treats all absolute errors linearly.</td>
+</tr>
+<tr class="even">
+<td>RMSE</td>
+<td>Error in target units with extra weight on large misses.</td>
+<td>Sensitive to outliers.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(R^2\)</span></td>
+<td>Improvement over predicting the mean on the evaluated data.</td>
+<td>Can be negative and does not express error in target units.</td>
+</tr>
+</tbody>
+</table>
+<p>Inspect residuals across predicted values, time, and important subgroups. A single average metric can conceal systematic error.</p>
+</section>
+<section id="preprocessing-reference" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-reference">Preprocessing reference</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data condition</th>
+<th>Typical treatment</th>
+<th>Fit on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Missing numeric values</td>
+<td>Median imputation or a domain rule</td>
+<td>Training data only</td>
+</tr>
+<tr class="even">
+<td>Missing categorical values</td>
+<td>Most-frequent or explicit missing category</td>
+<td>Training data only</td>
+</tr>
+<tr class="odd">
+<td>Differently scaled numeric features</td>
+<td>Standardization for scale-sensitive models</td>
+<td>Training data only</td>
+</tr>
+<tr class="even">
+<td>Nominal categories</td>
+<td>One-hot encoding with unknown-category handling</td>
+<td>Training data only</td>
+</tr>
+<tr class="odd">
+<td>Ordered categories</td>
+<td>Explicit ordinal encoding with documented order</td>
+<td>Training data only</td>
+</tr>
+<tr class="even">
+<td>Skewed positive values</td>
+<td>Log or power transformation if justified</td>
+<td>Training data only</td>
+</tr>
+<tr class="odd">
+<td>Free text</td>
+<td>A text-specific vectorizer or embedding workflow</td>
+<td>Training data only</td>
+</tr>
+<tr class="even">
+<td>Dates and times</td>
+<td>Prediction-safe calendar and elapsed-time features</td>
+<td>Defined before splitting; learned values from training only</td>
+</tr>
+</tbody>
+</table>
+<p>Keep preprocessing and the estimator in one pipeline:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"preprocess"</span>, preprocessor),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"classifier"</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>)),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This structure makes cross-validation, persistence, and prediction safer because each transformation follows the same fitted workflow.</p>
+</section>
+<section id="baselines-and-first-models" class="level2">
+<h2 class="anchored" data-anchor-id="baselines-and-first-models">Baselines and first models</h2>
+<p>Choose at least one baseline that reflects the problem:</p>
+<ul>
+<li>majority-class prediction for classification;</li>
+<li>class-prevalence probabilities when probability quality matters;</li>
+<li>mean or median prediction for regression;</li>
+<li>last-known value or seasonal naive prediction for forecasting;</li>
+<li>an existing rule or current business process when one exists.</li>
+</ul>
+<p>A first professional model should be understandable, reproducible, and difficult to misuse. Linear or logistic models and shallow trees are often strong starting points. Complexity is justified only when evaluation shows a meaningful benefit.</p>
+</section>
+<section id="cross-validation-and-tuning-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validation-and-tuning-checklist">Cross-validation and tuning checklist</h2>
+<ul>
+<li>Select the split strategy before comparing models.</li>
+<li>Keep all learned preprocessing inside the pipeline.</li>
+<li>Use metrics that match the decision and class balance.</li>
+<li>Define a restrained search space with plausible values.</li>
+<li>Compare score distributions, not only the best mean score.</li>
+<li>Record the random seed, folds, scoring rule, and search space.</li>
+<li>Tune decision thresholds separately from model fitting.</li>
+<li>Evaluate the final selected workflow once on untouched test data.</li>
+</ul>
+</section>
+<section id="evaluation-and-diagnostic-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="evaluation-and-diagnostic-checklist">Evaluation and diagnostic checklist</h2>
+<section id="classification" class="level3">
+<h3 class="anchored" data-anchor-id="classification">Classification</h3>
+<ul>
+<li>Compare against the baseline.</li>
+<li>Review the confusion matrix at the operating threshold.</li>
+<li>Examine precision, recall, and error counts.</li>
+<li>Inspect ROC and precision-recall behavior where appropriate.</li>
+<li>Check calibration if probabilities drive decisions.</li>
+<li>Evaluate important slices and small subgroups cautiously.</li>
+<li>Review representative false positives and false negatives.</li>
+<li>Report uncertainty or resampling variability when feasible.</li>
+</ul>
+</section>
+<section id="regression" class="level3">
+<h3 class="anchored" data-anchor-id="regression">Regression</h3>
+<ul>
+<li>Compare MAE and RMSE with a naive baseline.</li>
+<li>Plot observed versus predicted values.</li>
+<li>Inspect residuals for curvature, changing variance, and extreme errors.</li>
+<li>Evaluate errors over time and across important subgroups.</li>
+<li>Confirm predictions remain plausible at the edges of the feature range.</li>
+<li>Report errors in units decision-makers understand.</li>
+</ul>
+</section>
+</section>
+<section id="interpretation-guide" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-guide">Interpretation guide</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Suitable approach</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How does the model work overall?</td>
+<td>Coefficients, global permutation importance, aggregate partial dependence</td>
+<td>Global summaries can hide subgroup behavior.</td>
+</tr>
+<tr class="even">
+<td>Why did one prediction change?</td>
+<td>Local contribution method, counterfactual analysis, nearest examples</td>
+<td>Explanation methods can be unstable or correlated.</td>
+</tr>
+<tr class="odd">
+<td>Does a feature cause the outcome?</td>
+<td>A causal design, experiment, or justified identification strategy</td>
+<td>Predictive importance is not causal evidence.</td>
+</tr>
+<tr class="even">
+<td>Is the model using an undesirable proxy?</td>
+<td>Feature audit, subgroup evaluation, sensitivity tests</td>
+<td>Removing a protected attribute may not remove its proxies.</td>
+</tr>
+</tbody>
+</table>
+<p>Interpret the fitted pipeline, not an isolated estimator with differently processed inputs. State whether an explanation is global or local and avoid causal language unless the study design supports it.</p>
+</section>
+<section id="artifact-release-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="artifact-release-checklist">Artifact-release checklist</h2>
+<p>Before releasing a model artifact, record:</p>
+<ul>
+<li>artifact filename and version;</li>
+<li>creation time and source revision;</li>
+<li>Python and package versions;</li>
+<li>feature names, types, and expected units;</li>
+<li>target definition and training-data period;</li>
+<li>validation design and accepted metrics;</li>
+<li>operating threshold, when applicable;</li>
+<li>approved population and known limitations;</li>
+<li>owner, review date, and rollback procedure.</li>
+</ul>
+<p>Persist the complete pipeline whenever possible. Loading a model should restore preprocessing and prediction behavior together.</p>
+<blockquote class="blockquote">
+<p><strong>Security warning:</strong> Never load a Python model file from an untrusted source. Common persistence formats can execute code during loading.</p>
+</blockquote>
+</section>
+<section id="batch-scoring-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="batch-scoring-checklist">Batch-scoring checklist</h2>
+<p>Validate inputs before calling <code>predict()</code> or <code>predict_proba()</code>:</p>
+<ul>
+<li>required columns are present;</li>
+<li>unexpected columns are handled deliberately;</li>
+<li>data types can be converted safely;</li>
+<li>identifiers are unique when required;</li>
+<li>missingness and category levels are within expected bounds;</li>
+<li>numeric values and dates fall within plausible ranges;</li>
+<li>row counts and rejection counts are recorded.</li>
+</ul>
+<p>Every output should include enough audit information to trace the result:</p>
+<ul>
+<li>stable record identifier;</li>
+<li>prediction and, when relevant, probability or score;</li>
+<li>decision threshold or decision rule;</li>
+<li>model version;</li>
+<li>scoring timestamp;</li>
+<li>validation status or reason for rejection.</li>
+</ul>
+</section>
+<section id="monitoring-reference" class="level2">
+<h2 class="anchored" data-anchor-id="monitoring-reference">Monitoring reference</h2>
+<p>Monitor several layers because no single signal describes model health.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>Examples</th>
+<th>Can be measured without labels?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Service health</td>
+<td>Job success, latency, throughput, missing outputs</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Data quality</td>
+<td>Schema failures, missingness, invalid ranges</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Feature drift</td>
+<td>Distribution changes, unseen categories</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Prediction drift</td>
+<td>Score and decision-rate changes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Performance</td>
+<td>Precision, recall, calibration, MAE</td>
+<td>No; outcomes are required</td>
+</tr>
+<tr class="even">
+<td>Outcome and impact</td>
+<td>Intervention success, workload, harm indicators</td>
+<td>Usually requires downstream data</td>
+</tr>
+</tbody>
+</table>
+<p>For binned proportions <span class="math inline">\(a_j\)</span> from a reference period and <span class="math inline">\(b_j\)</span> from a current period, a common population stability index is:</p>
+<p><span class="math display">\[
+\text{PSI}=\sum_j(a_j-b_j)\ln\left(\frac{a_j}{b_j}\right)
+\]</span></p>
+<p>For two categorical distributions <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, total variation distance is:</p>
+<p><span class="math display">\[
+\text{TVD}=\frac{1}{2}\sum_j|p_j-q_j|
+\]</span></p>
+<p>These statistics are alerting signals, not automatic proof that a model must be retrained. Investigate causes and connect thresholds to operational consequences.</p>
+</section>
+<section id="responsible-machine-learning-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="responsible-machine-learning-checklist">Responsible-machine-learning checklist</h2>
+<ul>
+<li>Document the intended use and explicitly excluded uses.</li>
+<li>Identify affected people and possible harms.</li>
+<li>Confirm a lawful, proportionate basis for using the data.</li>
+<li>Minimize sensitive and unnecessary features.</li>
+<li>Evaluate performance and error rates across relevant groups.</li>
+<li>Define human review and appeal paths for consequential decisions.</li>
+<li>Protect training data, artifacts, predictions, and logs.</li>
+<li>Assign owners for approval, monitoring, incidents, and retirement.</li>
+<li>Record limitations in language users can understand.</li>
+<li>Reassess the system when its population, process, or purpose changes.</li>
+</ul>
+</section>
+<section id="repository-conventions" class="level2">
+<h2 class="anchored" data-anchor-id="repository-conventions">Repository conventions</h2>
+<p>The guide separates instructional prose from executable workflows:</p>
+<pre class="text"><code>machine-learning-with-python/
+├── 00-preface.qmd
+├── 01-ml-thinking-and-problem-types.qmd
+├── ...
+├── 12-end-to-end-machine-learning-case-study.qmd
+├── 99-appendix.qmd
+├── requirements.txt
+├── scripts/
+│   ├── bash/
+│   │   ├── 00-create-venv.sh
+│   │   ├── 01-run-ml-thinking-workbench.sh
+│   │   └── ...
+│   └── python/
+│       ├── 01-ml-thinking-workbench.py
+│       └── ...
+└── results/
+    ├── figures/
+    ├── models/
+    └── predictions/</code></pre>
+<p>Apply these rules consistently:</p>
+<ul>
+<li>QMD examples use plain <code>bash</code> and <code>python</code> fences and do not execute during rendering.</li>
+<li>Maintained code lives in <code>scripts/python/</code>.</li>
+<li>Bash launchers resolve the repository root and call <code>.venv/bin/python</code> directly.</li>
+<li>Generated figures, models, metrics, and predictions belong under <code>results/</code>.</li>
+<li>Numbered scripts correspond to numbered chapters.</li>
+<li>Generated results should not silently overwrite important reviewed artifacts.</li>
+</ul>
+</section>
+<section id="environment-quick-reference" class="level2">
+<h2 class="anchored" data-anchor-id="environment-quick-reference">Environment quick reference</h2>
+<p>From the repository root, create the dedicated environment:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/bash/00-create-venv.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Activate it in a new terminal:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Confirm which interpreter the terminal is using:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sys; print(sys.executable)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output should point inside this repository, ending in <code>.venv/bin/python</code> or <code>.venv/bin/python3</code>.</p>
+<p>Verify the core packages:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sklearn, pandas, numpy, matplotlib; print('Environment ready:', sklearn.__version__)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In VS Code, use <strong>Python: Select Interpreter</strong> and select the interpreter under this repository’s <code>.venv</code>. Then open a new integrated terminal so activation reflects the selection.</p>
+</section>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
+<section id="modulenotfounderror-no-module-named-sklearn" class="level3">
+<h3 class="anchored" data-anchor-id="modulenotfounderror-no-module-named-sklearn"><code>ModuleNotFoundError: No module named 'sklearn'</code></h3>
+<p>The current interpreter does not contain scikit-learn. Activate the repository environment and verify it:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-c</span> <span class="st">"import sys, sklearn; print(sys.executable); print(sklearn.__version__)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If the interpreter is correct but the import still fails, install the declared dependencies with <code>.venv/bin/python -m pip install -r requirements.txt</code>.</p>
+</section>
+<section id="a-bash-launcher-reports-python-command-not-found" class="level3">
+<h3 class="anchored" data-anchor-id="a-bash-launcher-reports-python-command-not-found">A Bash launcher reports <code>python: command not found</code></h3>
+<p>The launcher should not depend on a shell alias or a generic <code>python</code> command. It should resolve the repository root and invoke the environment explicitly:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="st">"</span><span class="va">${REPO_ROOT}</span><span class="st">/.venv/bin/python"</span> <span class="st">"</span><span class="va">${REPO_ROOT}</span><span class="st">/scripts/python/01-ml-thinking-workbench.py"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If <code>.venv/bin/python</code> does not exist, create the environment with <code>00-create-venv.sh</code>.</p>
+</section>
+<section id="vs-code-lists-several-.venv-environments" class="level3">
+<h3 class="anchored" data-anchor-id="vs-code-lists-several-.venv-environments">VS Code lists several <code>.venv</code> environments</h3>
+<p>Select the interpreter whose path includes <code>machine-learning-with-python/.venv/bin/python</code>. Open a new terminal and confirm <code>sys.executable</code>; do not rely only on the environment name displayed in the menu.</p>
+</section>
+<section id="nameerror-in-an-interactive-session" class="level3">
+<h3 class="anchored" data-anchor-id="nameerror-in-an-interactive-session"><code>NameError</code> in an interactive session</h3>
+<p>The required variable or import was defined in a cell that has not run in the current session. Restart and run the notebook from the beginning, or use the numbered script to reproduce the complete workflow.</p>
+</section>
+<section id="valueerror-all-arrays-must-be-of-the-same-length" class="level3">
+<h3 class="anchored" data-anchor-id="valueerror-all-arrays-must-be-of-the-same-length"><code>ValueError: All arrays must be of the same length</code></h3>
+<p>Inputs used to create a DataFrame have inconsistent lengths. Print or assert their lengths before construction and trace where the shorter object was produced.</p>
+</section>
+<section id="the-model-reports-that-input-contains-nan" class="level3">
+<h3 class="anchored" data-anchor-id="the-model-reports-that-input-contains-nan">The model reports that input contains <code>NaN</code></h3>
+<p>Confirm that missing-value handling is inside the fitted pipeline. Also check whether new parsing or type conversion introduced missing values before inference.</p>
+</section>
+<section id="new-data-contains-unknown-categories" class="level3">
+<h3 class="anchored" data-anchor-id="new-data-contains-unknown-categories">New data contains unknown categories</h3>
+<p>Use an encoder configured to handle unknown categories and monitor how often they occur. A sudden increase may indicate upstream change or drift.</p>
+</section>
+<section id="cross-validation-results-are-unexpectedly-high" class="level3">
+<h3 class="anchored" data-anchor-id="cross-validation-results-are-unexpectedly-high">Cross-validation results are unexpectedly high</h3>
+<p>Audit for target leakage, duplicate records, repeated entities across folds, future information, preprocessing performed before splitting, and tuning decisions informed by the test set.</p>
+</section>
+<section id="accuracy-is-high-but-the-model-finds-few-positive-cases" class="level3">
+<h3 class="anchored" data-anchor-id="accuracy-is-high-but-the-model-finds-few-positive-cases">Accuracy is high, but the model finds few positive cases</h3>
+<p>Inspect the class distribution, confusion matrix, recall, precision-recall curve, and threshold. A majority-class baseline can achieve high accuracy when the positive class is rare.</p>
+</section>
+<section id="probability-predictions-are-poorly-calibrated" class="level3">
+<h3 class="anchored" data-anchor-id="probability-predictions-are-poorly-calibrated">Probability predictions are poorly calibrated</h3>
+<p>Inspect a calibration curve and Brier score on held-out data. Consider calibration using a separate validation procedure; do not calibrate and assess on the same observations.</p>
+</section>
+<section id="a-reloaded-model-warns-about-versions-or-gives-different-results" class="level3">
+<h3 class="anchored" data-anchor-id="a-reloaded-model-warns-about-versions-or-gives-different-results">A reloaded model warns about versions or gives different results</h3>
+<p>Compare the Python and library versions with the artifact metadata. Confirm that the same complete pipeline was saved and that inputs have identical names, types, units, and ordering.</p>
+</section>
+<section id="drift-is-detected-but-outcomes-are-not-yet-available" class="level3">
+<h3 class="anchored" data-anchor-id="drift-is-detected-but-outcomes-are-not-yet-available">Drift is detected, but outcomes are not yet available</h3>
+<p>Treat drift as an investigation signal. Check data quality, upstream system changes, score distributions, and decision rates. Delay claims about predictive performance until trustworthy outcomes arrive.</p>
+</section>
+<section id="quarto-tries-to-execute-an-example" class="level3">
+<h3 class="anchored" data-anchor-id="quarto-tries-to-execute-an-example">Quarto tries to execute an example</h3>
+<p>Use an ordinary Markdown fence:</p>
+<pre class="text"><code>```python
+print("This example is displayed but not executed.")
+```</code></pre>
+<p>Do not add braces around the language name, because that changes a displayed example into an executable Quarto cell.</p>
+</section>
+</section>
+<section id="complete-project-handoff-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="complete-project-handoff-checklist">Complete project handoff checklist</h2>
+<section id="problem-and-data" class="level3">
+<h3 class="anchored" data-anchor-id="problem-and-data">Problem and data</h3>
+<ul>
+<li>The decision, population, prediction time, horizon, and target are explicit.</li>
+<li>Feature availability is documented at prediction time.</li>
+<li>Data provenance, exclusions, and quality checks are recorded.</li>
+<li>The split strategy matches the deployment setting.</li>
+</ul>
+</section>
+<section id="modeling-and-evaluation" class="level3">
+<h3 class="anchored" data-anchor-id="modeling-and-evaluation">Modeling and evaluation</h3>
+<ul>
+<li>A meaningful baseline is reported.</li>
+<li>Preprocessing and the estimator are contained in one pipeline.</li>
+<li>Cross-validation and tuning are reproducible.</li>
+<li>The final test set was used only after model selection.</li>
+<li>Metrics, thresholds, slices, uncertainty, and failure cases are documented.</li>
+</ul>
+</section>
+<section id="release-and-operation" class="level3">
+<h3 class="anchored" data-anchor-id="release-and-operation">Release and operation</h3>
+<ul>
+<li>The artifact, metadata, dependencies, and prediction contract are versioned.</li>
+<li>Batch inputs are validated before scoring.</li>
+<li>Prediction outputs contain audit fields.</li>
+<li>Monitoring includes service, data, drift, performance, and impact signals.</li>
+<li>Alert owners, escalation paths, rollback, and retirement procedures exist.</li>
+</ul>
+</section>
+<section id="responsibility-and-communication" class="level3">
+<h3 class="anchored" data-anchor-id="responsibility-and-communication">Responsibility and communication</h3>
+<ul>
+<li>Intended and prohibited uses are stated.</li>
+<li>Relevant subgroup performance and harms were reviewed.</li>
+<li>Human oversight and recourse are defined where needed.</li>
+<li>Security and privacy controls cover the full lifecycle.</li>
+<li>The model card or equivalent release record is understandable to its audience.</li>
+</ul>
+</section>
+</section>
+<section id="continue-learning" class="level2">
+<h2 class="anchored" data-anchor-id="continue-learning">Continue learning</h2>
+<p>After completing this guide, continue with the CDI guides that move from model development into production systems:</p>
+<ul>
+<li><strong>Model Deployment</strong> for serving, packaging, release strategies, and deployment operations;</li>
+<li><strong>From Models to Systems</strong> for architecture, feedback loops, reliability, and system-level tradeoffs;</li>
+<li><strong>Advanced Data Science</strong> for deeper statistical, computational, and research-oriented methods.</li>
+</ul>
+</section>
+<section id="evidence-base-and-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="evidence-base-and-further-reading">Evidence base and further reading</h2>
+<p>The guide’s treatment of machine-learning foundations, statistical learning, model assessment, and applied predictive modeling draws on established textbooks and methodological references <span class="citation" data-cites="James2021 Hastie2009 Kuhn2013">(<a href="99-references.html#ref-James2021" role="doc-biblioref">James et al. 2021</a>; <a href="99-references.html#ref-Hastie2009" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2009</a>; <a href="99-references.html#ref-Kuhn2013" role="doc-biblioref">Kuhn and Johnson 2013</a>)</span>.</p>
+<p>The chapters covering tree-based models, cross-validation, probability calibration, and probabilistic evaluation are supported by foundational work in these areas <span class="citation" data-cites="Breiman2001 Kohavi1995 NiculescuMizil2005 Brier1950">(<a href="99-references.html#ref-Breiman2001" role="doc-biblioref">Breiman 2001</a>; <a href="99-references.html#ref-Kohavi1995" role="doc-biblioref">Kohavi 1995</a>; <a href="99-references.html#ref-NiculescuMizil2005" role="doc-biblioref">Niculescu-Mizil and Caruana 2005</a>; <a href="99-references.html#ref-Brier1950" role="doc-biblioref">Brier 1950</a>)</span>.</p>
+<p>The Python workflows use scikit-learn, an open-source machine-learning library described by <span class="citation" data-cites="Pedregosa2011">Pedregosa et al. (<a href="99-references.html#ref-Pedregosa2011" role="doc-biblioref">2011</a>)</span>.</p>
+<p>The interpretation chapter introduces approaches associated with LIME and SHAP <span class="citation" data-cites="Ribeiro2016 Lundberg2017">(<a href="99-references.html#ref-Ribeiro2016" role="doc-biblioref">Ribeiro, Singh, and Guestrin 2016</a>; <a href="99-references.html#ref-Lundberg2017" role="doc-biblioref">Lundberg and Lee 2017</a>)</span>.</p>
+<p>The guide’s treatment of reproducibility, batch prediction, monitoring, and operational risk reflects established concerns about technical debt in machine-learning systems <span class="citation" data-cites="Sculley2015">(<a href="99-references.html#ref-Sculley2015" role="doc-biblioref">Sculley et al. 2015</a>)</span>.</p>
+<p>Documentation and responsible-machine-learning practices are informed by model cards, datasheets for datasets, and the NIST AI Risk Management Framework <span class="citation" data-cites="Mitchell2019 Gebru2021 Tabassi2023">(<a href="99-references.html#ref-Mitchell2019" role="doc-biblioref">Mitchell et al. 2019</a>; <a href="99-references.html#ref-Gebru2021" role="doc-biblioref">Gebru et al. 2021</a>; <a href="99-references.html#ref-Tabassi2023" role="doc-biblioref">Tabassi 2023</a>)</span>.</p>
+</section>
+<section id="final-note" class="level2">
+<h2 class="anchored" data-anchor-id="final-note">Final note</h2>
+<p>Professional machine learning is not a single fit-and-score operation. It is a traceable lifecycle:</p>
+<blockquote class="blockquote">
+<p>Define the decision, establish the data contract, split honestly, build a baseline, validate carefully, diagnose failures, interpret cautiously, release reproducibly, monitor continuously, and govern responsibly.</p>
+</blockquote>
+<p>Use this sequence as the standard against which future projects are designed and reviewed.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-Breiman2001" class="csl-entry" role="listitem">
+Breiman, Leo. 2001. <span>“Random Forests.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/A:1010933404324">https://doi.org/10.1023/A:1010933404324</a>.
+</div>
+<div id="ref-Brier1950" class="csl-entry" role="listitem">
+Brier, Glenn W. 1950. <span>“Verification of Forecasts Expressed in Terms of Probability.”</span> <em>Monthly Weather Review</em> 78 (1): 1–3. <a href="https://doi.org/10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2">https://doi.org/10.1175/1520-0493(1950)078&lt;0001:VOFEIT&gt;2.0.CO;2</a>.
+</div>
+<div id="ref-Gebru2021" class="csl-entry" role="listitem">
+Gebru, Timnit, Jamie Morgenstern, Briana Vecchione, Jennifer Wortman Vaughan, Hanna Wallach, Hal Daumé III, and Kate Crawford. 2021. <span>“Datasheets for Datasets.”</span> <em>Communications of the ACM</em> 64 (12): 86–92. <a href="https://doi.org/10.1145/3458723">https://doi.org/10.1145/3458723</a>.
+</div>
+<div id="ref-Hastie2009" class="csl-entry" role="listitem">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. 2nd ed. New York: Springer. <a href="https://doi.org/10.1007/978-0-387-84858-7">https://doi.org/10.1007/978-0-387-84858-7</a>.
+</div>
+<div id="ref-James2021" class="csl-entry" role="listitem">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2021. <em>An Introduction to Statistical Learning: With Applications in r</em>. 2nd ed. New York: Springer. <a href="https://doi.org/10.1007/978-1-0716-1418-1">https://doi.org/10.1007/978-1-0716-1418-1</a>.
+</div>
+<div id="ref-Kohavi1995" class="csl-entry" role="listitem">
+Kohavi, Ron. 1995. <span>“A Study of Cross-Validation and Bootstrap for Accuracy Estimation and Model Selection.”</span> In <em>Proceedings of the 14th International Joint Conference on Artificial Intelligence</em>, 2:1137–45. San Francisco, CA: Morgan Kaufmann Publishers Inc.
+</div>
+<div id="ref-Kuhn2013" class="csl-entry" role="listitem">
+Kuhn, Max, and Kjell Johnson. 2013. <em>Applied Predictive Modeling</em>. New York: Springer. <a href="https://doi.org/10.1007/978-1-4614-6849-3">https://doi.org/10.1007/978-1-4614-6849-3</a>.
+</div>
+<div id="ref-Lundberg2017" class="csl-entry" role="listitem">
+Lundberg, Scott M., and Su-In Lee. 2017. <span>“A Unified Approach to Interpreting Model Predictions.”</span> In <em>Advances in Neural Information Processing Systems 30</em>, 4765–74. Curran Associates, Inc. <a href="https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html">https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html</a>.
+</div>
+<div id="ref-Mitchell2019" class="csl-entry" role="listitem">
+Mitchell, Margaret, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, and Timnit Gebru. 2019. <span>“Model Cards for Model Reporting.”</span> In <em>Proceedings of the Conference on Fairness, Accountability, and Transparency</em>, 220–29. Association for Computing Machinery. <a href="https://doi.org/10.1145/3287560.3287596">https://doi.org/10.1145/3287560.3287596</a>.
+</div>
+<div id="ref-NiculescuMizil2005" class="csl-entry" role="listitem">
+Niculescu-Mizil, Alexandru, and Rich Caruana. 2005. <span>“Predicting Good Probabilities with Supervised Learning.”</span> In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 625–32. Association for Computing Machinery. <a href="https://doi.org/10.1145/1102351.1102430">https://doi.org/10.1145/1102351.1102430</a>.
+</div>
+<div id="ref-Pedregosa2011" class="csl-entry" role="listitem">
+Pedregosa, Fabian, Gaël Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, et al. 2011. <span>“Scikit-Learn: Machine Learning in Python.”</span> <em>Journal of Machine Learning Research</em> 12 (85): 2825–30. <a href="https://www.jmlr.org/papers/v12/pedregosa11a.html">https://www.jmlr.org/papers/v12/pedregosa11a.html</a>.
+</div>
+<div id="ref-Ribeiro2016" class="csl-entry" role="listitem">
+Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. 2016. <span>“Why Should i Trust You? Explaining the Predictions of Any Classifier.”</span> In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1135–44. Association for Computing Machinery. <a href="https://doi.org/10.1145/2939672.2939778">https://doi.org/10.1145/2939672.2939778</a>.
+</div>
+<div id="ref-Sculley2015" class="csl-entry" role="listitem">
+Sculley, D., Gary Holt, Daniel Golovin, Eugene Davydov, Todd Phillips, Dietmar Ebner, Vinay Chaudhary, Michael Young, Jean-François Crespo, and Dan Dennison. 2015. <span>“Hidden Technical Debt in Machine Learning Systems.”</span> In <em>Advances in Neural Information Processing Systems 28</em>, 2503–11. Curran Associates, Inc. <a href="https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/">https://research.google/pubs/hidden-technical-debt-in-machine-learning-systems/</a>.
+</div>
+<div id="ref-Tabassi2023" class="csl-entry" role="listitem">
+Tabassi, Elham. 2023. <span>“Artificial Intelligence Risk Management Framework (AI RMF 1.0).”</span> NIST AI 100-1. Gaithersburg, MD: National Institute of Standards; Technology. <a href="https://doi.org/10.6028/NIST.AI.100-1">https://doi.org/10.6028/NIST.AI.100-1</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./99-references.html" class="pagination-link" aria-label="References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
